@@ -1,0 +1,60 @@
+steps:
+  # Build image
+  - name: 'docker/compose:1.26.2'
+    id: 'Building negotiation image'
+    args: ['build', "$_IMAGES"]
+
+  # Tag image with custom tag
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'pushing datav2'
+    entrypoint: '/bin/bash'
+    args: 
+      - '-c'
+      - |
+        set -ex && \
+        if [[ $_IMAGES =~ "datav2" ]]
+        then 
+          docker tag asia.gcr.io/$PROJECT_ID/datav2 asia.gcr.io/$PROJECT_ID/datav2:$_ENV
+          docker push asia.gcr.io/$PROJECT_ID/datav2 
+          docker push asia.gcr.io/$PROJECT_ID/datav2:$_ENV
+        fi
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'pushing authv2'
+    entrypoint: '/bin/bash'
+    args: 
+      - '-c'
+      - |
+        set -ex && \
+        if [[ $_IMAGES =~ "authv2" ]]
+        then 
+          docker tag asia.gcr.io/$PROJECT_ID/authv2 asia.gcr.io/$PROJECT_ID/authv2:$_ENV
+          docker push asia.gcr.io/$PROJECT_ID/authv2 
+          docker push asia.gcr.io/$PROJECT_ID/authv2:$_ENV
+        fi          
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'pushing actionv2'
+    entrypoint: '/bin/bash'
+    args: 
+      - '-c'
+      - |
+        set -ex && \
+        if [[ $_IMAGES =~ "actionv2" ]]
+        then 
+          docker tag asia.gcr.io/$PROJECT_ID/actionv2 asia.gcr.io/$PROJECT_ID/actionv2:$_ENV
+          docker push asia.gcr.io/$PROJECT_ID/actionv2 
+          docker push asia.gcr.io/$PROJECT_ID/actionv2:$_ENV
+        fi    
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'pushing jobs'
+    entrypoint: '/bin/bash'
+    args: 
+      - '-c'
+      - |
+        set -ex && \
+        if [[ $_IMAGES =~ "jobs" ]]
+        then 
+          docker tag asia.gcr.io/$PROJECT_ID/jobs asia.gcr.io/$PROJECT_ID/jobs:$_ENV
+          docker push asia.gcr.io/$PROJECT_ID/jobs 
+          docker push asia.gcr.io/$PROJECT_ID/jobs:$_ENV
+        fi                
+timeout: 30m

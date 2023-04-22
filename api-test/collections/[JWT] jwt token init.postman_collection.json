@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "2f74f704-8b7c-4ce0-92f1-d4b2a7c7b56b",
+		"name": "[JWT] jwt token init",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "super_admin_jwt",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"admin@negobot.co\",\n  \"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{auth_host_name}}/login",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"login"
+					]
+				},
+				"description": "get token from system"
+			},
+			"response": []
+		},
+		{
+			"name": "epd_demo_admin_jwt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"admin@epd-demo.co\",\n  \"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{auth_host_name}}/login",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"login"
+					]
+				},
+				"description": "get token from system"
+			},
+			"response": [
+				{
+					"name": "epd_demo_jwt",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin@epd-demo.co\",\n  \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "https://api-dev.negobot.co/auth/login",
+							"protocol": "https",
+							"host": [
+								"api-dev",
+								"negobot",
+								"co"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 10:40:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYWRtaW5AZXBkLWRlbW8uY28iLCJleHAiOjE1ODUzMDU2MjYsIm5lZ29ib3QiOnsidXNlcl9pZCI6ImFkbWluQGVwZC1kZW1vLmNvIiwib3JnYW5pc2F0aW9uX2lkIjoiZXBkLWRlbW8iLCJhdXRob3JpdHkiOiJvcmdfYWRtaW4ifX0.6z32mTl2Eycf5DnsMx5POejTm_0wVqWLwbhcN3Z8pfk\",\n    \"refresh_token\": \"0c48224b86e963516781dcc4f7a1d6de1665a3f3a1358e79\"\n}"
+				}
+			]
+		},
+		{
+			"name": "angliss_admin_jwt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"admin@angliss.co\",\n  \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://api.negobot.co/auth/login",
+					"protocol": "https",
+					"host": [
+						"api",
+						"negobot",
+						"co"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				},
+				"description": "get token from system"
+			},
+			"response": [
+				{
+					"name": "admin_jwt",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin@angliss.co\",\n  \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "https://api-dev.negobot.co/auth/login",
+							"protocol": "https",
+							"host": [
+								"api-dev",
+								"negobot",
+								"co"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 10:40:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYWRtaW5AYW5nbGlzcy5jbyIsImV4cCI6MTU4NTMwNTYxMiwibmVnb2JvdCI6eyJ1c2VyX2lkIjoiYWRtaW5AYW5nbGlzcy5jbyIsIm9yZ2FuaXNhdGlvbl9pZCI6ImFuZ2xpc3MiLCJhdXRob3JpdHkiOiJvcmdfYWRtaW4ifX0.Ku1vzk_vaKvcLlVbtr3_7MqRhmW2AtCKlEh0FDYcPz4\",\n    \"refresh_token\": \"af204bc3d89d51f9f5c12d7e92b9e02e72f247650c3723b9\"\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}

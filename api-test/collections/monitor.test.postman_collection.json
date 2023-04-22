@@ -1,0 +1,1326 @@
+{
+	"info": {
+		"_postman_id": "3d96177c-8f2e-4048-b2cf-f3ea57a7e887",
+		"name": "monitor.test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "init chat channel",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"apiKey\": \"{{api_key}}\",\n    \"identity\": \"monitor@angliss.co\"\n}"
+				},
+				"url": {
+					"raw": "{{auth_host_name}}/token",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"token"
+					]
+				},
+				"description": "get token from system"
+			},
+			"response": [
+				{
+					"name": "init chat channel",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apiKey\": \"uuxaxhsfrpncsmehbxqr\",\n    \"identity\": \"monitor@angliss.co\"\n}"
+						},
+						"url": {
+							"raw": "{{auth_host_name}}/token",
+							"host": [
+								"{{auth_host_name}}"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:45:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzNlZDhmMjM5YjVmMWY3MmZkNTExNmYyNWVlOTllZDhmLTE1ODU1NDM1NTAiLCJncmFudHMiOnsiY2hhdCI6eyJzZXJ2aWNlX3NpZCI6IklTYjE1YjA5N2FhMDA3NDI4YjhlZTBhMGIwZjAwOThhNWYifSwiYm90Ijp7ImNoYW5uZWwiOiJhbmdsaXNzLW1vbml0b3JAYW5nbGlzcy5jbyIsIm9yZ2FuaXNhdGlvbl9pZCI6ImFuZ2xpc3MifSwiaWRlbnRpdHkiOiJhbmdsaXNzLW1vbml0b3JAYW5nbGlzcy5jbyJ9LCJpc3MiOiJTSzNlZDhmMjM5YjVmMWY3MmZkNTExNmYyNWVlOTllZDhmIiwiZXhwIjoxNTg1NTQ3MTUwLCJuYmYiOjE1ODU1NDM1NTAsInN1YiI6IkFDNGZkZDllODZjMTI3Mjk0ODg2ODdmYmQyNjUzZDE1MTQifQ.DueADegYS_KQzJ0Vi1u93T-lQVH7L8Qre0ysnm5MiLY\",\n    \"channel_id\": \"CHf45f9a4cddd74fb1b6f59438a648c590\",\n    \"service_id\": \"ISb15b097aa007428b8ee0a0b0f0098a5f\",\n    \"bot_id\": \"bot-angliss\",\n    \"admin_id\": \"admin-angliss\",\n    \"sender_id\": \"angliss-monitor@angliss.co\"\n}"
+				}
+			]
+		},
+		{
+			"name": "restart conversation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "From",
+							"value": "monitor@angliss.co",
+							"type": "text"
+						},
+						{
+							"key": "ChannelSid",
+							"value": "{{channel_id}}",
+							"type": "text"
+						},
+						{
+							"key": "Attributes",
+							"value": "{\"annotation\":\"/restart\"}",
+							"type": "text"
+						},
+						{
+							"key": "Body",
+							"value": "{\"type\":\"simple\",\"text\":\"Restart\"}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{client_host_name}}/negobot_channel/webhook",
+					"host": [
+						"{{client_host_name}}"
+					],
+					"path": [
+						"negobot_channel",
+						"webhook"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "restart conversation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "From",
+									"value": "monitor@angliss.co",
+									"type": "text"
+								},
+								{
+									"key": "ChannelSid",
+									"value": "{{channel_id}}",
+									"type": "text"
+								},
+								{
+									"key": "Attributes",
+									"value": "{\"annotation\":\"/restart\"}",
+									"type": "text"
+								},
+								{
+									"key": "Body",
+									"value": "{\"type\":\"simple\",\"text\":\"Restart\"}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{client_host_name}}/negobot_channel/webhook",
+							"host": [
+								"{{client_host_name}}"
+							],
+							"path": [
+								"negobot_channel",
+								"webhook"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:45:16 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						}
+					],
+					"cookie": [],
+					"body": "success"
+				}
+			]
+		},
+		{
+			"name": "start negotiation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "From",
+							"value": "monitor@angliss.co",
+							"type": "text"
+						},
+						{
+							"key": "ChannelSid",
+							"value": "{{channel_id}}",
+							"type": "text"
+						},
+						{
+							"key": "Attributes",
+							"value": "{\"annotation\":\"/request_nego{\\\"organisation_id\\\":\\\"angliss\\\",\\\"product_id\\\":\\\"DR10005060\\\",\\\"customer_name\\\":\\\"monitor\\\",\\\"customer_email\\\":\\\"monitor@angliss.co\\\",\\\"text\\\":\\\"Product Enquiry\\\"}\"}",
+							"type": "text"
+						},
+						{
+							"key": "Body",
+							"value": "{\"type\":\"simple\",\"text\":\"nego\"}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{client_host_name}}/negobot_channel/webhook",
+					"host": [
+						"{{client_host_name}}"
+					],
+					"path": [
+						"negobot_channel",
+						"webhook"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "start negotiation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "From",
+									"value": "monitor@angliss.co",
+									"type": "text"
+								},
+								{
+									"key": "ChannelSid",
+									"value": "{{channel_id}}",
+									"type": "text"
+								},
+								{
+									"key": "Attributes",
+									"value": "{\"annotation\":\"/request_nego{\\\"organisation_id\\\":\\\"angliss\\\",\\\"product_id\\\":\\\"DR10005060\\\",\\\"customer_name\\\":\\\"monitor\\\",\\\"customer_email\\\":\\\"monitor@angliss.co\\\",\\\"text\\\":\\\"Product Enquiry\\\"}\"}",
+									"type": "text"
+								},
+								{
+									"key": "Body",
+									"value": "{\"type\":\"simple\",\"text\":\"nego\"}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{client_host_name}}/negobot_channel/webhook",
+							"host": [
+								"{{client_host_name}}"
+							],
+							"path": [
+								"negobot_channel",
+								"webhook"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:45:21 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						}
+					],
+					"cookie": [],
+					"body": "success"
+				}
+			]
+		},
+		{
+			"name": "accept negotiation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "From",
+							"value": "monitor@angliss.co",
+							"type": "text"
+						},
+						{
+							"key": "ChannelSid",
+							"value": "{{channel_id}}",
+							"type": "text"
+						},
+						{
+							"key": "Attributes",
+							"value": "{\"annotation\":\"/offer\"}",
+							"type": "text"
+						},
+						{
+							"key": "Body",
+							"value": "{\"type\":\"simple\",\"text\":\"offer\"}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{client_host_name}}/negobot_channel/webhook",
+					"host": [
+						"{{client_host_name}}"
+					],
+					"path": [
+						"negobot_channel",
+						"webhook"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "accept negotiation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "From",
+									"value": "monitor@angliss.co",
+									"type": "text"
+								},
+								{
+									"key": "ChannelSid",
+									"value": "{{channel_id}}",
+									"type": "text"
+								},
+								{
+									"key": "Attributes",
+									"value": "{\"annotation\":\"/offer\"}",
+									"type": "text"
+								},
+								{
+									"key": "Body",
+									"value": "{\"type\":\"simple\",\"text\":\"offer\"}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{client_host_name}}/negobot_channel/webhook",
+							"host": [
+								"{{client_host_name}}"
+							],
+							"path": [
+								"negobot_channel",
+								"webhook"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:45:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						}
+					],
+					"cookie": [],
+					"body": "success"
+				}
+			]
+		},
+		{
+			"name": "first offer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "From",
+							"value": "monitor@angliss.co",
+							"type": "text"
+						},
+						{
+							"key": "ChannelSid",
+							"value": "{{channel_id}}",
+							"type": "text"
+						},
+						{
+							"key": "Attributes",
+							"value": "{\"annotation\":\"/offer{\\\"customer_offer\\\":{\\\"price\\\":1, \\\"quantity\\\": 50, \\\"monthly_quantity\\\": 150}}\"}",
+							"type": "text"
+						},
+						{
+							"key": "Body",
+							"value": "{\"type\":\"simple\",\"text\":\"offer\"}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{client_host_name}}/negobot_channel/webhook",
+					"host": [
+						"{{client_host_name}}"
+					],
+					"path": [
+						"negobot_channel",
+						"webhook"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "first offer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "From",
+									"value": "monitor@angliss.co",
+									"type": "text"
+								},
+								{
+									"key": "ChannelSid",
+									"value": "{{channel_id}}",
+									"type": "text"
+								},
+								{
+									"key": "Attributes",
+									"value": "{\"annotation\":\"/offer{\\\"customer_offer\\\":{\\\"price\\\":1, \\\"quantity\\\": 50, \\\"monthly_quantity\\\": 150}}\"}",
+									"type": "text"
+								},
+								{
+									"key": "Body",
+									"value": "{\"type\":\"simple\",\"text\":\"offer\"}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{client_host_name}}/negobot_channel/webhook",
+							"host": [
+								"{{client_host_name}}"
+							],
+							"path": [
+								"negobot_channel",
+								"webhook"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:46:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						}
+					],
+					"cookie": [],
+					"body": "success"
+				}
+			]
+		},
+		{
+			"name": "second offer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "From",
+							"value": "monitor@angliss.co",
+							"type": "text"
+						},
+						{
+							"key": "ChannelSid",
+							"value": "{{channel_id}}",
+							"type": "text"
+						},
+						{
+							"key": "Attributes",
+							"value": "{\"annotation\":\"/offer{\\\"customer_offer\\\":{\\\"price\\\":1.1, \\\"quantity\\\": 50, \\\"monthly_quantity\\\": 150}}\"}",
+							"type": "text"
+						},
+						{
+							"key": "Body",
+							"value": "{\"type\":\"simple\",\"text\":\"offer\"}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{client_host_name}}/negobot_channel/webhook",
+					"host": [
+						"{{client_host_name}}"
+					],
+					"path": [
+						"negobot_channel",
+						"webhook"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "second offer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "From",
+									"value": "monitor@angliss.co",
+									"type": "text"
+								},
+								{
+									"key": "ChannelSid",
+									"value": "{{channel_id}}",
+									"type": "text"
+								},
+								{
+									"key": "Attributes",
+									"value": "{\"annotation\":\"/offer{\\\"customer_offer\\\":{\\\"price\\\":1.1, \\\"quantity\\\": 50, \\\"monthly_quantity\\\": 150}}\"}",
+									"type": "text"
+								},
+								{
+									"key": "Body",
+									"value": "{\"type\":\"simple\",\"text\":\"offer\"}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{client_host_name}}/negobot_channel/webhook",
+							"host": [
+								"{{client_host_name}}"
+							],
+							"path": [
+								"negobot_channel",
+								"webhook"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:46:40 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						}
+					],
+					"cookie": [],
+					"body": "success"
+				}
+			]
+		},
+		{
+			"name": "3rd offer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "From",
+							"value": "monitor@angliss.co",
+							"type": "text"
+						},
+						{
+							"key": "ChannelSid",
+							"value": "{{channel_id}}",
+							"type": "text"
+						},
+						{
+							"key": "Attributes",
+							"value": "{\"annotation\":\"/offer{\\\"customer_offer\\\":{\\\"price\\\":1.2, \\\"quantity\\\": 50, \\\"monthly_quantity\\\": 150}}\"}",
+							"type": "text"
+						},
+						{
+							"key": "Body",
+							"value": "{\"type\":\"simple\",\"text\":\"offer\"}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{client_host_name}}/negobot_channel/webhook",
+					"host": [
+						"{{client_host_name}}"
+					],
+					"path": [
+						"negobot_channel",
+						"webhook"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "3rd offer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "From",
+									"value": "monitor@angliss.co",
+									"type": "text"
+								},
+								{
+									"key": "ChannelSid",
+									"value": "{{channel_id}}",
+									"type": "text"
+								},
+								{
+									"key": "Attributes",
+									"value": "{\"annotation\":\"/offer{\\\"customer_offer\\\":{\\\"price\\\":1.2, \\\"quantity\\\": 50, \\\"monthly_quantity\\\": 150}}\"}",
+									"type": "text"
+								},
+								{
+									"key": "Body",
+									"value": "{\"type\":\"simple\",\"text\":\"offer\"}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{client_host_name}}/negobot_channel/webhook",
+							"host": [
+								"{{client_host_name}}"
+							],
+							"path": [
+								"negobot_channel",
+								"webhook"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:46:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						}
+					],
+					"cookie": [],
+					"body": "success"
+				}
+			]
+		},
+		{
+			"name": "4nd offer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "From",
+							"value": "monitor@angliss.co",
+							"type": "text"
+						},
+						{
+							"key": "ChannelSid",
+							"value": "{{channel_id}}",
+							"type": "text"
+						},
+						{
+							"key": "Attributes",
+							"value": "{\"annotation\":\"/offer{\\\"customer_offer\\\":{\\\"price\\\":1.4, \\\"quantity\\\": 50, \\\"monthly_quantity\\\": 150}}\"}",
+							"type": "text"
+						},
+						{
+							"key": "Body",
+							"value": "{\"type\":\"simple\",\"text\":\"offer\"}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{client_host_name}}/negobot_channel/webhook",
+					"host": [
+						"{{client_host_name}}"
+					],
+					"path": [
+						"negobot_channel",
+						"webhook"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "4nd offer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "From",
+									"value": "monitor@angliss.co",
+									"type": "text"
+								},
+								{
+									"key": "ChannelSid",
+									"value": "{{channel_id}}",
+									"type": "text"
+								},
+								{
+									"key": "Attributes",
+									"value": "{\"annotation\":\"/offer{\\\"customer_offer\\\":{\\\"price\\\":1.4, \\\"quantity\\\": 50, \\\"monthly_quantity\\\": 150}}\"}",
+									"type": "text"
+								},
+								{
+									"key": "Body",
+									"value": "{\"type\":\"simple\",\"text\":\"offer\"}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{client_host_name}}/negobot_channel/webhook",
+							"host": [
+								"{{client_host_name}}"
+							],
+							"path": [
+								"negobot_channel",
+								"webhook"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:47:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						}
+					],
+					"cookie": [],
+					"body": "success"
+				}
+			]
+		},
+		{
+			"name": "seal deal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "From",
+							"value": "monitor@angliss.co",
+							"type": "text"
+						},
+						{
+							"key": "ChannelSid",
+							"value": "{{channel_id}}",
+							"type": "text"
+						},
+						{
+							"key": "Attributes",
+							"value": "{\"annotation\":\"/affirm\"}",
+							"type": "text"
+						},
+						{
+							"key": "Body",
+							"value": "{\"type\":\"simple\",\"text\":\"yes\"}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{client_host_name}}/negobot_channel/webhook",
+					"host": [
+						"{{client_host_name}}"
+					],
+					"path": [
+						"negobot_channel",
+						"webhook"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "seal deal",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "From",
+									"value": "monitor@angliss.co",
+									"type": "text"
+								},
+								{
+									"key": "ChannelSid",
+									"value": "{{channel_id}}",
+									"type": "text"
+								},
+								{
+									"key": "Attributes",
+									"value": "{\"annotation\":\"/affirm\"}",
+									"type": "text"
+								},
+								{
+									"key": "Body",
+									"value": "{\"type\":\"simple\",\"text\":\"yes\"}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{client_host_name}}/negobot_channel/webhook",
+							"host": [
+								"{{client_host_name}}"
+							],
+							"path": [
+								"negobot_channel",
+								"webhook"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:47:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						}
+					],
+					"cookie": [],
+					"body": "success"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3e4bcaae-6444-4ef1-90ab-06ac7b4d2cdb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b08dac13-0b8c-4b5b-84bb-721bd28e4492",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status test\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

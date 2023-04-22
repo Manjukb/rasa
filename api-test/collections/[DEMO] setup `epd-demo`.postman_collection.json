@@ -1,0 +1,708 @@
+{
+	"info": {
+		"_postman_id": "cdc24207-385b-4804-a45b-1fbc1e237d78",
+		"name": "[DEMO] setup `epd-demo`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[EMAIL TEMPLATE] update `test_brand_01`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_01\",\n    \"brand_info\": {\n        \"name\": \"test brand 01\",\n        \"description\": \"brand description\",\n        \"email\": \"huynh@test.com\",\n        \"email_template\": {\n            \"title\": \"Please make an offer for early payment discount\",\n            \"content\": \"Dear Supplier,\\nThank you for your support to our business. In order to pay you faster, we would like to offer you payment within {baseline_payment_days} days going forward.\\nTo indicate how much discount you would be willing to offer on an ongoing basis to avail of this early payment , please click this link below to indicate your offer:\\n{chat_url}\\nSince our overall capacity to offer early payment terms is limited, we urge you to respond quickly with your offer. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n{brand_name}\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/brands/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"brands",
+						""
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": []
+		},
+		{
+			"name": "fetch epd domain sheet Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/domains/fetch_sheet?organisation_id=epd",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"domains",
+						"fetch_sheet"
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "epd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch epd message template sheet Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/message_templates/fetch_sheet?organisation_id=epd",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"message_templates",
+						"fetch_sheet"
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "epd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add `epd-demo` domain",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"epd-demo\",\n    \"bot_domain\": {\n        \"intents\": [\n            {\n                \"questions\": [\n                    \"What are your operating hours?\\n\",\n                    \"\\nFrom what time to what time are you open?\\n\",\n                    \"\\nWhen do you open and close?\\n\",\n                    \"\\nAre you open on Sundays?\\n\",\n                    \"\\nDo you operate on public holidays?\\n\",\n                    \"\\nDo you work on weekends?\"\n                ],\n                \"answers\": [\n                    \"[1] Our operating hours are: \\nMonday - Friday : 9am - 5pm\\nSaturday : 9am - 12pm\\nWe are closed on Sundays and Public Holidays\\n\",\n                    \"\\n[2] Our operating hours are:\\nMonday - Friday : 9am - 5pm\\nSaturday : 9am - 12pm\\nWe are closed on Sundays and Public Holidays\"\n                ],\n                \"intent_name\": \"Opening_Hours\",\n                \"description\": \"Question on opening/ operating hours\"\n            },\n            {\n                \"questions\": [\n                    \"When will my order be delivered?\\n\",\n                    \"\\nHow long does it take for the order to be delivered?\\n\",\n                    \"\\nCan I choose delivery timings for my order?\\n\",\n                    \"\\nWhat is your delivery schedule?\"\n                ],\n                \"answers\": [\n                    \"[1] Delivery time is usually between 9am - 5pm on working days. On Saturdays delivery timings are 9am - 2pm. There are no deliveries on Sundays and Public Holidays.\"\n                ],\n                \"intent_name\": \"Delivery_Timing\",\n                \"description\": \"Question on delivery timings\"\n            },\n            {\n                \"questions\": [\n                    \"What quality standards do you follow?\\n\",\n                    \"\\nWhat are the checks on the quality standards?                    \"\n                ],\n                \"answers\": [\n                    \"[1] The sellers on the platform have to verified suppliers and need to abide by FDA norms on quality control.\"\n                ],\n                \"intent_name\": \"Product_Quality\",\n                \"description\": \"Question on Product quality\"\n            },\n            {\n                \"questions\": [\n                    \"How do I cancel an order before it is shipped?\\n\",\n                    \"\\nHow do I add items to an order that has been placed?\"\n                ],\n                \"answers\": [\n                    \"[1] There is an order cancellation option which is active till the order is shipped. Before shipping, products maybe added or removed from the cart, though this may delay the shipping as per the requirements.\"\n                ],\n                \"intent_name\": \"Cart_Changes\",\n                \"description\": \"Question on cart changes\"\n            },\n            {\n                \"questions\": [\n                    \"When will I recieve my refund for cancelled order?\\n\",\n                    \"\\nWhat is the refund policy?\\n\",\n                    \"\\nWhat part of shipping charges will be refunded?\"\n                ],\n                \"answers\": [\n                    \"[1] The refund for cancelled order is processed when the product has reached back to the supplier. After processing it takes 2-5 working days to reflect the money in the bank. The shipping charges are non refundable.\"\n                ],\n                \"intent_name\": \"Refund\",\n                \"description\": \"Question on refunds\"\n            },\n            {\n                \"questions\": [\n                    \"Are there any priority or fast delivery options?\\n\",\n                    \"\\nHow long does it take for delivery in case I opt for priority delievry?\\n\",\n                    \"\\nWhat are the extra charges for priority delivery options?\"\n                ],\n                \"answers\": [\n                    \"[1] There are priority delivery options available with some suppliers in Singapore. The priority delievry costs S$10 eextra and can be delivered within 12 hours of placing the order.\"\n                ],\n                \"intent_name\": \"Priotiry_Delivery\",\n                \"description\": \"Question on priority delivery\"\n            },\n            {\n                \"questions\": [\n                    \"Can I reject the delivery for dissatisfaction?\\n\",\n                    \"\\nWhat is the maximum time after delivery when rejections will be accepted?\\n\",\n                    \"\\nCan I reject and not pay for products in case of COD?\\n\",\n                    \"\\nCan I reject some items from the order if they are unsatisfactory?\"\n                ],\n                \"answers\": [\n                    \"[1] Products that are rejected should be informed to the supplier within 2 hours of receiving the delivery. Post that no rejections will be accepted. On rejection, the supplier will be notified to verify the reasoning and the product reversal and refund will be processed accordingly.\"\n                ],\n                \"intent_name\": \"Rejection\",\n                \"description\": \"Question on rejection post delivery\"\n            },\n            {\n                \"questions\": [\n                    \"What is the credit period allowed by supliers?\\n\",\n                    \"\\nAre there any discounts on upfront cash payment?\\n\",\n                    \"\\nDoes cash on delivery have any extra discounts?\"\n                ],\n                \"answers\": [\n                    \"[1] Credit and early payment discount is allowed as per the discretion of the supplier.\"\n                ],\n                \"intent_name\": \"Payment_Terms\",\n                \"description\": \"Question on Payment Terms\"\n            },\n            {\n                \"questions\": [\n                    \"Are there any financing options to pay the supplier?\"\n                ],\n                \"answers\": [\n                    \"[1] Currently we do not have any financing options. Please check back later for update on this. Thanks :)\"\n                ],\n                \"intent_name\": \"Financing_Options\",\n                \"description\": \"Question on financing options\"\n            },\n            {\n                \"questions\": [\n                    \"Can I cancel some items from the order? \\n\",\n                    \" \\nCan I change my basket?\\n\",\n                    \"\\nWhat if I need to change some items in my order?\"\n                ],\n                \"answers\": [\n                    \"[1] The basket can be modified before the order is shipped, post shipping if any modifications are required then the product might be returned/ replaced basis the order terms and conditions.\"\n                ],\n                \"intent_name\": \"Basket_Modifications\",\n                \"description\": \"Question on basket modifications\"\n            },\n            {\n                \"questions\": [\n                    \"What are the shipping charges?\\n\",\n                    \"\\nWhat are shipping charges for cross-border shipping?\\n\",\n                    \"\\nIs there any criteria for free shipping?\"\n                ],\n                \"answers\": [\n                    \"[1] Shipping charges are based on supplier and buyer location. The shipping charges vary from order to order and can be checked while placing the order.\"\n                ],\n                \"intent_name\": \"Shipping_Charges\",\n                \"description\": \"Question on Shipping charges\"\n            },\n            {\n                \"questions\": [\n                    \"How can I provide special delivery instructions?\"\n                ],\n                \"answers\": [\n                    \"[1] Incase of special delivery instructions, the buyer may write it in a note on theplatform. The instructions will be passed on to the supplier.\"\n                ],\n                \"intent_name\": \"Special_Instructions\",\n                \"description\": \"Question on Special Instructions\"\n            },\n            {\n                \"questions\": [\n                    \"Can I have additional information about Dijon Mustard?\\n\",\n                    \"\\nWhat is the nutritional content of Dijon Mustard?\\n\",\n                    \"\\nWhat are the ingredients of Dijon Mustard?\"\n                ],\n                \"answers\": [\n                    \"https://drive.google.com/file/d/1LkWM4sBCC1kN7spzbRm910qDvKjKZnKc/view?usp=sharing\"\n                ],\n                \"intent_name\": \"Mustard_Information\",\n                \"description\": \"Question on information about Mustard\"\n            }\n        ]\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/domains/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"domains",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add `epd-demo` message_template",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"epd-demo\",\n    \"bot_template\": {\n        \"templates\": [\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"negotiate\",\n                    \"negotiation_round\": 1,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Hmmm...that's a bit low. How about this? <br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\\n\",\n                    \"\\nThanks, however I am afraid this is bit low. Can you please consider this offer? <br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\\n\",\n                    \"\\nAppreciate your offer! But will you accept this offer ? <br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's round one offer is not above auto acceptance utility. BOT will make a counter offer, concession strategy for round one is applicable. The buyer will have following options after after this round - Accept, Make Offer, Exit Negotiation.\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"onhold\",\n                    \"negotiation_round\": 1,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Thanks for your offer! We will collate all our supplier offers and come back to you with our response soon....<br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"Pause\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"accept\",\n                    \"negotiation_round\": 1,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Great! We accept the offer for:<br>\\n **Brand: {brand_name}** <br> \\n{customer_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's offer in round 1 is above the auto acceptance. The BOT accepts the buyer offer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"reject\",\n                    \"negotiation_round\": 1,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Sorry, this is our final offer:<br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"BOT makes the final offer. Buyer has following options after this round - Accept, Exit Negotiation\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"negotiate\",\n                    \"negotiation_round\": 2,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"I am afraid your offer is still on the lower side. Let me improve my offer. <br>\\n**Brand: {brand_name}**\\n{bot_offer_message}\\n\",\n                    \"\\nWe seem to be closing in on a deal. How about this? <br>\\n**Brand: {brand_name}**\\n{bot_offer_message}\\n\",\n                    \"\\nWe are keen to make this deal happen. How about this offer? <br>\\n**Brand: {brand_name}**\\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's counter offer in round 2 is not above auto acceptance utility. BOT will make a counter offer, concession strategy for round two is applicable. The buyer will have following options after after this round - Accept Offer, Make Offer, Exit Negotiation.\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"accept\",\n                    \"negotiation_round\": 2,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Thanks a lot! We have a deal....Please confirm the offer for:<br>\\n **Brand: {brand_name}** <br> \\n{customer_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's round 2 offer is above the auto acceptance. The BOT accepts the buyer offer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"reject\",\n                    \"negotiation_round\": 2,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Sorry, this is our final offer:<br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"BOT makes the final offer. Buyer has following options after this round - Accept Offer, Exit Negotiation\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"negotiate\",\n                    \"negotiation_round\": 3,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"We are close to striking a deal. How about this? <br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\\n\",\n                    \"\\nThanks for your patience. Does this offer work for you? <br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\\n\",\n                    \"\\nWe are so close to an agreement. Let me make you an improved offer: <br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's offer in round 3 is not above auto acceptance utility. BOT will make a counter offer, concession strategy for round three is applicable. The buyer will have following options after after this round - Accept Offer, Make offer, Exit Negotiation.\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"accept\",\n                    \"negotiation_round\": 3,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Thanks a lot! We have a deal....Please confirm the offer for:<br>\\n **Brand: {brand_name}** <br> \\n{customer_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's round three offer is above the auto acceptance. The BOT accepts the buyer offer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"reject\",\n                    \"negotiation_round\": 3,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Sorry, this is our final offer:<br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"BOT makes the final offer. Buyer has following options after this round - Accept Offer, Exit Negotiation\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"negotiate\",\n                    \"negotiation_round\": 4,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"I really hope we can agree on this. Here's my final offer: <br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\\n\",\n                    \"\\nHope we can business today! Here is my best offer: <br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\\n\",\n                    \"\\nWe have really done our best. I can't go below this offer: <br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"Buyer's final offer is not above auto-accpetance utility. BOT makes the FINAL OFFER as per the concession startegy for round four. Buyer will have following options after this round - Accept Offer, Exit Negotiation \"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"accept\",\n                    \"negotiation_round\": 4,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Finally have a deal! Hope we can shake hands on this offer for:<br>\\n **Brand: {brand_name}** <br> \\n{customer_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer round four offer is in above the auto acceptance. The BOT accepts the buyer offer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"reject\",\n                    \"negotiation_round\": 4,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Sorry, this is our final offer:<br>\\n**Brand: {brand_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"BOT makes the final offer. Buyer has following options - Accept , Reject\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_product_id\"\n                },\n                \"answers\": [\n                    \"Thanks for considering our offer {customer_name}. Can we initiate negotiation of an Early Payment Discount? Thanks!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_make_offer\"\n                },\n                \"answers\": [\n                    \"Hi {customer_name}. Thanks for expressing interest in negotiating an early payment discount for {brand_info}<br>\\n                                    <br> \\n                                    {bot_offer_message}\\n                                    Please make an offer and hopefully we can strike a deal! :smiley:\\n\",\n                    \"\\nHi {customer_name}. Thanks for expressing interest in negotiating an early payment discount for {brand_info}:<br>\\n                                    <br> \\n                                    {bot_offer_message}\\n                                    Please make an offer and hopefully we can strike a deal! :smiley:\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_input_offer\"\n                },\n                \"answers\": [\n                    \"Offer {brand_info}:\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when buyer hit the accept nego buttons while the bot dont accept the buyer' offer \\nbut propose the counter offer, the counter offer is set to be accept by buyer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_seal_deal\"\n                },\n                \"answers\": [\n                    \"Please confirm that this is your final offer.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when buyer hit the accept nego buttons while the bot dont accept the buyer' offer \\nbut propose the counter offer, the counter offer is set to be accept by buyer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_faq_feedback\"\n                },\n                \"answers\": [\n                    \"Was this answer useful?\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when buyer hit the accept nego buttons while the bot dont accept the buyer' offer \\nbut propose the counter offer, the counter offer is set to be accept by buyer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_unclear_faq_feedback\"\n                },\n                \"answers\": [\n                    \"I am sorry I could not understand your question. Could you help me improve by providing me the correct question label? Thanks!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when buyer hit the reject nego button while the bot don't accept the buyer' offer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_unknown_feedback\"\n                },\n                \"answers\": [\n                    \"I am sorry. I didn't quite catch that. Please continue with your negotiation.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when user hit the nego buttons, \\nthe corresponding product name of that button \\nwill be set to this slot automatically \\nand remain unchange\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_response_correct_feedback\"\n                },\n                \"answers\": [\n                    \"That's great! Glad it was helpful....please continue with your negotiation. \"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when user login, the provided email will be set \\nto this slot automatically and remain unchange\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_response_intent_name_feedback\"\n                },\n                \"answers\": [\n                    \"Thanks a lot! Your feedback will help me get better. Much appreciated!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when start the nego form, \\nthe prefill customer_email slot will be checked\\nto validate of customer_email with authorization service, \\nif sucess validated, the customer_name value will return \\nand set the slot and remain unchange \"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_response_not_correct_feedback\"\n                },\n                \"answers\": [\n                    \"I am sorry I couldn't be of help. I will alert my supervisor to help you. In the meantime, I'll return you to your earlier negotiation.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_response_continue_nego\"\n                },\n                \"answers\": [\n                    \"Let me return you to your earlier negotiation, thanks!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"provided by popup model\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_confirm_seal_deal_with_bot_offer\"\n                },\n                \"answers\": [\n                    \"Thank {customer_name} Your offer {brand_info}<br>\\n{bot_offer_message} \\nWe will process your order and inform you to {customer_email}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"provided by popup model\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_confirm_seal_deal_with_customer_offer\"\n                },\n                \"answers\": [\n                    \"Thank you {customer_name}! <br>\\nAm confirming your agreed offer for {brand_name}<br>\\n{customer_offer_message} <br>\\nI will alert my sales supervisor about the offer and we will come back to you shortly on {customer_email}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"provided by nego service\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_confirm_no_seal_deal\"\n                },\n                \"answers\": [\n                    \"Sorry we couldn’t arrive at a deal today {customer_name} :cry:\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"provided by nego service\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_product_id\"\n                },\n                \"answers\": [\n                    \"please provide name of product\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_wait_for_agent_to_review_deal\"\n                },\n                \"answers\": [\n                    \"please wait for agent to accept your deal\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_confirm_agent_fix_offer\"\n                },\n                \"answers\": [\n                    \"thank this is one time offer, {agent_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_confirm_agent_accept_deal\"\n                },\n                \"answers\": [\n                    \"Hi, accept the deal, have a good day!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_confirm_agent_reject_deal\"\n                },\n                \"answers\": [\n                    \"Hi, sorry to inform you that agent reject the deal!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"agent_release_session\"\n                },\n                \"answers\": [\n                    \"hi, let my bot continue this conversation\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            }\n        ],\n        \"offer_template_view\": \"\",\n        \"parameter_view\": {\n            \"price\": \"Price\",\n            \"quantity\": \"Quantity\",\n            \"monthly_quantity\": \"Monthly quantity\",\n            \"credit_terms\": \"Credit Terms\",\n            \"delivery_charges\": \"Delivery Charges\",\n            \"payment_date\": \"Payment days\",\n            \"discount\": \"Discount\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/message_templates/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"message_templates",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[RESET] payees for `test_brand_01`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_01\",\n    \"payee\": [\n                {\n                    \"supplier_id\": \"huynh-01\",\n                    \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                    \"supplier_email\": \"huynh@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"shashank-01\",\n                    \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                    \"supplier_email\": \"shashank@startup-o.com\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"man\",\n                    \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                    \"supplier_email\": \"man@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 637.2\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"ani-01\",\n                    \"supplier_name\": \"Bright Vegetable Enterprise\",\n                    \"supplier_email\": \"aniruddha@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 3491.96000027061\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"ani-02\",\n                    \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                    \"supplier_email\": \"ganguly.ani@gmail.com\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 3491.96000027061\n                    },\n                    \"epd_status\": \"new\"\n                }\n            ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/payees/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees",
+						""
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": []
+		},
+		{
+			"name": "get epd negotiation session of `test_brand_01`",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "aef4c4e8-7a9d-4e33-a932-ba42be395e3e",
+						"exec": [
+							"options = {",
+							"      'method': 'GET',",
+							"      'url': pm.environment.get(\"data_host_name\")+'/epd_negotiation_sessions/schema',",
+							"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"epd_demo_admin_jwt\")}",
+							"};",
+							"pm.sendRequest(options, function (err, res) {",
+							"    pm.environment.set('epd_negotiation_sessions_schema', res.json().item)",
+							"});    "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc1b9247-404d-42ea-a18a-cd65a9e74db4",
+						"exec": [
+							"var Ajv = require('ajv'),",
+							"    ajv = new Ajv({logger: console}),",
+							"    schema = pm.environment.get('epd_negotiation_sessions_schema');",
+							"",
+							"pm.test(\"schema check\", function () {",
+							"    items = pm.response.json().items;",
+							"    items.map(item=> {",
+							"        data = item.negotiation_session;",
+							"        pm.expect(ajv.validate(schema, data)).to.be.true;",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/epd_negotiation_sessions/?customer_email=test@test.com&organisation_id=test-org&brand_id=test_brand_tmp&sort_by=updated_date&order=desc&page_index=1&page_size=1",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_negotiation_sessions",
+						""
+					],
+					"query": [
+						{
+							"key": "customer_email",
+							"value": "test@test.com"
+						},
+						{
+							"key": "organisation_id",
+							"value": "test-org"
+						},
+						{
+							"key": "brand_id",
+							"value": "test_brand_tmp"
+						},
+						{
+							"key": "sort_by",
+							"value": "updated_date"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						},
+						{
+							"key": "page_index",
+							"value": "1"
+						},
+						{
+							"key": "page_size",
+							"value": "1"
+						},
+						{
+							"key": "session_status",
+							"value": "[\"customer_negotiate\", \"agent_fix_offer\"]",
+							"disabled": true
+						}
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "[REQUEST] payees for `test_brand_01`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_01\",\n    \"payee\": [\n                {\n                    \"supplier_id\": \"huynh-01\",\n                    \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                    \"supplier_email\": \"huynh@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"send_negotiate\"\n                },\n                {\n                    \"supplier_id\": \"shashank-01\",\n                    \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                    \"supplier_email\": \"shashank@startup-o.com\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"man\",\n                    \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                    \"supplier_email\": \"man@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 637.2\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"ani-01\",\n                    \"supplier_name\": \"Bright Vegetable Enterprise\",\n                    \"supplier_email\": \"aniruddha@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 3491.96000027061\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"ani-02\",\n                    \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                    \"supplier_email\": \"ganguly.ani@gmail.com\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 3491.96000027061\n                    },\n                    \"epd_status\": \"new\"\n                }\n            ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/payees/request_epd",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees",
+						"request_epd"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": []
+		},
+		{
+			"name": "[RESET] clean all EPD session",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organisation_id\": \"epd-demo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.negobot.co/actions/clean_all_epd_session",
+					"protocol": "https",
+					"host": [
+						"api",
+						"negobot",
+						"co"
+					],
+					"path": [
+						"actions",
+						"clean_all_epd_session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[STG ]update chat epd url",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"url\": \"https://epd-landing-page.netlify.com/\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/payees/chat_epd",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees",
+						"chat_epd"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "update chat epd url",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"url\": \"https://5e589d8e7fa2af4c17cb3d15--nego-iframe-epd.netlify.com/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/payees/chat_epd",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"payees",
+								"chat_epd"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "103"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"url\": \"https://5e589d8e7fa2af4c17cb3d15--nego-iframe-epd.netlify.com/\"\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "61de9682-d38e-42d1-b77e-1deba9dea8af",
+				"type": "text/javascript",
+				"exec": [
+					"const makeLogin = (username, password)=>{",
+					"    return {",
+					"      url: pm.environment.get(\"auth_host_name\")+'/login',",
+					"      method: 'POST',",
+					"      header: 'Content-Type:application/json',",
+					"      body: {",
+					"        mode: 'application/json',",
+					"        raw: JSON.stringify({ username, password })",
+					"      }",
+					"    };    ",
+					"}",
+					"",
+					"const jwt_decode = (a) => {",
+					"    var parts = a.split('.'); // header, payload, signature",
+					"    return JSON.parse(atob(parts[1]));",
+					"}",
+					"",
+					"const is_expired = (a) => {",
+					"    dec_jwt = jwt_decode(a);",
+					"    let cur_epoch = Date.now()/1000;",
+					"    console.log(cur_epoch - dec_jwt.exp < 0);",
+					"    return cur_epoch - dec_jwt.exp < 0;",
+					"};",
+					"",
+					"const need_request_token = (a)=>{",
+					"    if(!a || a.length === 0){",
+					"        return true",
+					"    }",
+					"    return is_expired(a);",
+					"}",
+					"",
+					"",
+					"var getNegobotToken = need_request_token(pm.environment.get(\"super_admin_jwt\"));",
+					"var getAnglissToken = need_request_token(pm.environment.get(\"angliss_admin_jwt\"));",
+					"var getEPDDemoToken = need_request_token(pm.environment.get(\"epd_demo_admin_jwt\"));",
+					"",
+					"if (getNegobotToken === true) {",
+					"",
+					"    echoPostRequest = makeLogin(\"admin@negobot.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving super_admin_jwt token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('super_admin_jwt', responseJson.access_token)",
+					"            pm.environment.set('super_admin_refresh_token', responseJson.refresh_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"if (getAnglissToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@angliss.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving angliss_admin_jwt token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('angliss_admin_jwt', responseJson.access_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"if (getEPDDemoToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@epd-demo.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving edp_demo token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('epd_demo_admin_jwt', responseJson.access_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"",
+					"if(!pm.environment.get(\"cleanup_test_org\")){",
+					"    console.log(\"try to clean up test_org\");",
+					"    var options = {",
+					"      'method': 'DELETE',",
+					"      'url': pm.environment.get(\"data_host_name\")+'/organisation?organisation_id=test-org',",
+					"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"epd_demo_admin_jwt\")},",
+					"      body: JSON.stringify({\"brand_id\":\"test_brand_tmp\"})",
+					"    ",
+					"    };",
+					"    ",
+					"    pm.sendRequest(options, function (err, res) {",
+					"        console.log(err ? err : res.text());",
+					"    });    ",
+					"    ",
+					"    pm.environment.set(\"cleanup_test_org\", \"true\");",
+					"}",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ff26cf1b-3ba8-40c2-a6a5-abe6813e8091",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

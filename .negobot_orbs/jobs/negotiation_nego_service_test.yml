@@ -1,0 +1,30 @@
+working_directory: /tmp/circleci/rasa-poc/
+docker:
+  - image: circleci/python:3.6.2-stretch-browsers
+    environment:
+      FLASK_CONFIG: testing
+      TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+  # - image: circleci/postgres:9.6.5-alpine-ram
+  #   environment:
+  #     POSTGRES_USER: ubuntu
+  #     POSTGRES_DB: circle_test
+  #     POSTGRES_PASSWORD: ''
+steps:
+  - checkout
+  - run:
+      command: |
+        python3 -m venv venv
+        . venv/bin/activate
+        pip install -U pip
+        pip install -r requirements.txt
+        
+  - run:
+      command: |
+        . venv/bin/activate
+        sh services/negotiation_nego/run_test.sh services/negotiation_nego/
+      name: test 
+
+  # - store_artifacts:
+  #     path: services/test_reports/
+  #     destination: test_reports
+  

@@ -1,0 +1,1802 @@
+{
+	"info": {
+		"_postman_id": "d1ad6f71-4af0-483f-ab9f-dbbe6eecf2a2",
+		"name": "product_negotiation_service.test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get product negotiation schema",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/product_negotiation_sessions/schema",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"product_negotiation_sessions",
+						"schema"
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get open product negotiation session",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c3c04544-51a3-450b-9b83-e7922c82acff",
+						"exec": [
+							"options = {",
+							"      'method': 'GET',",
+							"      'url': pm.environment.get(\"data_host_name\")+'/product_negotiation_sessions/schema',",
+							"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"super_admin_jwt\")}",
+							"};",
+							"pm.sendRequest(options, function (err, res) {",
+							"    pm.environment.set('product_nego_session_schema', res.json().item)",
+							"});    "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a25ba8c-d3ac-4d89-bc79-3c14733d1c90",
+						"exec": [
+							"var Ajv = require('ajv'),",
+							"    ajv = new Ajv({logger: console}),",
+							"    schema = pm.environment.get('product_nego_session_schema');",
+							"",
+							"pm.test(\"schema check\", function () {",
+							"    items = pm.response.json().items;",
+							"    items.map(item=> {",
+							"        data = item.parameter;",
+							"        pm.expect(ajv.validate(schema, data)).to.be.true;",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/product_negotiation_sessions/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"product_negotiation_sessions",
+						""
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get parameter schema",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9b47c1e8-e041-4825-af6c-6be96a7b0298",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e321a4e-8e9b-4764-8c81-8ce614a87e01",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/parameters/schema",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"parameters",
+						"schema"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get parameter",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "664cb54f-3843-4467-a3d1-c49037865ae4",
+						"exec": [
+							"options = {",
+							"      'method': 'GET',",
+							"      'url': pm.environment.get(\"data_host_name\")+'/parameters/schema',",
+							"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"super_admin_jwt\")}",
+							"};",
+							"pm.sendRequest(options, function (err, res) {",
+							"    pm.environment.set('parameters_schema', res.json().item)",
+							"});    "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9eafe391-7c6c-473b-92c8-a33310cd3c81",
+						"exec": [
+							"var Ajv = require('ajv'),",
+							"    ajv = new Ajv({logger: console}),",
+							"    schema = pm.environment.get('parameters_schema');",
+							"",
+							"pm.test(\"schema check\", function () {",
+							"    items = pm.response.json().items;",
+							"    items.map(item=> {",
+							"        data = item.parameter;",
+							"        pm.expect(ajv.validate(schema, data)).to.be.true;",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/parameters/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"parameters",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get product schema",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "af0e2949-2736-4918-a012-d0905ffbf4d3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5e26dba3-fa84-44bf-82ee-1dfb3b754114",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/products/schema",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"products",
+						"schema"
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b5d4669a-741c-41bb-83dd-c6d7caf4e144",
+						"exec": [
+							"options = {",
+							"      'method': 'GET',",
+							"      'url': pm.environment.get(\"data_host_name\")+'/products/schema',",
+							"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"super_admin_jwt\")}",
+							"};",
+							"pm.sendRequest(options, function (err, res) {",
+							"    pm.environment.set('products_schema', res.json().item)",
+							"});    "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "dd81395a-a4a5-4f4b-af98-0cd402c98d50",
+						"exec": [
+							"var Ajv = require('ajv'),",
+							"    ajv = new Ajv({logger: console}),",
+							"    schema = pm.environment.get('products_schema');",
+							"",
+							"pm.test(\"schema check\", function () {",
+							"    items = pm.response.json().items;",
+							"    items.map(item=> {",
+							"        data = item.product_info;",
+							"        pm.expect(ajv.validate(schema, data)).to.be.true;",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/products/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"products",
+						""
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": []
+		},
+		{
+			"name": "add `test-product` products in `angliss`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-product\",\n\t\"product_info\": {\n        \"name\": \"test product\",\n        \"description\": \"test product\",\n        \"image_url\": \"https://storage.googleapis.com/nego-staging.appspot.com/product_dev_image/test-org_test-product.png\"\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/products/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"products",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "add `test-product` products in",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-product\",\n\t\"product_info\": {\n        \"name\": \"test product\",\n        \"description\": \"test product\",\n        \"image_url\": \"https://storage.googleapis.com/nego-staging.appspot.com/product_dev_image/test-org_test-product.png\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/products/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"products",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "312"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-product\",\n        \"product_info\": {\n            \"name\": \"test product\",\n            \"description\": \"test product\",\n            \"image_url\": \"https://storage.googleapis.com/nego-staging.appspot.com/product_dev_image/test-org_test-product.png\"\n        },\n        \"created_date\": null,\n        \"updated_date\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update `test-product`",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1d83588-7801-4de3-8527-efd081a72138",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-product\",\n\t\"product_info\": {\n        \"name\": \"test product updated\",\n        \"description\": \"test product\",\n        \"image_url\": \"https://storage.googleapis.com/nego-staging.appspot.com/product_dev_image/test-org_test-product.png\"\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/products/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"products",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "update `test-product`",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-product\",\n\t\"product_info\": {\n        \"name\": \"test product\",\n        \"description\": \"test product\",\n        \"image_url\": \"https://storage.googleapis.com/nego-staging.appspot.com/product_dev_image/test-org_test-product.png\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/products/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"products",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "324"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-product\",\n        \"product_info\": {\n            \"name\": \"test product\",\n            \"description\": \"test product\",\n            \"image_url\": \"https://storage.googleapis.com/nego-staging.appspot.com/product_dev_image/test-org_test-product.png\"\n        },\n        \"created_date\": 1585547636,\n        \"updated_date\": 1585547636\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "create `test-parameter`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/parameters/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"parameters",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547613,\n        \"updated_date\": 1585547613\n    }\n}"
+				},
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547535,\n        \"updated_date\": 1585547535\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update `test-parameter`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/parameters/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"parameters",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete `test-parameter` parameter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/parameters/?organisation_id=angliss&product_id=test-parameter",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"parameters",
+						""
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "angliss"
+						},
+						{
+							"key": "product_id",
+							"value": "test-parameter"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete `test-parameter` parameter",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/parameters/?organisation_id=angliss&product_id=test-parameter",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							],
+							"query": [
+								{
+									"key": "organisation_id",
+									"value": "angliss"
+								},
+								{
+									"key": "product_id",
+									"value": "test-parameter"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "437"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"baseline\": 16.2,\n                \"weight\": 0.6,\n                \"step\": 0.5,\n                \"unit\": \"SGD\"\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"baseline\": 10,\n                \"weight\": 0.1,\n                \"step\": 5,\n                \"unit\": \"PKT\"\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"baseline\": 80,\n                \"weight\": 0.3,\n                \"step\": 5,\n                \"unit\": \"PKT\"\n            }\n        ],\n        \"created_date\": 1585547535,\n        \"updated_date\": 1585547539\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update `test-product` image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/huynhnguyen/Desktop/dog.jpeg"
+						},
+						{
+							"key": "product_id",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/products/image?product_id=test-product&organisation_id=angliss",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"products",
+						"image"
+					],
+					"query": [
+						{
+							"key": "product_id",
+							"value": "test-product"
+						},
+						{
+							"key": "organisation_id",
+							"value": "angliss"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get product negotiation session",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/product_negotiation_sessions/?organisation_id=angliss&product_id=test-product",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"product_negotiation_sessions",
+						""
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "angliss"
+						},
+						{
+							"key": "product_id",
+							"value": "test-product"
+						}
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "create product negotiation `test-product`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"angliss\",\n    \"customer_email\": \"test@test.com\",\n    \"customer_name\": \"test\",\n    \"product_id\": \"test-product\",\n    \"make_offer\": null,\n    \"customer_offer\": null,\n    \"seal_deal\": null,\n    \"negotiation_session\": {\n        \"overall\": [],\n        \"negotiation_parameter\": [\n            {\n                \"baseline\": 16.2,\n                \"inverse\": false,\n                \"max\": 16.2,\n                \"min\": 16.2,\n                \"name\": \"price\",\n                \"step\": 0.5,\n                \"unit\": \"SGD\",\n                \"weight\": 0.6\n            },\n            {\n                \"baseline\": 10,\n                \"inverse\": false,\n                \"max\": 20,\n                \"min\": 5,\n                \"name\": \"quantity\",\n                \"step\": 5,\n                \"unit\": \"PKT\",\n                \"weight\": 0.1\n            },\n            {\n                \"baseline\": 80,\n                \"inverse\": false,\n                \"max\": 80,\n                \"min\": 40,\n                \"name\": \"monthly_quantity\",\n                \"step\": 5,\n                \"unit\": \"PKT\",\n                \"weight\": 0.3\n            }\n        ],\n        \"negotiation_evaluation_metric\": {\n            \"max_concession_round\": 4,\n            \"max_concession_score\": 0.2,\n            \"min_accept_score\": 0.2,\n            \"auto_accept_score\": 0.7,\n            \"concession_pattern\": [\n                0.2,\n                0.3,\n                0.4,\n                0.9\n            ]\n        },\n        \"session\": {\n            \"session_id\": \"test-session-20221\",\n            \"seal_deal\": \"negotiate\",\n            \"agent_seal_deal\": \"negotiate\",\n            \"organisation_id\": \"epd-demo\",\n            \"product_id\": \"None\",\n            \"brand_id\": \"test_brand_01\",\n            \"customer_name\": \"test\",\n            \"customer_email\": \"test@test.com\",\n            \"customer_role\": \"buyer\"\n        },\n        \"session_status\": \"customer_negotiate\"\n    },\n    \"product_name\": null,\n    \"product_info\": null,\n    \"bot_offer\": null,\n    \"session_id\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/product_negotiation_sessions/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"product_negotiation_sessions",
+						""
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "update product negotiation `test-product`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"angliss\",\n    \"customer_email\": \"test@test.com\",\n    \"customer_name\": \"test\",\n    \"product_id\": \"test-product\",\n    \"make_offer\": null,\n    \"customer_offer\": null,\n    \"seal_deal\": null,\n    \"negotiation_session\": {\n        \"overall\": [],\n        \"negotiation_parameter\": [\n            {\n                \"baseline\": 16.2,\n                \"inverse\": false,\n                \"max\": 16.2,\n                \"min\": 16.2,\n                \"name\": \"price\",\n                \"step\": 0.5,\n                \"unit\": \"SGD\",\n                \"weight\": 0.6\n            },\n            {\n                \"baseline\": 10,\n                \"inverse\": false,\n                \"max\": 20,\n                \"min\": 5,\n                \"name\": \"quantity\",\n                \"step\": 5,\n                \"unit\": \"PKT\",\n                \"weight\": 0.1\n            },\n            {\n                \"baseline\": 80,\n                \"inverse\": false,\n                \"max\": 80,\n                \"min\": 40,\n                \"name\": \"monthly_quantity\",\n                \"step\": 5,\n                \"unit\": \"PKT\",\n                \"weight\": 0.3\n            }\n        ],\n        \"negotiation_evaluation_metric\": {\n            \"max_concession_round\": 4,\n            \"max_concession_score\": 0.2,\n            \"min_accept_score\": 0.2,\n            \"auto_accept_score\": 0.7,\n            \"concession_pattern\": [\n                0.2,\n                0.3,\n                0.4,\n                0.9\n            ]\n        },\n        \"session\": {\n            \"session_id\": \"test-session-20221\",\n            \"seal_deal\": \"negotiate\",\n            \"agent_seal_deal\": \"negotiate\",\n            \"organisation_id\": \"epd-demo\",\n            \"product_id\": \"None\",\n            \"brand_id\": \"test_brand_01\",\n            \"customer_name\": \"test\",\n            \"customer_email\": \"test@test.com\",\n            \"customer_role\": \"buyer\"\n        },\n        \"session_status\": \"customer_negotiate\"\n    },\n    \"product_name\": null,\n    \"product_info\": null,\n    \"bot_offer\": null,\n    \"session_id\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/product_negotiation_sessions/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"product_negotiation_sessions",
+						""
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "close product negotiation `test-product`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"angliss\",\n    \"product_id\": \"test-product\",\n    \"customer_email\": \"test@test.com\",\n    \"session_status\": \"accept\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/product_negotiation_sessions/agent_seal_session",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"product_negotiation_sessions",
+						"agent_seal_session"
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": []
+		},
+		{
+			"name": "delete product negotiation `test-product`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"test-org\",\n    \"brand_id\": \"test-brand-tmp\",\n    \"session_id\": \"test-org-test@test.org\",\n    \"session_trace\": {\n        \"overall\": [\n            {\n                \"customer_offer_score\": 0,\n                \"action\": \"negotiate\",\n                \"is_violated\": true,\n                \"counter_offer_score\": 0.86,\n                \"customer_offer\": {\n                    \"price\": 130,\n                    \"quantity\": 1,\n                    \"monthly_quantity\": 1\n                },\n                \"counter_offer\": {\n                    \"price\": 136.2,\n                    \"quantity\": 18,\n                    \"monthly_quantity\": 74.5\n                }\n            },\n            {\n                \"customer_offer_score\": 0,\n                \"action\": \"negotiate\",\n                \"is_violated\": true,\n                \"counter_offer_score\": 0.7,\n                \"customer_offer\": {\n                    \"price\": 132,\n                    \"quantity\": 1.5,\n                    \"monthly_quantity\": 1.5\n                },\n                \"counter_offer\": {\n                    \"price\": 136.2,\n                    \"quantity\": 15.5,\n                    \"monthly_quantity\": 68\n                }\n            },\n            {\n                \"customer_offer_score\": 0,\n                \"action\": \"negotiate\",\n                \"is_violated\": true,\n                \"counter_offer_score\": 0.54,\n                \"customer_offer\": {\n                    \"price\": 135,\n                    \"quantity\": 2,\n                    \"monthly_quantity\": 2\n                },\n                \"counter_offer\": {\n                    \"price\": 136.2,\n                    \"quantity\": 13,\n                    \"monthly_quantity\": 61.5\n                }\n            },\n            {\n                \"customer_offer_score\": 0,\n                \"action\": \"reject\",\n                \"is_violated\": true,\n                \"counter_offer_score\": 0.33,\n                \"customer_offer\": {\n                    \"price\": 136,\n                    \"quantity\": 3,\n                    \"monthly_quantity\": 3\n                },\n                \"counter_offer\": {\n                    \"price\": 136.2,\n                    \"quantity\": 10,\n                    \"monthly_quantity\": 53\n                }\n            }\n        ],\n        \"session\": {\n            \"name\": \"session_1\",\n            \"customer_role\": \"buyer\",\n            \"min_accept_score\": 0.2,\n            \"auto_accept_score\": 0.7,\n            \"concession_pattern\": [\n                0.2,\n                0.3,\n                0.4,\n                0.9\n            ],\n            \"max_concession_score\": 0.3,\n            \"max_concession_round\": 4\n        },\n        \"price\": [\n            {\n                \"name\": \"price\",\n                \"min\": 136.2,\n                \"max\": 136.2,\n                \"weight\": 0.6,\n                \"inverse\": false,\n                \"step\": 0.1,\n                \"baseline\": 136.2,\n                \"customer_offer\": 130,\n                \"counter_offer\": 136.2,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0\n            },\n            {\n                \"name\": \"price\",\n                \"min\": 136.2,\n                \"max\": 136.2,\n                \"weight\": 0.6,\n                \"inverse\": false,\n                \"step\": 0.1,\n                \"baseline\": 136.2,\n                \"customer_offer\": 132,\n                \"counter_offer\": 136.2,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0\n            },\n            {\n                \"name\": \"price\",\n                \"min\": 136.2,\n                \"max\": 136.2,\n                \"weight\": 0.6,\n                \"inverse\": false,\n                \"step\": 0.1,\n                \"baseline\": 136.2,\n                \"customer_offer\": 135,\n                \"counter_offer\": 136.2,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0\n            },\n            {\n                \"name\": \"price\",\n                \"min\": 136.2,\n                \"max\": 136.2,\n                \"weight\": 0.6,\n                \"inverse\": false,\n                \"step\": 0.1,\n                \"baseline\": 136.2,\n                \"customer_offer\": 136,\n                \"counter_offer\": 136.2,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0\n            }\n        ],\n        \"quantity\": [\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 20,\n                \"customer_offer\": 1,\n                \"counter_offer\": 18,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.8666666666666667\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 20,\n                \"customer_offer\": 1.5,\n                \"counter_offer\": 15.5,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.7\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 20,\n                \"customer_offer\": 2,\n                \"counter_offer\": 13,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.5333333333333333\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 20,\n                \"customer_offer\": 3,\n                \"counter_offer\": 10,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.3333333333333333\n            }\n        ],\n        \"monthly_quantity\": [\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 80,\n                \"customer_offer\": 1,\n                \"counter_offer\": 74.5,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.8625\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 80,\n                \"customer_offer\": 1.5,\n                \"counter_offer\": 68,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.7\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 80,\n                \"customer_offer\": 2,\n                \"counter_offer\": 61.5,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.5375\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 80,\n                \"customer_offer\": 3,\n                \"counter_offer\": 53,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.325\n            }\n        ]\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/product_negotiation_sessions/?organisation_id=angliss&product_id=test-product",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"product_negotiation_sessions",
+						""
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "angliss"
+						},
+						{
+							"key": "product_id",
+							"value": "test-product"
+						}
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "delete product negotiation `test-product`",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"organisation_id\": \"test-org\",\n    \"brand_id\": \"test-brand-tmp\",\n    \"session_id\": \"test-org-test@test.org\",\n    \"session_trace\": {\n        \"overall\": [\n            {\n                \"customer_offer_score\": 0,\n                \"action\": \"negotiate\",\n                \"is_violated\": true,\n                \"counter_offer_score\": 0.86,\n                \"customer_offer\": {\n                    \"price\": 130,\n                    \"quantity\": 1,\n                    \"monthly_quantity\": 1\n                },\n                \"counter_offer\": {\n                    \"price\": 136.2,\n                    \"quantity\": 18,\n                    \"monthly_quantity\": 74.5\n                }\n            },\n            {\n                \"customer_offer_score\": 0,\n                \"action\": \"negotiate\",\n                \"is_violated\": true,\n                \"counter_offer_score\": 0.7,\n                \"customer_offer\": {\n                    \"price\": 132,\n                    \"quantity\": 1.5,\n                    \"monthly_quantity\": 1.5\n                },\n                \"counter_offer\": {\n                    \"price\": 136.2,\n                    \"quantity\": 15.5,\n                    \"monthly_quantity\": 68\n                }\n            },\n            {\n                \"customer_offer_score\": 0,\n                \"action\": \"negotiate\",\n                \"is_violated\": true,\n                \"counter_offer_score\": 0.54,\n                \"customer_offer\": {\n                    \"price\": 135,\n                    \"quantity\": 2,\n                    \"monthly_quantity\": 2\n                },\n                \"counter_offer\": {\n                    \"price\": 136.2,\n                    \"quantity\": 13,\n                    \"monthly_quantity\": 61.5\n                }\n            },\n            {\n                \"customer_offer_score\": 0,\n                \"action\": \"reject\",\n                \"is_violated\": true,\n                \"counter_offer_score\": 0.33,\n                \"customer_offer\": {\n                    \"price\": 136,\n                    \"quantity\": 3,\n                    \"monthly_quantity\": 3\n                },\n                \"counter_offer\": {\n                    \"price\": 136.2,\n                    \"quantity\": 10,\n                    \"monthly_quantity\": 53\n                }\n            }\n        ],\n        \"session\": {\n            \"name\": \"session_1\",\n            \"customer_role\": \"buyer\",\n            \"min_accept_score\": 0.2,\n            \"auto_accept_score\": 0.7,\n            \"concession_pattern\": [\n                0.2,\n                0.3,\n                0.4,\n                0.9\n            ],\n            \"max_concession_score\": 0.3,\n            \"max_concession_round\": 4\n        },\n        \"price\": [\n            {\n                \"name\": \"price\",\n                \"min\": 136.2,\n                \"max\": 136.2,\n                \"weight\": 0.6,\n                \"inverse\": false,\n                \"step\": 0.1,\n                \"baseline\": 136.2,\n                \"customer_offer\": 130,\n                \"counter_offer\": 136.2,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0\n            },\n            {\n                \"name\": \"price\",\n                \"min\": 136.2,\n                \"max\": 136.2,\n                \"weight\": 0.6,\n                \"inverse\": false,\n                \"step\": 0.1,\n                \"baseline\": 136.2,\n                \"customer_offer\": 132,\n                \"counter_offer\": 136.2,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0\n            },\n            {\n                \"name\": \"price\",\n                \"min\": 136.2,\n                \"max\": 136.2,\n                \"weight\": 0.6,\n                \"inverse\": false,\n                \"step\": 0.1,\n                \"baseline\": 136.2,\n                \"customer_offer\": 135,\n                \"counter_offer\": 136.2,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0\n            },\n            {\n                \"name\": \"price\",\n                \"min\": 136.2,\n                \"max\": 136.2,\n                \"weight\": 0.6,\n                \"inverse\": false,\n                \"step\": 0.1,\n                \"baseline\": 136.2,\n                \"customer_offer\": 136,\n                \"counter_offer\": 136.2,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0\n            }\n        ],\n        \"quantity\": [\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 20,\n                \"customer_offer\": 1,\n                \"counter_offer\": 18,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.8666666666666667\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 20,\n                \"customer_offer\": 1.5,\n                \"counter_offer\": 15.5,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.7\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 20,\n                \"customer_offer\": 2,\n                \"counter_offer\": 13,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.5333333333333333\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 20,\n                \"customer_offer\": 3,\n                \"counter_offer\": 10,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.3333333333333333\n            }\n        ],\n        \"monthly_quantity\": [\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 80,\n                \"customer_offer\": 1,\n                \"counter_offer\": 74.5,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.8625\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 80,\n                \"customer_offer\": 1.5,\n                \"counter_offer\": 68,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.7\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 80,\n                \"customer_offer\": 2,\n                \"counter_offer\": 61.5,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.5375\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 80,\n                \"customer_offer\": 3,\n                \"counter_offer\": 53,\n                \"customer_offer_score\": 0,\n                \"counter_offer_score\": 0.325\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/product_negotiation_sessions/?organisation_id=angliss&product_id=test-product",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"product_negotiation_sessions",
+								""
+							],
+							"query": [
+								{
+									"key": "organisation_id",
+									"value": "angliss"
+								},
+								{
+									"key": "product_id",
+									"value": "test-product"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1095"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"angliss\",\n            \"product_id\": \"test-product\",\n            \"customer_email\": \"test@test.com\",\n            \"session_id\": \"test-session-20221\",\n            \"session_status\": \"customer_negotiate\",\n            \"negotiation_session\": {\n                \"overall\": [],\n                \"negotiation_parameter\": [\n                    {\n                        \"baseline\": 16.2,\n                        \"inverse\": false,\n                        \"max\": 16.2,\n                        \"min\": 16.2,\n                        \"name\": \"price\",\n                        \"step\": 0.5,\n                        \"unit\": \"SGD\",\n                        \"weight\": 0.6\n                    },\n                    {\n                        \"baseline\": 10,\n                        \"inverse\": false,\n                        \"max\": 20,\n                        \"min\": 5,\n                        \"name\": \"quantity\",\n                        \"step\": 5,\n                        \"unit\": \"PKT\",\n                        \"weight\": 0.1\n                    },\n                    {\n                        \"baseline\": 80,\n                        \"inverse\": false,\n                        \"max\": 80,\n                        \"min\": 40,\n                        \"name\": \"monthly_quantity\",\n                        \"step\": 5,\n                        \"unit\": \"PKT\",\n                        \"weight\": 0.3\n                    }\n                ],\n                \"negotiation_evaluation_metric\": {\n                    \"max_concession_round\": 4,\n                    \"max_concession_score\": 0.2,\n                    \"min_accept_score\": 0.2,\n                    \"auto_accept_score\": 0.7,\n                    \"concession_pattern\": [\n                        0.2,\n                        0.3,\n                        0.4,\n                        0.9\n                    ]\n                },\n                \"session\": {\n                    \"session_id\": \"test-session-20221\",\n                    \"seal_deal\": \"negotiate\",\n                    \"agent_seal_deal\": \"negotiate\",\n                    \"organisation_id\": \"epd-demo\",\n                    \"product_id\": \"None\",\n                    \"brand_id\": \"test_brand_01\",\n                    \"customer_name\": \"test\",\n                    \"customer_email\": \"test@test.com\",\n                    \"customer_role\": \"buyer\"\n                },\n                \"session_status\": \"customer_negotiate\"\n            },\n            \"created_date\": 1585550688,\n            \"updated_date\": 1585550688\n        }\n    ]\n}"
+				},
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "delete `test-product` from angliss",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/products/?organisation_id=angliss&product_id=test-product",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"products",
+						""
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "angliss"
+						},
+						{
+							"key": "product_id",
+							"value": "test-product"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete `test-product` from angliss",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/products/?organisation_id=angliss&product_id=test-product",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "organisation_id",
+									"value": "angliss"
+								},
+								{
+									"key": "product_id",
+									"value": "test-product"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "324"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-product\",\n        \"product_info\": {\n            \"name\": \"test product\",\n            \"description\": \"test product\",\n            \"image_url\": \"https://storage.googleapis.com/nego-staging.appspot.com/product_dev_image/test-org_test-product.png\"\n        },\n        \"created_date\": 1585547636,\n        \"updated_date\": 1585547636\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "247a8b2f-620b-49d2-baa2-4c44280c7c69",
+				"type": "text/javascript",
+				"exec": [
+					"const makeLogin = (username, password)=>{",
+					"    return {",
+					"      url: pm.environment.get(\"auth_host_name\")+'/login',",
+					"      method: 'POST',",
+					"      header: 'Content-Type:application/json',",
+					"      body: {",
+					"        mode: 'application/json',",
+					"        raw: JSON.stringify({ username, password })",
+					"      }",
+					"    };    ",
+					"}",
+					"",
+					"",
+					"var getNegobotToken = pm.environment.get(\"super_admin_jwt\").length===0;",
+					"var getAnglissToken = pm.environment.get(\"angliss_admin_jwt\").length===0;",
+					"var getEPDDemoToken = pm.environment.get(\"epd_demo_admin_jwt\").length===0;",
+					"",
+					"if (getNegobotToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@negobot.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving super_admin_jwt token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('super_admin_jwt', responseJson.access_token)",
+					"            pm.environment.set('super_admin_refresh_token', responseJson.refresh_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"if (getAnglissToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@angliss.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving angliss_admin_jwt token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('angliss_admin_jwt', responseJson.access_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"if (getEPDDemoToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@epd-demo.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving edp_demo token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('epd_demo_admin_jwt', responseJson.access_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"",
+					"if(!pm.environment.get(\"cleanup_test_product\")){",
+					"    console.log(\"try to clean up test_org\");",
+					"    var options = {",
+					"      'method': 'DELETE',",
+					"      'url': pm.environment.get(\"data_host_name\")+'/products/?organisation_id=angliss&product_id=test-product',",
+					"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"angliss_admin_jwt\")},",
+					"      body: JSON.stringify({\"brand_id\":\"test_brand_tmp\"})",
+					"    ",
+					"    };",
+					"    ",
+					"    pm.sendRequest(options, function (err, res) {",
+					"        console.log(err ? err : res.text());",
+					"    });    ",
+					"    ",
+					"    pm.environment.set(\"cleanup_test_product\", \"true\");",
+					"}",
+					"",
+					"if(!pm.environment.get(\"cleanup_test_product_parameter\")){",
+					"    console.log(\"try to clean up cleanup_test_product_parameter\");",
+					"    var options = {",
+					"      'method': 'DELETE',",
+					"      'url': pm.environment.get(\"data_host_name\")+'/parameters/?organisation_id=angliss&product_id=test-parameter',",
+					"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"angliss_admin_jwt\")},",
+					"      body: JSON.stringify({\"brand_id\":\"test_brand_tmp\"})",
+					"    ",
+					"    };",
+					"    ",
+					"    pm.sendRequest(options, function (err, res) {",
+					"        console.log(err ? err : res.text());",
+					"    });    ",
+					"    ",
+					"    pm.environment.set(\"cleanup_test_product_parameter\", \"true\");",
+					"}",
+					"",
+					"if(!pm.environment.get(\"cleanup_test_product_session\")){",
+					"    console.log(\"try to clean up cleanup_test_product_session\");",
+					"    var options = {",
+					"      'method': 'DELETE',",
+					"      'url': pm.environment.get(\"data_host_name\")+'/product_negotiation_sessions/?organisation_id=angliss&product_id=test-product',",
+					"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"angliss_admin_jwt\")},",
+					"      body: JSON.stringify({\"brand_id\":\"test_brand_tmp\"})",
+					"    ",
+					"    };",
+					"    ",
+					"    pm.sendRequest(options, function (err, res) {",
+					"        console.log(err ? err : res.text());",
+					"    });    ",
+					"    ",
+					"    pm.environment.set(\"cleanup_test_product_session\", \"true\");",
+					"}",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "00e3cee1-85ea-4d26-9587-4ab17387a8e7",
+				"type": "text/javascript",
+				"exec": [
+					"var Ajv = require('ajv'),",
+					"    ajv = new Ajv({logger: console}),",
+					"    schema = {",
+					"        \"properties\": {",
+					"            \"items\": {",
+					"                \"type\": \"array\"",
+					"            },",
+					"            \"item\": {",
+					"                \"type\": \"object\"",
+					"            }",
+					"        }",
+					"    };",
+					"",
+					"pm.test(\"Status test\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test(\"test content by base schema\", function () {",
+					"    data = pm.response.json()",
+					"    pm.expect(ajv.validate(schema, data)).to.be.true;",
+					"});",
+					"",
+					"((pm.request.method === \"POST\" && pm.response.code == 200)?pm.test:pm.test.skip)(\"test content by create time\", function () {",
+					"    data = pm.response.json()",
+					"    data = pm.response.json()",
+					"    if(data.item && data.item.create_date){",
+					"        pm.expect(data.item.create_date - new Date().getTime()/1000).to.be.at.most(1)",
+					"    }",
+					"});",
+					"((pm.request.method === \"PUT\" && pm.response.code == 200)?pm.test:pm.test.skip)(\"test create content by timestampt\", function () {",
+					"    data = pm.response.json()",
+					"    if(data.item && data.item.update_date){",
+					"        pm.expect(data.item.updated_date - data.item.created_date).to.be.at.least(0)",
+					"        pm.expect(data.item.updated_date - new Date().getTime()/1000).to.be.at.most(1)",
+					"    }",
+					"});"
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

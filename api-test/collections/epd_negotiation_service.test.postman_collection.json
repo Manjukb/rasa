@@ -1,0 +1,2923 @@
+{
+	"info": {
+		"_postman_id": "5123668b-dccf-49bf-b87f-46ac462bca5e",
+		"name": "epd_negotiation_service.test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get payees schema",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/payees/schema",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees",
+						"schema"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "get payees schema",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/payees/schema",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"payees",
+								"schema"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1269"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n        \"$id\": \"brand\",\n        \"title\": \"brand schema\",\n        \"properties\": {\n            \"name\": {\n                \"type\": \"string\",\n                \"pattern\": \"^(.{1,40})$\"\n            },\n            \"description\": {\n                \"type\": \"string\",\n                \"pattern\": \"^([\\\\s\\\\S]{1,500})$\"\n            },\n            \"email_template\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"title\": {\n                        \"type\": \"string\",\n                        \"pattern\": \"^.{1,500}$\",\n                        \"default\": \"Early payment discount for you\"\n                    },\n                    \"content\": {\n                        \"type\": \"string\",\n                        \"pattern\": \"^([\\\\s\\\\S]{0,5000}\\\\{chat_url\\\\}[\\\\s\\\\S]{0,5000}\\\\{brand_name\\\\}[\\\\s\\\\S]{0,5000})$\",\n                        \"default\": \"Dear Supplier,\\nThank you for your support to our business. In order to pay you faster, we would like to offer you payment within {baseline_payment_days} days going forward.\\nTo indicate how much discount you would be willing to offer on an ongoing basis to avail of this early payment discount, please click this link below to indicate your offer:\\n{chat_url}\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n{brand_name}\"\n                    }\n                }\n            },\n            \"email\": {\n                \"type\": \"string\",\n                \"pattern\": \"^([a-zA-Z0-9_\\\\-\\\\.]+)@([a-zA-Z0-9_\\\\-\\\\.]+)\\\\.([a-zA-Z]{2,5})$\"\n            }\n        },\n        \"required\": [\n            \"name\",\n            \"description\"\n        ],\n        \"type\": \"object\"\n    }\n}"
+				},
+				{
+					"name": "get payees schema",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/payees/schema",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"payees",
+								"schema"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 11:08:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n        \"$id\": \"brand\",\n        \"title\": \"brand schema\",\n        \"properties\": {\n            \"name\": {\n                \"type\": \"string\",\n                \"pattern\": \"^(.{1,40})$\"\n            },\n            \"description\": {\n                \"type\": \"string\",\n                \"pattern\": \"^([\\\\s\\\\S]{1,500})$\"\n            },\n            \"email_template\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"title\": {\n                        \"type\": \"string\",\n                        \"pattern\": \"^.{1,500}$\",\n                        \"default\": \"Early payment discount for you\"\n                    },\n                    \"content\": {\n                        \"type\": \"string\",\n                        \"pattern\": \"^([\\\\s\\\\S]{1,5000}\\\\{chat_url\\\\}[\\\\s\\\\S]{1,5000}\\\\{brand_name\\\\}[\\\\s\\\\S]{1,5000})$\",\n                        \"default\": \"Dear Madam / Sir,\\nThank you for our ongoing business relationship! We have created an early payment offer in conjunction with the EzyPay platform to help valued suppliers like you receive funds early and reduce your working capital cycle. \\nShould you be interested in this solution, please click the link below to visit the EzyPay website and make us an offer:\\n\\n{chat_url}\\n\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n\\n{brand_name}\\n\"\n                    }\n                }\n            },\n            \"email\": {\n                \"type\": \"string\",\n                \"pattern\": \"^([a-zA-Z0-9_\\\\-\\\\.]+)@([a-zA-Z0-9_\\\\-\\\\.]+)\\\\.([a-zA-Z]{2,5})$\"\n            }\n        },\n        \"required\": [\n            \"name\",\n            \"description\"\n        ],\n        \"type\": \"object\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get payees of edp@demo",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c7578500-dc30-401c-b942-4de1cc63b131",
+						"exec": [
+							"options = {",
+							"      'method': 'GET',",
+							"      'url': pm.environment.get(\"data_host_name\")+'/payees/schema',",
+							"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"epd_demo_admin_jwt\")}",
+							"};",
+							"pm.sendRequest(options, function (err, res) {",
+							"    pm.environment.set('payees_schema', res.json().item)",
+							"});    "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c9d3a302-1cd2-4f82-b8ac-301505d4bb75",
+						"exec": [
+							"var Ajv = require('ajv'),",
+							"    ajv = new Ajv({logger: console}),",
+							"    schema = pm.environment.get('payees_schema');",
+							"",
+							"pm.test(\"schema check\", function () {",
+							"    items = pm.response.json().items;",
+							"    items.map(item=> {",
+							"        data = item.payee;",
+							"        pm.expect(ajv.validate(schema, data)).to.be.true;",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/payees",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "get payees of edp@demo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/payees",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"payees"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 11:09:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"brand_id\": \"test_brand_02\",\n            \"payee\": [\n                {\n                    \"supplier_id\": \"huynh-01\",\n                    \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                    \"supplier_email\": \"huynh@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"shashank-01\",\n                    \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                    \"supplier_email\": \"shashank@startup-o.com\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"negotiate\",\n                    \"invite_email_status\": {\n                        \"labels\": [\n                            \"SENT\"\n                        ],\n                        \"url\": \"https://negobot.page.link/6SQzBFK4JKcpXCTr9\"\n                    }\n                },\n                {\n                    \"supplier_id\": \"man\",\n                    \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                    \"supplier_email\": \"man@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 637.2\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"ani-01\",\n                    \"supplier_name\": \"Bright Vegetable Enterprise\",\n                    \"supplier_email\": \"aniruddha@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 3491.9600002706\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"ani-02\",\n                    \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                    \"supplier_email\": \"aniruddha@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 3491.9600002706\n                    },\n                    \"epd_status\": \"new\"\n                }\n            ],\n            \"created_date\": 1584081943,\n            \"updated_date\": 1584087427\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"brand_id\": \"test_brand_01\",\n            \"payee\": [\n                {\n                    \"supplier_id\": \"huynh-01\",\n                    \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                    \"supplier_email\": \"huynh@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"shashank-01\",\n                    \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                    \"supplier_email\": \"shashank@startup-o.com\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"negotiate\",\n                    \"invite_email_status\": {\n                        \"labels\": [\n                            \"SENT\"\n                        ],\n                        \"url\": \"https://negobot.page.link/utgrsjBCiB5HePLh8\"\n                    }\n                },\n                {\n                    \"supplier_id\": \"man\",\n                    \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                    \"supplier_email\": \"man@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 637.2\n                    },\n                    \"epd_status\": \"negotiate\",\n                    \"invite_email_status\": {\n                        \"labels\": [\n                            \"SENT\"\n                        ],\n                        \"url\": \"https://negobot.page.link/YQQgSzVeC2BYkJ1R7\"\n                    }\n                },\n                {\n                    \"supplier_id\": \"ani-01\",\n                    \"supplier_name\": \"Bright Vegetable Enterprise\",\n                    \"supplier_email\": \"aniruddha@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 3491.9600002706\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"ani-02\",\n                    \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                    \"supplier_email\": \"aniruddha@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 3491.9600002706\n                    },\n                    \"epd_status\": \"negotiate\",\n                    \"invite_email_status\": {\n                        \"labels\": [\n                            \"SENT\"\n                        ],\n                        \"url\": \"https://negobot.page.link/EVn46bDHDKs3PC3P7\"\n                    }\n                }\n            ],\n            \"created_date\": 1583738364,\n            \"updated_date\": 1585189878\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get epd_parameters schema",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/epd_parameters",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_parameters"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "get epd_parameters schema",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/epd_parameters",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"epd_parameters"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 11:09:03 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"brand_id\": \"test_brand_01\",\n            \"epd_parameter\": [\n                {\n                    \"name\": \"payment_date\",\n                    \"min\": 7,\n                    \"max\": 7,\n                    \"weight\": 0,\n                    \"unit\": \"day\",\n                    \"inverse\": false,\n                    \"step\": 1,\n                    \"baseline\": 7\n                },\n                {\n                    \"name\": \"discount\",\n                    \"min\": 2,\n                    \"max\": 6,\n                    \"weight\": 1,\n                    \"unit\": \"percentage\",\n                    \"inverse\": false,\n                    \"step\": 1,\n                    \"baseline\": 6\n                }\n            ],\n            \"created_date\": 1583738145,\n            \"updated_date\": 1585106037\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get `epd_parameters` of edp-demo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/epd_parameters",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_parameters"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "get epd_parameters of edp-demo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/epd_parameters",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"epd_parameters"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 11:09:56 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"brand_id\": \"test_brand_01\",\n            \"epd_parameter\": [\n                {\n                    \"name\": \"payment_date\",\n                    \"min\": 7,\n                    \"max\": 7,\n                    \"weight\": 0,\n                    \"unit\": \"day\",\n                    \"inverse\": false,\n                    \"step\": 1,\n                    \"baseline\": 7\n                },\n                {\n                    \"name\": \"discount\",\n                    \"min\": 2,\n                    \"max\": 6,\n                    \"weight\": 1,\n                    \"unit\": \"percentage\",\n                    \"inverse\": false,\n                    \"step\": 1,\n                    \"baseline\": 6\n                }\n            ],\n            \"created_date\": 1583738145,\n            \"updated_date\": 1585106037\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get brands  schema",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fdec189c-8cff-4263-8c42-a535c19b7df1",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8d0686e3-4bea-43cd-afa8-50b5375875d2",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/brands/schema",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"brands",
+						"schema"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "get brands  schema",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/brands/schema",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"brands",
+								"schema"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 11:05:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n        \"$id\": \"brand\",\n        \"title\": \"brand schema\",\n        \"properties\": {\n            \"name\": {\n                \"type\": \"string\",\n                \"pattern\": \"^(.{1,40})$\"\n            },\n            \"description\": {\n                \"type\": \"string\",\n                \"pattern\": \"^([\\\\s\\\\S]{1,500})$\"\n            },\n            \"email_template\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"title\": {\n                        \"type\": \"string\",\n                        \"pattern\": \"^.{1,500}$\",\n                        \"default\": \"Early payment discount for you\"\n                    },\n                    \"content\": {\n                        \"type\": \"string\",\n                        \"pattern\": \"^([\\\\s\\\\S]{1,5000}\\\\{chat_url\\\\}[\\\\s\\\\S]{1,5000}\\\\{brand_name\\\\}[\\\\s\\\\S]{1,5000})$\",\n                        \"default\": \"Dear Madam / Sir,\\nThank you for our ongoing business relationship! We have created an early payment offer in conjunction with the EzyPay platform to help valued suppliers like you receive funds early and reduce your working capital cycle. \\nShould you be interested in this solution, please click the link below to visit the EzyPay website and make us an offer:\\n\\n{chat_url}\\n\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n\\n{brand_name}\\n\"\n                    }\n                }\n            },\n            \"email\": {\n                \"type\": \"string\",\n                \"pattern\": \"^([a-zA-Z0-9_\\\\-\\\\.]+)@([a-zA-Z0-9_\\\\-\\\\.]+)\\\\.([a-zA-Z]{2,5})$\"\n            }\n        },\n        \"required\": [\n            \"name\",\n            \"description\"\n        ],\n        \"type\": \"object\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get brands of `epd-demo`",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3c36e89e-f655-440e-99df-eaa846f7e875",
+						"exec": [
+							"options = {",
+							"      'method': 'GET',",
+							"      'url': pm.environment.get(\"data_host_name\")+'/brands/schema',",
+							"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"epd_demo_admin_jwt\")}",
+							"};",
+							"pm.sendRequest(options, function (err, res) {",
+							"    pm.environment.set('brands_schema', res.json().item)",
+							"});    "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f162904-22e1-4ae8-b85e-e0d6d15680b5",
+						"exec": [
+							"var Ajv = require('ajv'),",
+							"    ajv = new Ajv({logger: console}),",
+							"    schema = pm.environment.get('brands_schema');",
+							"",
+							"pm.test(\"schema check\", function () {",
+							"    items = pm.response.json().items;",
+							"    items.map(item=> {",
+							"        data = item.brand_info;",
+							"        pm.expect(ajv.validate(schema, data)).to.be.true;",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/brands",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"brands"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "get brands of `epd-demo`",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/brands",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"brands"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 11:10:18 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"brand_id\": \"test_brand_01\",\n            \"brand_info\": {\n                \"name\": \"test brand 01\",\n                \"description\": \"brand description\",\n                \"email\": \"huynh@test.com\",\n                \"email_template\": {\n                    \"title\": \"Early test\",\n                    \"content\": \"Dear Supplier,\\n\\nThank you for your support to our business. In order to pay you faster, we would like to offer you payment within {Baseline Payment days} days going forward.\\n\\nTo indicate how much discount you would be willing to offer on an ongoing basis to avail of this early payment discount, please click this link below to indicate your offer:\\n{chat_url}\\n\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\n\\nThank you and best regards,\\n{brand_name}\\n\"\n                }\n            },\n            \"created_date\": 1583738178,\n            \"updated_date\": 1585219383\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"brand_id\": \"test_brand_02\",\n            \"brand_info\": {\n                \"name\": \"test brand 02\",\n                \"description\": \"brand description\"\n            },\n            \"created_date\": 1582626256,\n            \"updated_date\": 1584082881\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"brand_id\": \"test_brand_03\",\n            \"brand_info\": {\n                \"name\": \"test brand 03\",\n                \"description\": \"brand description\"\n            },\n            \"created_date\": 1582626342,\n            \"updated_date\": 1584082913\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get sample email template",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/brands/sample_email_template",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"brands",
+						"sample_email_template"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "get sample email template",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/brands/sample_email_template",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"brands",
+								"sample_email_template"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 11:10:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"title\": \"Early payment discount for you\",\n        \"content\": \"Dear Madam / Sir,\\nThank you for our ongoing business relationship! We have created an early payment offer in conjunction with the EzyPay platform to help valued suppliers like you receive funds early and reduce your working capital cycle. \\nShould you be interested in this solution, please click the link below to visit the EzyPay website and make us an offer:\\n\\n{chat_url}\\n\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n\\n{brand_name}\\n\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "create `test_brand_tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"brand_info\": {\n        \"name\": \"test brand tmp\",\n        \"description\": \"brand description\",\n        \"email\": \"huynh@test.com\",\n        \"email_template\": {\n            \"title\": \"Early payment discount for you\",\n            \"content\": \"Dear Madam / Sir,\\nThank you for our ongoing business relationship! We have created an early payment offer in conjunction with the EzyPay platform to help valued suppliers like you receive funds early and reduce your working capital cycle. \\nShould you be interested in this solution, please click the link below to visit the EzyPay website and make us an offer:\\n\\n{chat_url}\\n\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n\\n{brand_name}\\n\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/brands/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"brands",
+						""
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "`test_brand_tmp`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"brand_info\": {\n        \"name\": \"test brand tmp\",\n        \"description\": \"brand description\",\n        \"email\": \"huynh@test.com\",\n        \"email_template\": {\n            \"title\": \"Early payment discount for you\",\n            \"content\": \"Dear Madam / Sir,\\nThank you for our ongoing business relationship! We have created an early payment offer in conjunction with the EzyPay platform to help valued suppliers like you receive funds early and reduce your working capital cycle. \\nShould you be interested in this solution, please click the link below to visit the EzyPay website and make us an offer:\\n\\n{chat_url}\\n\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n\\n{brand_name}\\n\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/brands/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"brands",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "921"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"epd-demo\",\n        \"brand_id\": \"test_brand_tmp\",\n        \"brand_info\": {\n            \"name\": \"test brand tmp\",\n            \"description\": \"brand description\",\n            \"email\": \"huynh@test.com\",\n            \"email_template\": {\n                \"title\": \"Early payment discount for you\",\n                \"content\": \"Dear Madam / Sir,\\nThank you for our ongoing business relationship! We have created an early payment offer in conjunction with the EzyPay platform to help valued suppliers like you receive funds early and reduce your working capital cycle. \\nShould you be interested in this solution, please click the link below to visit the EzyPay website and make us an offer:\\n\\n{chat_url}\\n\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n\\n{brand_name}\\n\"\n            }\n        },\n        \"created_date\": 1585277291,\n        \"updated_date\": 1585277291\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "add parameter to `test_brand_tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"epd_parameter\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"step\": 1,\n            \"baseline\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 1,\n            \"max\": 5,\n            \"step\": 1,\n            \"baseline\": 5,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/epd_parameters",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_parameters"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "add parameter to `test_brand_tmp`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"epd_parameter\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"step\": 1,\n            \"baseline\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 1,\n            \"max\": 5,\n            \"step\": 1,\n            \"baseline\": 5,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/epd_parameters",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"epd_parameters"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "361"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"epd-demo\",\n        \"brand_id\": \"test_brand_tmp\",\n        \"epd_parameter\": [\n            {\n                \"name\": \"payment_date\",\n                \"min\": 7,\n                \"max\": 7,\n                \"weight\": 0,\n                \"unit\": \"day\",\n                \"inverse\": true,\n                \"step\": 1,\n                \"baseline\": 7\n            },\n            {\n                \"name\": \"discount\",\n                \"min\": 1,\n                \"max\": 5,\n                \"weight\": 1,\n                \"unit\": \"percentage\",\n                \"inverse\": true,\n                \"step\": 1,\n                \"baseline\": 5\n            }\n        ],\n        \"created_date\": 1585531749,\n        \"updated_date\": 1585531749\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update epd_parameter `test_brand_tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"epd_parameter\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"step\": 1,\n            \"baseline\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 1,\n            \"max\": 5,\n            \"step\": 1,\n            \"baseline\": 4,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/epd_parameters",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_parameters"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "update epd_parameter",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"epd_parameter\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"step\": 1,\n            \"baseline\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 1,\n            \"max\": 5,\n            \"step\": 1,\n            \"baseline\": 4,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/epd_parameters",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"epd_parameters"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "361"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"epd-demo\",\n        \"brand_id\": \"test_brand_tmp\",\n        \"epd_parameter\": [\n            {\n                \"name\": \"payment_date\",\n                \"min\": 7,\n                \"max\": 7,\n                \"weight\": 0,\n                \"unit\": \"day\",\n                \"inverse\": true,\n                \"step\": 1,\n                \"baseline\": 7\n            },\n            {\n                \"name\": \"discount\",\n                \"min\": 1,\n                \"max\": 5,\n                \"weight\": 1,\n                \"unit\": \"percentage\",\n                \"inverse\": true,\n                \"step\": 1,\n                \"baseline\": 4\n            }\n        ],\n        \"created_date\": 1585531749,\n        \"updated_date\": 1585531762\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "add payees to test_brand_tmp",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"payee\": [\n            {\n                \"supplier_id\": \"huynh-01\",\n                \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                \"supplier_email\": \"huynh@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"send_negotiate\"\n            },\n            {\n                \"supplier_id\": \"shashank-01\",\n                \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                \"supplier_email\": \"shashank@startup-o.com\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"man\",\n                \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                \"supplier_email\": \"man@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 637.2\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"ani-01\",\n                \"supplier_name\": \"Bright Vegetable Enterprise\",\n                \"supplier_email\": \"aniruddha@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 3491.9600002706\n                },\n                \"epd_status\": \"new\"\n            }\n        ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/payees/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees",
+						""
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "add payees to test_brand_tmp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"payee\": [\n            {\n                \"supplier_id\": \"huynh-01\",\n                \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                \"supplier_email\": \"huynh@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"send_negotiate\"\n            },\n            {\n                \"supplier_id\": \"shashank-01\",\n                \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                \"supplier_email\": \"shashank@startup-o.com\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"man\",\n                \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                \"supplier_email\": \"man@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 637.2\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"ani-01\",\n                \"supplier_name\": \"Bright Vegetable Enterprise\",\n                \"supplier_email\": \"aniruddha@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 3491.9600002706\n                },\n                \"epd_status\": \"new\"\n            }\n        ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/payees/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"payees",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "865"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"epd-demo\",\n        \"brand_id\": \"test_brand_tmp\",\n        \"payee\": [\n            {\n                \"supplier_id\": \"huynh-01\",\n                \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                \"supplier_email\": \"huynh@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"send_negotiate\"\n            },\n            {\n                \"supplier_id\": \"shashank-01\",\n                \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                \"supplier_email\": \"shashank@startup-o.com\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"man\",\n                \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                \"supplier_email\": \"man@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 637.2\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"ani-01\",\n                \"supplier_name\": \"Bright Vegetable Enterprise\",\n                \"supplier_email\": \"aniruddha@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 3491.9600002706\n                },\n                \"epd_status\": \"new\"\n            }\n        ],\n        \"created_date\": 1585531739,\n        \"updated_date\": 1585531739\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update payees for `test_brand_tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"payee\": [\n                {\n                    \"supplier_id\": \"huynh-01\",\n                    \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                    \"supplier_email\": \"huynh@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"shashank-01\",\n                    \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                    \"supplier_email\": \"shashank@startup-o.com\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"man\",\n                    \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                    \"supplier_email\": \"man@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 637.2\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"ani-01\",\n                    \"supplier_name\": \"Bright Vegetable Enterprise\",\n                    \"supplier_email\": \"aniruddha@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 3491.96000027061\n                    },\n                    \"epd_status\": \"new\"\n                }\n            ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/payees/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees",
+						""
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "update payees for `test_brand_tmp`",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"payee\": [\n                {\n                    \"supplier_id\": \"huynh-01\",\n                    \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                    \"supplier_email\": \"huynh@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"shashank-01\",\n                    \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                    \"supplier_email\": \"shashank@startup-o.com\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 332.1\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"man\",\n                    \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                    \"supplier_email\": \"man@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 637.2\n                    },\n                    \"epd_status\": \"new\"\n                },\n                {\n                    \"supplier_id\": \"ani-01\",\n                    \"supplier_name\": \"Bright Vegetable Enterprise\",\n                    \"supplier_email\": \"aniruddha@negobot.co\",\n                    \"purchase_info\": {\n                        \"purchase_value\": 3491.96000027061\n                    },\n                    \"epd_status\": \"new\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/payees/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"payees",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "854"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"epd-demo\",\n        \"brand_id\": \"test_brand_tmp\",\n        \"payee\": [\n            {\n                \"supplier_id\": \"huynh-01\",\n                \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                \"supplier_email\": \"huynh@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"shashank-01\",\n                \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                \"supplier_email\": \"shashank@startup-o.com\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"man\",\n                \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                \"supplier_email\": \"man@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 637.2\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"ani-01\",\n                \"supplier_name\": \"Bright Vegetable Enterprise\",\n                \"supplier_email\": \"aniruddha@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 3491.9600002706\n                },\n                \"epd_status\": \"new\"\n            }\n        ],\n        \"created_date\": 1585531739,\n        \"updated_date\": 1585531739\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "[EMAIL] send request epd by email `test-brand-tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"payee\": [\n            {\n                \"supplier_id\": \"huynh-01\",\n                \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                \"supplier_email\": \"huynh@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"send_negotiate\"\n            },\n            {\n                \"supplier_id\": \"shashank-01\",\n                \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                \"supplier_email\": \"shashank@startup-o.com\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"man\",\n                \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                \"supplier_email\": \"man@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 637.2\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"ani-01\",\n                \"supplier_name\": \"Bright Vegetable Enterprise\",\n                \"supplier_email\": \"aniruddha@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 3491.9600002706\n                },\n                \"epd_status\": \"new\"\n            }\n        ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/payees/request_epd",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees",
+						"request_epd"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "send email `test-brand-tmp`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"payee\": [\n            {\n                \"supplier_id\": \"huynh-01\",\n                \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                \"supplier_email\": \"huynh@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"send_negotiate\"\n            },\n            {\n                \"supplier_id\": \"shashank-01\",\n                \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                \"supplier_email\": \"shashank@startup-o.com\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"man\",\n                \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                \"supplier_email\": \"man@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 637.2\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"ani-01\",\n                \"supplier_name\": \"Bright Vegetable Enterprise\",\n                \"supplier_email\": \"aniruddha@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 3491.9600002706\n                },\n                \"epd_status\": \"new\"\n            }\n        ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/payees/request_epd",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"payees",
+								"request_epd"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "957"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"epd-demo\",\n        \"brand_id\": \"test_brand_tmp\",\n        \"payee\": [\n            {\n                \"supplier_id\": \"huynh-01\",\n                \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                \"supplier_email\": \"huynh@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"negotiate\",\n                \"invite_email_status\": {\n                    \"labels\": [\n                        \"SENT\"\n                    ],\n                    \"url\": \"https://negobot.page.link/3cfvnuNa4uLHJc7z6\"\n                }\n            },\n            {\n                \"supplier_id\": \"shashank-01\",\n                \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                \"supplier_email\": \"shashank@startup-o.com\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"man\",\n                \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                \"supplier_email\": \"man@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 637.2\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"ani-01\",\n                \"supplier_name\": \"Bright Vegetable Enterprise\",\n                \"supplier_email\": \"aniruddha@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 3491.9600002706\n                },\n                \"epd_status\": \"new\"\n            }\n        ],\n        \"created_date\": 1585531739,\n        \"updated_date\": 1585531775\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "delete epd_parameters of `test_brand_tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{data_host_name}}/epd_parameters?brand_id=test_brand_tmp",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_parameters"
+					],
+					"query": [
+						{
+							"key": "brand_id",
+							"value": "test_brand_tmp"
+						}
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "delete epd_parameters of `test_brand_tmp`",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"brand_id\": \"test_brand_01\",\n\t\"brand_info\": {\"name\": \"test brand 01 - update\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/epd_parameters?brand_id=test_brand_tmp",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"epd_parameters"
+							],
+							"query": [
+								{
+									"key": "brand_id",
+									"value": "test_brand_tmp"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "361"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"epd-demo\",\n        \"brand_id\": \"test_brand_tmp\",\n        \"epd_parameter\": [\n            {\n                \"name\": \"payment_date\",\n                \"min\": 7,\n                \"max\": 7,\n                \"weight\": 0,\n                \"unit\": \"day\",\n                \"inverse\": true,\n                \"step\": 1,\n                \"baseline\": 7\n            },\n            {\n                \"name\": \"discount\",\n                \"min\": 1,\n                \"max\": 5,\n                \"weight\": 1,\n                \"unit\": \"percentage\",\n                \"inverse\": true,\n                \"step\": 1,\n                \"baseline\": 4\n            }\n        ],\n        \"created_date\": 1585531749,\n        \"updated_date\": 1585531762\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "delete payees of `test_brand_tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"brand_id\": \"test_brand_01\",\n\t\"brand_info\": {\"name\": \"test brand 01 - update\"}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/payees?brand_id=test_brand_tmp",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees"
+					],
+					"query": [
+						{
+							"key": "brand_id",
+							"value": "test_brand_tmp"
+						}
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "delete payees of `test_brand_tmp`",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"brand_id\": \"test_brand_01\",\n\t\"brand_info\": {\"name\": \"test brand 01 - update\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/payees?brand_id=test_brand_tmp",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"payees"
+							],
+							"query": [
+								{
+									"key": "brand_id",
+									"value": "test_brand_tmp"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "957"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"epd-demo\",\n        \"brand_id\": \"test_brand_tmp\",\n        \"payee\": [\n            {\n                \"supplier_id\": \"huynh-01\",\n                \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n                \"supplier_email\": \"huynh@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"negotiate\",\n                \"invite_email_status\": {\n                    \"labels\": [\n                        \"SENT\"\n                    ],\n                    \"url\": \"https://negobot.page.link/3cfvnuNa4uLHJc7z6\"\n                }\n            },\n            {\n                \"supplier_id\": \"shashank-01\",\n                \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n                \"supplier_email\": \"shashank@startup-o.com\",\n                \"purchase_info\": {\n                    \"purchase_value\": 332.1\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"man\",\n                \"supplier_name\": \"Australian Fruit Juice (S) Pte Ltd\",\n                \"supplier_email\": \"man@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 637.2\n                },\n                \"epd_status\": \"new\"\n            },\n            {\n                \"supplier_id\": \"ani-01\",\n                \"supplier_name\": \"Bright Vegetable Enterprise\",\n                \"supplier_email\": \"aniruddha@negobot.co\",\n                \"purchase_info\": {\n                    \"purchase_value\": 3491.9600002706\n                },\n                \"epd_status\": \"new\"\n            }\n        ],\n        \"created_date\": 1585531739,\n        \"updated_date\": 1585531787\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update brand for `test_epd_tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"brand_info\": {\n        \"name\": \"BANGKOK JAM - BUGIS+ 1\",\n        \"description\": \"BANGKOK JAM - BUGIS+\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/brands/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"brands",
+						""
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "update brand for `test_epd_tmp`",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand_id\": \"test_brand_tmp\",\n    \"brand_info\": {\n        \"name\": \"BANGKOK JAM - BUGIS+ 1\",\n        \"description\": \"BANGKOK JAM - BUGIS+\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/brands/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"brands",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "222"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"epd-demo\",\n        \"brand_id\": \"test_brand_tmp\",\n        \"brand_info\": {\n            \"name\": \"BANGKOK JAM - BUGIS+ 1\",\n            \"description\": \"BANGKOK JAM - BUGIS+\"\n        },\n        \"created_date\": 1585531656,\n        \"updated_date\": 1585531889\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update `test_brand_tmp`for email template",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand_id\": \"test_brand_01\",\n    \"brand_info\": {\n        \"name\": \"test brand 01\",\n        \"description\": \"brand description\",\n        \"email\": \"huynh@test.com\",\n        \"email_template\": {\n            \"title\": \"Early test\",\n            \"content\": \"Dear {chat_url}\\n\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n\\n{brand_name}\\n\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/brands/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"brands",
+						""
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "update `test_brand_tmp`for email template",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand_id\": \"test_brand_01\",\n    \"brand_info\": {\n        \"name\": \"test brand 01\",\n        \"description\": \"brand description\",\n        \"email\": \"huynh@test.com\",\n        \"email_template\": {\n            \"title\": \"Early test\",\n            \"content\": \"Dear {chat_url}\\n\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n\\n{brand_name}\\n\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/brands/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"brands",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "537"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"epd-demo\",\n        \"brand_id\": \"test_brand_01\",\n        \"brand_info\": {\n            \"name\": \"test brand 01\",\n            \"description\": \"brand description\",\n            \"email\": \"huynh@test.com\",\n            \"email_template\": {\n                \"title\": \"Early test\",\n                \"content\": \"Dear {chat_url}\\n\\nSince our overall capacity to offer early payment terms is limited, we urge you to make us an offer in the next 24 hours. We will then assess all our proposed offers and revert to you.\\nThank you and best regards,\\n\\n{brand_name}\\n\"\n            }\n        },\n        \"created_date\": 1583738178,\n        \"updated_date\": 1585531925\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get chat epd url",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/payees/chat_epd",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees",
+						"chat_epd"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "get chat epd url",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/payees/chat_epd",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"payees",
+								"chat_epd"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "132"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"url\": \"https://5e589d8e7fa2af4c17cb3d15--nego-iframe-epd.netlify.com/\",\n        \"organisation_id\": \"epd-demo\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update chat epd url",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"url\": \"https://5e589d8e7fa2af4c17cb3d15--nego-iframe-epd.netlify.com/\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/payees/chat_epd",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"payees",
+						"chat_epd"
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": [
+				{
+					"name": "update chat epd url",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"url\": \"https://5e589d8e7fa2af4c17cb3d15--nego-iframe-epd.netlify.com/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/payees/chat_epd",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"payees",
+								"chat_epd"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "103"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"url\": \"https://5e589d8e7fa2af4c17cb3d15--nego-iframe-epd.netlify.com/\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "delete brand of `test_brand_tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"brand_id\": \"test_brand_tmp\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/brands?brand_id=test_brand_tmp",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"brands"
+					],
+					"query": [
+						{
+							"key": "brand_id",
+							"value": "test_brand_tmp"
+						}
+					]
+				},
+				"description": "get list of brands"
+			},
+			"response": []
+		},
+		{
+			"name": "get open epd negotiation session",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/epd_negotiation_sessions/open_session?organisation_id=test-org",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_negotiation_sessions",
+						"open_session"
+					],
+					"query": [
+						{
+							"key": "session_status",
+							"value": "customer_negotiate",
+							"disabled": true
+						},
+						{
+							"key": "organisation_id",
+							"value": "test-org"
+						},
+						{
+							"key": "session_id",
+							"value": "test-test@test.co-test-03/17/2020-06:21:12",
+							"disabled": true
+						}
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get epd negotiation schema",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/epd_negotiation_sessions/schema",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_negotiation_sessions",
+						"schema"
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get epd negotiation session of `test_brand_tmp`",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1b336be5-fdb8-4ab8-a15a-bdb343232152",
+						"exec": [
+							"options = {",
+							"      'method': 'GET',",
+							"      'url': pm.environment.get(\"data_host_name\")+'/epd_negotiation_sessions/schema',",
+							"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"epd_demo_admin_jwt\")}",
+							"};",
+							"pm.sendRequest(options, function (err, res) {",
+							"    pm.environment.set('epd_negotiation_sessions_schema', res.json().item)",
+							"});    "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "efa1c787-a62b-43f8-9cf8-ab0b1859097b",
+						"exec": [
+							"var Ajv = require('ajv'),",
+							"    ajv = new Ajv({logger: console}),",
+							"    schema = pm.environment.get('epd_negotiation_sessions_schema');",
+							"",
+							"pm.test(\"schema check\", function () {",
+							"    items = pm.response.json().items;",
+							"    items.map(item=> {",
+							"        data = item.negotiation_session;",
+							"        pm.expect(ajv.validate(schema, data)).to.be.true;",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/epd_negotiation_sessions/?customer_email=test@test.com&organisation_id=test-org&brand_id=test_brand_tmp",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_negotiation_sessions",
+						""
+					],
+					"query": [
+						{
+							"key": "customer_email",
+							"value": "test@test.com"
+						},
+						{
+							"key": "organisation_id",
+							"value": "test-org"
+						},
+						{
+							"key": "brand_id",
+							"value": "test_brand_tmp"
+						}
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "create epd negotiation `test-brand-tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"test-org\",\n    \"customer_email\": \"test@test.com\",\n    \"customer_name\": \"test\",\n    \"brand_id\": \"test_brand_tmp\",\n    \"make_offer\": null,\n    \"customer_offer\": null,\n    \"seal_deal\": null,\n    \"negotiation_session\": {\n        \"overall\": [],\n        \"negotiation_parameter\": [\n            {\n                \"name\": \"payment_date\",\n                \"min\": 7,\n                \"max\": 7,\n                \"weight\": 0,\n                \"unit\": \"day\",\n                \"inverse\": true,\n                \"step\": 1,\n                \"baseline\": 7\n            },\n            {\n                \"name\": \"discount\",\n                \"min\": 2,\n                \"max\": 6,\n                \"weight\": 1,\n                \"unit\": \"percentage\",\n                \"inverse\": true,\n                \"step\": 1,\n                \"baseline\": 6\n            }\n        ],\n        \"negotiation_evaluation_metric\": {\n            \"max_concession_round\": 4,\n            \"max_concession_score\": 0.2,\n            \"min_accept_score\": 0.2,\n            \"auto_accept_score\": 0.7,\n            \"concession_pattern\": [\n                0.2,\n                0.3,\n                0.4,\n                0.9\n            ]\n        },\n        \"session\": {\n            \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/19/2020-04:33:01\",\n            \"seal_deal\": \"negotiate\",\n            \"agent_seal_deal\": \"negotiate\",\n            \"organisation_id\": \"epd-demo\",\n            \"product_id\": \"None\",\n            \"brand_id\": \"test_brand_tmp\",\n            \"customer_name\": \"test\",\n            \"customer_email\": \"test@test.com\",\n            \"customer_role\": \"buyer\"\n        },\n        \"session_status\": \"customer_negotiate\"\n    },\n    \"brand_name\": null,\n    \"brand_info\": null,\n    \"bot_offer\": null,\n    \"session_id\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/epd_negotiation_sessions/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_negotiation_sessions",
+						""
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "update epd negotiation `test-brand-tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"test-org\",\n    \"customer_email\": \"test@test.com\",\n    \"customer_name\": \"test\",\n    \"brand_id\": \"test_brand_tmp\",\n    \"make_offer\": null,\n    \"customer_offer\": null,\n    \"seal_deal\": null,\n    \"negotiation_session\": {\n        \"overall\": [],\n        \"negotiation_parameter\": [\n            {\n                \"name\": \"payment_date\",\n                \"min\": 7,\n                \"max\": 7,\n                \"weight\": 0,\n                \"unit\": \"day\",\n                \"inverse\": true,\n                \"step\": 1,\n                \"baseline\": 7\n            },\n            {\n                \"name\": \"discount\",\n                \"min\": 2,\n                \"max\": 6,\n                \"weight\": 1,\n                \"unit\": \"percentage\",\n                \"inverse\": true,\n                \"step\": 1,\n                \"baseline\": 6\n            }\n        ],\n        \"negotiation_evaluation_metric\": {\n            \"max_concession_round\": 4,\n            \"max_concession_score\": 0.2,\n            \"min_accept_score\": 0.2,\n            \"auto_accept_score\": 0.7,\n            \"concession_pattern\": [\n                0.2,\n                0.3,\n                0.4,\n                0.9\n            ]\n        },\n        \"session\": {\n            \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/19/2020-04:33:01\",\n            \"seal_deal\": \"accept\",\n            \"organisation_id\": \"epd-demo\",\n            \"product_id\": \"None\",\n            \"brand_id\": \"test_brand_tmp\",\n            \"customer_name\": \"test\",\n            \"customer_email\": \"test@test.com\",\n            \"customer_role\": \"buyer\"\n        },\n        \"session_status\": \"customer_negotiate\"\n    },\n    \"brand_name\": null,\n    \"brand_info\": null,\n    \"bot_offer\": null,\n    \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/19/2020-04:33:01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/epd_negotiation_sessions/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_negotiation_sessions",
+						""
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "close epd negotiation `test-brand-tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"test-org\",\n    \"brand_id\": \"test_brand_tmp\",\n    \"customer_email\": \"test@test.com\",\n    \"session_status\": \"accept\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/epd_negotiation_sessions/agent_seal_session",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_negotiation_sessions",
+						"agent_seal_session"
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "delete epd negotiation `test_brand_tmp`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{epd_demo_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{data_host_name}}/epd_negotiation_sessions/?organisation_id=test-org&brand_id=test_brand_tmp&customer_email=test@test.com",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"epd_negotiation_sessions",
+						""
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "test-org"
+						},
+						{
+							"key": "brand_id",
+							"value": "test_brand_tmp"
+						},
+						{
+							"key": "customer_email",
+							"value": "test@test.com"
+						}
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "add `test-org` organisation Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"test-org\",\n    \"organisation_info\": {\n        \"name\": \"test-org\",\n        \"type\": \"seller\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/organisations/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"organisations",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f5f55c34-e3f2-4fa8-a4f1-a8806bb1ae0d",
+				"type": "text/javascript",
+				"exec": [
+					"const makeLogin = (username, password)=>{",
+					"    return {",
+					"      url: pm.environment.get(\"auth_host_name\")+'/login',",
+					"      method: 'POST',",
+					"      header: 'Content-Type:application/json',",
+					"      body: {",
+					"        mode: 'application/json',",
+					"        raw: JSON.stringify({ username, password })",
+					"      }",
+					"    };    ",
+					"}",
+					"",
+					"",
+					"var getNegobotToken = pm.environment.get(\"super_admin_jwt\").length===0;",
+					"var getAnglissToken = pm.environment.get(\"angliss_admin_jwt\").length===0;",
+					"var getEPDDemoToken = pm.environment.get(\"epd_demo_admin_jwt\").length===0;",
+					"",
+					"if (getNegobotToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@negobot.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving super_admin_jwt token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('super_admin_jwt', responseJson.access_token)",
+					"            pm.environment.set('super_admin_refresh_token', responseJson.refresh_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"if (getAnglissToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@angliss.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving angliss_admin_jwt token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('angliss_admin_jwt', responseJson.access_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"if (getEPDDemoToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@epd-demo.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving edp_demo token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('epd_demo_admin_jwt', responseJson.access_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"",
+					"if(!pm.environment.get(\"cleanup\")){",
+					"    console.log(\"try to clean up test_brand_tmp\");",
+					"    var options = {",
+					"      'method': 'DELETE',",
+					"      'url': pm.environment.get(\"data_host_name\")+'/brands?brand_id=test_brand_tmp',",
+					"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"epd_demo_admin_jwt\")},",
+					"      body: JSON.stringify({\"brand_id\":\"test_brand_tmp\"})",
+					"    ",
+					"    };",
+					"    ",
+					"    pm.sendRequest(options, function (err, res) {",
+					"        console.log(err ? err : res.text());",
+					"    });    ",
+					"    ",
+					"    options = {",
+					"      'method': 'DELETE',",
+					"      'url': pm.environment.get(\"data_host_name\")+'/epd_parameters?brand_id=test_brand_tmp',",
+					"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"epd_demo_admin_jwt\")}",
+					"    };",
+					"    ",
+					"    pm.sendRequest(options, function (err, res) {",
+					"        console.log(err ? err : res.text());",
+					"    });    ",
+					"    ",
+					"    options = {",
+					"      'method': 'DELETE',",
+					"      'url': pm.environment.get(\"data_host_name\")+'/epd_negotiation_sessions/?organisation_id=epd-demo&brand_id=test_brand_tmp&customer_email=test@test.com',",
+					"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"epd_demo_admin_jwt\")}",
+					"    };",
+					"    ",
+					"    pm.sendRequest(options, function (err, res) {",
+					"        console.log(err ? err : res.text());",
+					"    });    ",
+					"    ",
+					"    pm.environment.set(\"cleanup\", \"true\");",
+					"}",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ac95c685-318d-436e-a9ad-c094f5f0e7aa",
+				"type": "text/javascript",
+				"exec": [
+					"var Ajv = require('ajv'),",
+					"    ajv = new Ajv({logger: console}),",
+					"    schema = {",
+					"        \"properties\": {",
+					"            \"items\": {",
+					"                \"type\": \"array\"",
+					"            },",
+					"            \"item\": {",
+					"                \"type\": \"object\"",
+					"            }",
+					"        }",
+					"    };",
+					"",
+					"pm.test(\"Status test\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"((pm.request.method !== \"DELETE\" && pm.response.code === 200)?pm.test:pm.test.skip)(\"test content by base schema\", function () {",
+					"    data = pm.response.json()",
+					"    pm.expect(ajv.validate(schema, data)).to.be.true;",
+					"});",
+					"",
+					"((pm.request.method === \"POST\" && pm.response.code === 200)?pm.test:pm.test.skip)(\"test content by create time\", function () {",
+					"    data = pm.response.json()",
+					"    data = pm.response.json()",
+					"    if(data.item && data.item.create_date){",
+					"        pm.expect(data.item.create_date - new Date().getTime()/1000).to.be.at.most(1)",
+					"    }",
+					"});",
+					"((pm.request.method === \"PUT\" && pm.response.code === 200)?pm.test:pm.test.skip)(\"test create content by timestampt\", function () {",
+					"    data = pm.response.json()",
+					"    if(data.item && data.item.update_date){",
+					"        pm.expect(data.item.updated_date - data.item.created_date).to.be.at.least(0)",
+					"        pm.expect(data.item.updated_date - new Date().getTime()/1000).to.be.at.most(1)",
+					"    }",
+					"});"
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

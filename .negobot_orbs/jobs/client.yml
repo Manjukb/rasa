@@ -1,0 +1,16 @@
+machine: true
+working_directory: /tmp/circleci/rasa-poc/
+steps:
+  - checkout
+  # - restore_cache:
+  #     keys:
+  #       - v1-dependencies-{{ checksum "requirements.txt" }}
+  #       - v1-dependencies-
+  - run:
+      name: instance heroku cli
+      command: |
+          ./scripts/heroku_setup.sh
+  - run:
+      name: run deploy
+      command: |
+          ./scripts/service_client_nego_heroku_build_deploy.sh

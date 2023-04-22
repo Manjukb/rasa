@@ -1,0 +1,753 @@
+{
+	"info": {
+		"_postman_id": "0d254beb-3c20-4967-a1f0-67e9f31a5b1e",
+		"name": "negotiation_metric.test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get negotiation metric schema",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/negotiation_metrics/schema",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"negotiation_metrics",
+						"schema"
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "create `negotiation evaluation metric`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"angliss\",\n    \"negotiation_metric\": {\n        \"max_concession_round\": 4,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3,\n            0.4,\n            0.9\n        ],\n        \"counter_offers\":2,\n        \"negotiation_round\": 0,\n        \"evaluation_method\": \"ultility_method\",\n        \"business_type\": \"Collector\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/negotiation_metrics/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"negotiation_metrics",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547613,\n        \"updated_date\": 1585547613\n    }\n}"
+				},
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547535,\n        \"updated_date\": 1585547535\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update `negotiation evaluation metric`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"angliss\",\n    \"negotiation_metric\": {\n        \"max_concession_round\": 4,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3,\n            0.5,\n            0.9\n        ],\n        \"negotiation_round\": 0,\n        \"evaluation_method\": \"ultility_method\",\n        \"iam_role\": \"buyer\",\n        \"business_type\": \"collector\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/negotiation_metrics/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"negotiation_metrics",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547613,\n        \"updated_date\": 1585547613\n    }\n}"
+				},
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547535,\n        \"updated_date\": 1585547535\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "delete `negotiation evaluation metric`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"angliss\",\n    \"negotiation_metric\": {\n        \"max_concession_round\": 4,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3,\n            0.5,\n            0.9\n        ],\n        \"negotiation_round\": 0,\n        \"evaluation_method\": \"ultility_method\",\n        \"iam_role\": \"buyer\",\n        \"business_type\": \"collector\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/negotiation_metrics/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"negotiation_metrics",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547613,\n        \"updated_date\": 1585547613\n    }\n}"
+				},
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547535,\n        \"updated_date\": 1585547535\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get `negotiation evaluation metric`",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/negotiation_metrics/?organisation_id=angliss",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"negotiation_metrics",
+						""
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "angliss"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547613,\n        \"updated_date\": 1585547613\n    }\n}"
+				},
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547535,\n        \"updated_date\": 1585547535\n    }\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}

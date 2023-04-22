@@ -1,0 +1,16 @@
+{
+    "references": [
+        {
+            "path": "./packages/shared"
+        },
+        {
+            "path": "./packages/datav2"
+        },
+        {
+            "path": "./packages/authv2"
+        },
+        {
+            "path": "./packages/actionv2"
+        }
+    ],
+}

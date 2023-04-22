@@ -1,0 +1,901 @@
+{
+	"info": {
+		"_postman_id": "600e6aca-c21a-4b2e-9c4f-ea70758c3d42",
+		"name": "auth.test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "negobot admin login - me",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"admin@negobot.co\",\n  \"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{auth_host_name}}/login/me",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"login",
+						"me"
+					]
+				},
+				"description": "get token from system"
+			},
+			"response": [
+				{
+					"name": "negobot admin login - me",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{auth_host_name}}/login/me",
+							"host": [
+								"{{auth_host_name}}"
+							],
+							"path": [
+								"login",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 08:59:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "89"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"me\": {\n        \"user_id\": \"admin@angliss.co\",\n        \"organisation_id\": \"angliss\",\n        \"authority\": \"org_admin\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "negobot auth status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"admin@negobot.co\",\n  \"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{auth_host_name}}",
+					"host": [
+						"{{auth_host_name}}"
+					]
+				},
+				"description": "get token from system"
+			},
+			"response": [
+				{
+					"name": "negobot auth status",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{auth_host_name}}",
+							"host": [
+								"{{auth_host_name}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 10:37:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "91"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"service\": \"auth_service\",\n    \"buildtime\": \"Mon Mar  9 10:51:22 UTC 2020\\n\",\n    \"store\": {\n        \"size\": 16\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "negobot refresh token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"refresh_token\": \"{{super_admin_refresh_token}}\"\n}"
+				},
+				"url": {
+					"raw": "{{auth_host_name}}/login/refresh",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"login",
+						"refresh"
+					]
+				},
+				"description": "get token from system"
+			},
+			"response": [
+				{
+					"name": "negobot refresh token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh_token\": \"{{super_admin_refresh_token}}\"\n}"
+						},
+						"url": {
+							"raw": "{{auth_host_name}}/login/refresh",
+							"host": [
+								"{{auth_host_name}}"
+							],
+							"path": [
+								"login",
+								"refresh"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 10:37:42 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYWRtaW5AbmVnb2JvdC5jbyIsImV4cCI6MTU4NTMwNTQ2MiwibmVnb2JvdCI6eyJ1c2VyX2lkIjoiYWRtaW5AbmVnb2JvdC5jbyIsIm9yZ2FuaXNhdGlvbl9pZCI6Im5lZ29ib3QiLCJhdXRob3JpdHkiOiJzdXBlcl9hZG1pbiJ9fQ.Dbto-sK0wYFaUYriPrVq1GCdU9IlQHFxikROpJmCKbk\"\n}"
+				}
+			]
+		},
+		{
+			"name": "register client token for notification",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"token\": \"cq9Iy2R85fYoxCoswa9TcR:APA91bEtQW6-diSEZz8SQausWkL9UVSMLfqLFg-Uje_w4T0eDnvBnGnghKYFV147-p6XS3kYwfvsJUgQlKT83bEJ-L77Q8prLehjf0PMbxWEO6FO37i14GG9nhi2GN65-6ShC0YkfGI6\",\n  \"device\": \"mobile\"\n}"
+				},
+				"url": {
+					"raw": "{{auth_host_name}}/notification",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"notification"
+					]
+				},
+				"description": "get token from system"
+			},
+			"response": [
+				{
+					"name": "register client token for notification",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"token\": \"cq9Iy2R85fYoxCoswa9TcR:APA91bEtQW6-diSEZz8SQausWkL9UVSMLfqLFg-Uje_w4T0eDnvBnGnghKYFV147-p6XS3kYwfvsJUgQlKT83bEJ-L77Q8prLehjf0PMbxWEO6FO37i14GG9nhi2GN65-6ShC0YkfGI6\",\n  \"device\": \"mobile\"\n}"
+						},
+						"url": {
+							"raw": "{{auth_host_name}}/notification",
+							"host": [
+								"{{auth_host_name}}"
+							],
+							"path": [
+								"notification"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 10:37:03 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "237"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"id\": \"fcm-negobot-admin@negobot.co-mobile\",\n    \"token\": \"cq9Iy2R85fYoxCoswa9TcR:APA91bEtQW6-diSEZz8SQausWkL9UVSMLfqLFg-Uje_w4T0eDnvBnGnghKYFV147-p6XS3kYwfvsJUgQlKT83bEJ-L77Q8prLehjf0PMbxWEO6FO37i14GG9nhi2GN65-6ShC0YkfGI6\"\n}"
+				}
+			]
+		},
+		{
+			"name": "retrieve token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"identity\": \"monitor@negobot.co\",\n    \"apiKey\": \"{{api_key}}\"\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{auth_host_name}}/token",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"token"
+					]
+				},
+				"description": "request channel"
+			},
+			"response": [
+				{
+					"name": "retrieve token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"identity\": \"mean@negobo.co\",\n    \"apiKey\": \"{{api_key}}\"\n}"
+						},
+						"url": {
+							"raw": "{{auth_host_name}}/token",
+							"host": [
+								"{{auth_host_name}}"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 10:38:01 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzNlZDhmMjM5YjVmMWY3MmZkNTExNmYyNWVlOTllZDhmLTE1ODUyMTkwODEiLCJncmFudHMiOnsiY2hhdCI6eyJzZXJ2aWNlX3NpZCI6IklTYjE1YjA5N2FhMDA3NDI4YjhlZTBhMGIwZjAwOThhNWYifSwiYm90Ijp7ImNoYW5uZWwiOiJlcGQtZGVtby1tZWFuQG5lZ29iby5jbyIsIm9yZ2FuaXNhdGlvbl9pZCI6ImVwZC1kZW1vIn0sImlkZW50aXR5IjoiZXBkLWRlbW8tbWVhbkBuZWdvYm8uY28ifSwiaXNzIjoiU0szZWQ4ZjIzOWI1ZjFmNzJmZDUxMTZmMjVlZTk5ZWQ4ZiIsImV4cCI6MTU4NTIyMjY4MSwibmJmIjoxNTg1MjE5MDgxLCJzdWIiOiJBQzRmZGQ5ZTg2YzEyNzI5NDg4Njg3ZmJkMjY1M2QxNTE0In0.AlojQAYHd-DO_rMImrPnx4MJN3GlX5EZKJOREf8_qXk\",\n    \"channel_id\": \"CHa8f29b3c345c44e0a2e38a3c8c7eb628\",\n    \"service_id\": \"ISb15b097aa007428b8ee0a0b0f0098a5f\",\n    \"bot_id\": \"bot-epd-demo\",\n    \"admin_id\": \"admin-epd-demo\",\n    \"sender_id\": \"epd-demo-mean@negobo.co\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get all channel status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{auth_host_name}}/admin/channels/status",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"admin",
+						"channels",
+						"status"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get all channel status",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{auth_host_name}}/admin/channels/status",
+							"host": [
+								"{{auth_host_name}}"
+							],
+							"path": [
+								"admin",
+								"channels",
+								"status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 10:39:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"channels\": [\n        {\n            \"channelName\": \"negobot-huynh1@negbot.co\",\n            \"channelId\": \"CH31d808e0c3e14f20a3be05716897770e\",\n            \"status\": true,\n            \"friendlyName\": \"\"\n        },\n        {\n            \"channelName\": \"negobot-huynh@negbot.co\",\n            \"channelId\": \"CH76b95e7ec5ae4fcca79717bbae28c29c\",\n            \"status\": true,\n            \"friendlyName\": \"chat room\"\n        },\n        {\n            \"channelName\": \"negobot-huynh@negobot.co\",\n            \"channelId\": \"CHa8265431b54048e19316ca24562cda0f\",\n            \"status\": true,\n            \"friendlyName\": \"\"\n        },\n        {\n            \"channelName\": \"negobot-123@sdf.co\",\n            \"channelId\": \"CHdcfcfeff13684598bb799d62996c063f\",\n            \"status\": true,\n            \"friendlyName\": \"\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "admin update channel status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"channel_id\": \"CHba7316c18d534c438ec0182f8aa2aa66\",\n    \"status\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{auth_host_name}}/admin/channels/status",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"admin",
+						"channels",
+						"status"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "admin update channel status",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"channel_id\": \"CH31d808e0c3e14f20a3be05716897770e\",\n    \"status\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{auth_host_name}}/admin/channels/status",
+							"host": [
+								"{{auth_host_name}}"
+							],
+							"path": [
+								"admin",
+								"channels",
+								"status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 10:40:49 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"channel\": {\n        \"status\": true\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get admin twilio chat token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{auth_host_name}}/admin/token",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"admin",
+						"token"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "admin token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{auth_host_name}}/admin/token",
+							"host": [
+								"{{auth_host_name}}"
+							],
+							"path": [
+								"admin",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 10:40:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzNlZDhmMjM5YjVmMWY3MmZkNTExNmYyNWVlOTllZDhmLTE1ODUyMTkyMDIiLCJncmFudHMiOnsiY2hhdCI6eyJzZXJ2aWNlX3NpZCI6IklTYjE1YjA5N2FhMDA3NDI4YjhlZTBhMGIwZjAwOThhNWYifSwiYm90Ijp7ImNoYW5uZWwiOiJhZG1pbi1uZWdvYm90Iiwib3JnYW5pc2F0aW9uX2lkIjoibmVnb2JvdCJ9LCJpZGVudGl0eSI6ImFkbWluLW5lZ29ib3QifSwiaXNzIjoiU0szZWQ4ZjIzOWI1ZjFmNzJmZDUxMTZmMjVlZTk5ZWQ4ZiIsImV4cCI6MTU4NTIyMjgwMiwibmJmIjoxNTg1MjE5MjAyLCJzdWIiOiJBQzRmZGQ5ZTg2YzEyNzI5NDg4Njg3ZmJkMjY1M2QxNTE0In0.WVAdcuKNZe4zr_TuBai_lIyJf4sZXPzL60t29ZvPjIU\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "59f675ca-a3e6-45da-8edd-1d0ef38cf1d8",
+				"type": "text/javascript",
+				"exec": [
+					"const makeLogin = (username, password)=>{",
+					"    return {",
+					"      url: pm.environment.get(\"auth_host_name\")+'/login',",
+					"      method: 'POST',",
+					"      header: 'Content-Type:application/json',",
+					"      body: {",
+					"        mode: 'application/json',",
+					"        raw: JSON.stringify({ username, password })",
+					"      }",
+					"    };    ",
+					"}",
+					"",
+					"",
+					"var getNegobotToken = pm.environment.get(\"super_admin_jwt\").length===0;",
+					"var getAnglissToken = pm.environment.get(\"angliss_admin_jwt\").length===0;",
+					"var getEPDDemoToken = pm.environment.get(\"epd_demo_admin_jwt\").length===0;",
+					"",
+					"if (getNegobotToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@negobot.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving super_admin_jwt token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('super_admin_jwt', responseJson.access_token)",
+					"            pm.environment.set('super_admin_refresh_token', responseJson.refresh_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"if (getAnglissToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@angliss.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving angliss_admin_jwt token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('angliss_admin_jwt', responseJson.access_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					"if (getEPDDemoToken === true) {",
+					"    echoPostRequest = makeLogin(\"admin@epd-demo.co\", \"123456\")",
+					"    pm.sendRequest(echoPostRequest, function (err, res) {",
+					"        console.log(err ? err : res.json());",
+					"        if (err === null) {",
+					"            console.log('Saving edp_demo token ');",
+					"            var responseJson = res.json();",
+					"            pm.environment.set('epd_demo_admin_jwt', responseJson.access_token)",
+					"        }",
+					"    });",
+					"}",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "84b1f2b4-3869-4f0b-8874-d8830e1f1607",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status test\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

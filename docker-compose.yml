@@ -1,0 +1,29 @@
+version: '3.0'
+services:
+  datav2-service:
+    image: asia.gcr.io/nego-staging/datav2
+    build:
+      context: ./
+      dockerfile: ./services/packages/datav2/Dockerfile
+    ports:
+      - 4201:4201
+
+  authv2-service:
+    image: asia.gcr.io/nego-staging/authv2
+    build:
+      context: ./
+      dockerfile: ./services/packages/authv2/Dockerfile
+    ports:
+      - 4202:4202
+  actionv2-service:
+    image: asia.gcr.io/nego-staging/actionv2
+    build:
+      context: ./
+      dockerfile: ./services/packages/actionv2/Dockerfile
+    ports:
+      - 4203:4203
+  jobs:
+    image: asia.gcr.io/nego-staging/jobs
+    build:
+      context: ./
+      dockerfile: ./services/packages/jobs/Dockerfile

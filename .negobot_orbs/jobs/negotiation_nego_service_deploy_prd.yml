@@ -1,0 +1,13 @@
+
+docker:
+  - image: google/cloud-sdk@sha256:126a49cfa2aa6e20d561fa14999bf657bc341efeba04939bd2f612bf843d12a6
+working_directory: /tmp/circleci/rasa-poc/
+steps:
+  - checkout
+  - run:
+      name: instance heroku cli
+      command: |
+          ./scripts/heroku_setup.sh
+  - heroku_build_deploy:
+      service: negotiation_service
+      app_name: nd-svc-rasa-poc-faq

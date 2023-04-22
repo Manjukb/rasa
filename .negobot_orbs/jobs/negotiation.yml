@@ -1,0 +1,23 @@
+working_directory: /tmp/circleci/rasa-poc/
+docker:
+  - image: circleci/python:3.6.2-stretch-browsers
+    environment:
+steps:
+  - checkout
+  - run:
+      command: |
+        python3 -m venv venv
+        . venv/bin/activate
+        pip install -U pip
+        pip install -r requirements.txt
+        
+  - run:
+      command: |
+        . venv/bin/activate
+        sh services/client_nego/run_test.sh services/client_nego/
+      name: test 
+
+  # - store_artifacts:
+  #     path: services/test_reports/
+  #     destination: test_reports
+  

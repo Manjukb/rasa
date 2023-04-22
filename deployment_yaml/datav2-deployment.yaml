@@ -1,0 +1,171 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    created.by: STG
+  creationTimestamp: "2020-05-20T04:36:12Z"
+  labels:
+    app: datav2-app
+  name: datav2-deployment
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datav2-app
+  template:
+    metadata:
+      labels:
+        app: datav2-app
+    spec:
+      containers:
+      - env:
+        - name: prod
+          value: prod
+        - name: jwt_secret
+          valueFrom:
+            secretKeyRef:
+              key: jwt_secret
+              name: negobot-secret
+        - name: jwt_issuer
+          valueFrom:
+            secretKeyRef:
+              key: jwt_issuer
+              name: negobot-secret
+        - name: redis_host
+          valueFrom:
+            secretKeyRef:
+              key: redis_host
+              name: negobot-secret
+        - name: redis_port
+          valueFrom:
+            secretKeyRef:
+              key: redis_port
+              name: negobot-secret
+        - name: redis_password
+          valueFrom:
+            secretKeyRef:
+              key: redis_password
+              name: negobot-secret
+        - name: twilio_account_sid
+          valueFrom:
+            secretKeyRef:
+              key: twilio_account_sid
+              name: negobot-secret
+        - name: twilio_auth_token
+          valueFrom:
+            secretKeyRef:
+              key: twilio_auth_token
+              name: negobot-secret
+        - name: twilio_twilio_number
+          valueFrom:
+            secretKeyRef:
+              key: twilio_twilio_number
+              name: negobot-secret
+        - name: twilio_api_key
+          valueFrom:
+            secretKeyRef:
+              key: twilio_api_key
+              name: negobot-secret
+        - name: twilio_api_secret
+          valueFrom:
+            secretKeyRef:
+              key: twilio_api_secret
+              name: negobot-secret
+        - name: twilio_service_id
+          valueFrom:
+            secretKeyRef:
+              key: twilio_service_id
+              name: negobot-secret
+        - name: twilio_chat_url
+          valueFrom:
+            secretKeyRef:
+              key: twilio_chat_url
+              name: negobot-secret
+        - name: postgres_user
+          valueFrom:
+            secretKeyRef:
+              key: postgres_user
+              name: negobot-secret
+        - name: postgres_host
+          valueFrom:
+            secretKeyRef:
+              key: postgres_host
+              name: negobot-secret
+        - name: postgres_port
+          valueFrom:
+            secretKeyRef:
+              key: postgres_port
+              name: negobot-secret
+        - name: postgres_table
+          valueFrom:
+            secretKeyRef:
+              key: postgres_table
+              name: negobot-secret
+        - name: postgres_password
+          valueFrom:
+            secretKeyRef:
+              key: postgres_password
+              name: negobot-secret
+        - name: model_bucket
+          valueFrom:
+            secretKeyRef:
+              key: model_bucket
+              name: negobot-secret
+        - name: sendgrid_key
+          valueFrom:
+            secretKeyRef:
+              key: sendgrid_key
+              name: negobot-secret    
+        - name: api_url
+          valueFrom:
+            secretKeyRef:
+              key: api_url
+              name: negobot-secret
+        - name: recipient_email
+          valueFrom:
+            secretKeyRef:
+              key: recipient_email
+              name: negobot-secret
+        - name: dev_recipient_email
+          valueFrom:
+            secretKeyRef:
+              key: dev_recipient_email
+              name: negobot-secret
+        - name: api_token
+          valueFrom:
+            secretKeyRef:
+              key: api_token
+              name: negobot-secret
+        - name: sendgrid_sender_email
+          valueFrom:
+            secretKeyRef:
+              key: sendgrid_sender_email
+              name: negobot-secret
+        - name: public_url
+          valueFrom:
+            secretKeyRef:
+              key: public_url
+              name: negobot-secret
+        - name: environment
+          valueFrom:
+            secretKeyRef:
+              key: environment
+              name: negobot-secret
+        - name: newrelic_license_key
+          valueFrom:
+            secretKeyRef:
+              key: newrelic_license_key
+              name: negobot-secret
+        - name: PORT
+          valueFrom:
+            secretKeyRef:
+              key: datav2_port
+              name: negobot-secret                                                                                
+        image: asia.gcr.io/nego-staging/datav2:prod
+        imagePullPolicy: Always
+        name: datav2-app
+        ports:
+        - containerPort: 4201
+          protocol: TCP
+        resources: {}

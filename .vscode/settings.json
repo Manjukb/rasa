@@ -1,0 +1,34 @@
+{
+    "git.ignoreLimitWarning": true,
+    "python.formatting.provider": "black",
+    "python.pythonPath": "environments\\nego-data\\Scripts\\python.exe",
+    "editor.formatOnSave": true,
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+            "language": "typescript",
+            "autoFix": true
+        },
+        {
+            "language": "typescriptreact",
+            "autoFix": true
+        }
+    ],
+    "[javascript]": {
+        "editor.formatOnSave": false,
+    },
+    "[javascriptreact]": {
+        "editor.formatOnSave": false,
+    },
+    "[typescript]": {
+        "editor.formatOnSave": false,
+    },
+    "[typescriptreact]": {
+        "editor.formatOnSave": false,
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+}

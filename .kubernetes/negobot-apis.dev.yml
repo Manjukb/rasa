@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: negobot-apis
+  namespace: "dev"
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true" 
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
+spec:
+  tls:
+  - hosts:
+    - "api-dev.negobot.co"
+    secretName: quickstart-cis-tls
+  rules:
+  - host: api-dev.negobot.co
+    http:
+      paths:
+        - path: /data(/|$)(.*)
+          backend:
+            serviceName: data-service
+            servicePort: 5700
+        - path: /negotiation(/|$)(.*)
+          backend:
+            serviceName: negotiation-service
+            servicePort: 5555
+        - path: /actions(/|$)(.*)
+          backend:
+            serviceName: actions-service
+            servicePort: 5055
+        - path: /client(/|$)(.*)
+          backend:
+            serviceName: client-service
+            servicePort: 5005
+        - path: /auth(/|$)(.*)
+          backend:
+            serviceName: auth-service
+            servicePort: 5900
+        - path: /duckling(/|$)(.*)
+          backend:
+            serviceName: duckling-service
+            servicePort: 8000
+        - path: /monitor(/|$)(.*)
+          backend:
+            serviceName: monitor-service
+            servicePort: 8097
+        - path: /actions-epd(/|$)(.*)
+          backend:
+            serviceName: actions-epd-service
+            servicePort: 5055
+        
+

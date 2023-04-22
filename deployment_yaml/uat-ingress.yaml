@@ -1,0 +1,39 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: negobot-apis
+  namespace: ${ENV}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: 'nginx'
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/websocket-services: "datav2-service"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+spec:
+  tls:
+    - hosts:
+        - api-dev.negobot.co
+      secretName: quickstart-cis-tls
+  rules:
+    - host: api-dev.negobot.co
+      http:
+        paths:
+          - path: /dv2(/|$)(.*)
+            backend:
+              serviceName: datav2-service
+              servicePort: 4201
+          - path: /v2auth(/|$)(.*)
+            backend:
+              serviceName: authv2-service
+              servicePort: 4202
+          - path: /negotiations(/|$)(.*)
+            backend:
+              serviceName: actionv2-service
+              servicePort: 4203   
+          - path: /ws(/|$)(.*)
+            backend:
+              serviceName: datav2-service
+              servicePort: 4201

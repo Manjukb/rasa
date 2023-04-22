@@ -1,0 +1,979 @@
+{
+	"info": {
+		"_postman_id": "1f2a20d1-484e-4312-90dc-5ee4be746fa7",
+		"name": "negotiation.test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "parametric evaluation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"iam_role\": \"seller\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{negotiation_host_name}}/parametric_evaluation",
+					"host": [
+						"{{negotiation_host_name}}"
+					],
+					"path": [
+						"parametric_evaluation"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "parametric evaluation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{negotiation_host_name}}/parametric_evaluation",
+							"host": [
+								"{{negotiation_host_name}}"
+							],
+							"path": [
+								"parametric_evaluation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 02:30:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"action\": \"negotiate\",\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3\n        ],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"customer_offer_utility\": {\n        \"score\": 0,\n        \"evaluation\": \"negotiate\",\n        \"parametric_scores\": {\n            \"discount\": 0\n        },\n        \"is_violated\": false\n    },\n    \"counter_offer\": {\n        \"payment_date\": 7,\n        \"discount\": 5\n    },\n    \"counter_offer_utility\": {\n        \"score\": 0.75,\n        \"evaluation\": \"accept\",\n        \"parametric_scores\": {\n            \"discount\": 0.75\n        },\n        \"is_violated\": false\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "offer evaluation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 1,\n            \"max\": 100,\n            \"weight\": 1,\n            \"unit\": \"day\",\n            \"inverse\": false,\n            \"step\": 1,\n            \"baseline\": 100\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 1,\n            \"max\": 100,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": false,\n            \"step\": 1,\n            \"baseline\": 100\n        }\n    ],\n    \"customer_negotiable\": {\n        \"discount\": true, \n        \"payment_date\": true\n    },\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.5,\n            0.2\n        ],\n        \"counter_offers\": 2,\n        \"negotiation_round\": 1,\n        \"business_type\": \"seller\",\n        \"evaluation_method\": \"ultility_method\"\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"123456\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/20/2020-06:53:14\"\n    },\n    \"negotiation_trace\": [],\n    \"last_counter_offer\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{negotiation_host_name}}/evaluation",
+					"host": [
+						"{{negotiation_host_name}}"
+					],
+					"path": [
+						"evaluation"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "parametric evaluation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{negotiation_host_name}}/parametric_evaluation",
+							"host": [
+								"{{negotiation_host_name}}"
+							],
+							"path": [
+								"parametric_evaluation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 02:30:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"action\": \"negotiate\",\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3\n        ],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"customer_offer_utility\": {\n        \"score\": 0,\n        \"evaluation\": \"negotiate\",\n        \"parametric_scores\": {\n            \"discount\": 0\n        },\n        \"is_violated\": false\n    },\n    \"counter_offer\": {\n        \"payment_date\": 7,\n        \"discount\": 5\n    },\n    \"counter_offer_utility\": {\n        \"score\": 0.75,\n        \"evaluation\": \"accept\",\n        \"parametric_scores\": {\n            \"discount\": 0.75\n        },\n        \"is_violated\": false\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "offer evaluation Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"monthly_quantity\",\n            \"value\": 80\n        },\n        {\n            \"parameter\": \"price\",\n            \"value\": 4.11\n        },\n        {\n            \"parameter\": \"quantity\",\n            \"value\": 60\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"price\",\n            \"min\": 3.91,\n            \"max\": 4.2,\n            \"negotiable\": true,\n            \"weight\": 0.6,\n            \"unit\": \"SGD\",\n            \"inverse\": false,\n            \"step\": 0.1,\n            \"baseline\": 4.2,\n            \"step_offer\": false\n        },\n        {\n            \"name\": \"quantity\",\n            \"min\": 40.0,\n            \"max\": 100.0,\n            \"negotiable\": true,\n            \"weight\": 0.1,\n            \"unit\": \"KG\",\n            \"inverse\": false,\n            \"step\": 10.0,\n            \"baseline\": 100.0,\n            \"step_offer\": false\n        },\n        {\n            \"name\": \"monthly_quantity\",\n            \"min\": 80.0,\n            \"max\": 200.0,\n            \"negotiable\": true,\n            \"weight\": 0.3,\n            \"unit\": \"KG\",\n            \"inverse\": false,\n            \"step\": 10.0,\n            \"baseline\": 200.0,\n            \"step_offer\": false\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7000000000000001,\n        \"concession_pattern\": [\n            0.2,\n            0.30000000000000004\n        ],\n        \"negotiation_round\": 1,\n        \"evaluation_method\": \"ultility_method\",\n        \"iam_role\": \"buyer\",\n        \"counter_offers\": 1,\n        \"business_type\": \"collector\"\n    },\n    \"customer_offer\": {\n        \"monthly_quantity\": 80,\n        \"price\": 4.11,\n        \"quantity\": 60\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"None\",\n        \"basket_id\": \"None\",\n        \"basket_info\": \"None\",\n        \"basket_name\": \"None\",\n        \"brand_id\": \"None\",\n        \"brand_info\": \"None\",\n        \"brand_name\": \"None\",\n        \"customer_email\": \"huynh@negobot.co\",\n        \"customer_name\": \"huynh\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"procurement\",\n        \"product_id\": \"PO14000003\",\n        \"product_info\": null,\n        \"product_name\": null,\n        \"seal_deal\": \"None\",\n        \"session_id\": \"procurement-huynh@negobot.co-PO14000003-07292020080359\"\n    },\n    \"negotiation_trace\": [],\n    \"last_counter_offer\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{negotiation_host_name}}/evaluation",
+					"host": [
+						"{{negotiation_host_name}}"
+					],
+					"path": [
+						"evaluation"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "parametric evaluation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{negotiation_host_name}}/parametric_evaluation",
+							"host": [
+								"{{negotiation_host_name}}"
+							],
+							"path": [
+								"parametric_evaluation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 02:30:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"action\": \"negotiate\",\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3\n        ],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"customer_offer_utility\": {\n        \"score\": 0,\n        \"evaluation\": \"negotiate\",\n        \"parametric_scores\": {\n            \"discount\": 0\n        },\n        \"is_violated\": false\n    },\n    \"counter_offer\": {\n        \"payment_date\": 7,\n        \"discount\": 5\n    },\n    \"counter_offer_utility\": {\n        \"score\": 0.75,\n        \"evaluation\": \"accept\",\n        \"parametric_scores\": {\n            \"discount\": 0.75\n        },\n        \"is_violated\": false\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "basket offer evaluation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nego_round\": 1,\n    \"negotiation_basket_parameter\": {\n        \"001\": [{\n                    \"name\": \"payment_date\",\n                    \"min\": 1,\n                    \"max\": 100,\n                    \"weight\": 1,\n                    \"unit\": \"day\",\n                    \"negotiable\": true,\n                    \"step\": 1,\n                    \"baseline\": 100 },\n                {\n                    \"name\": \"discount\",\n                    \"min\": 1,\n                    \"max\": 100,\n                    \"weight\": 1,\n                    \"unit\": \"percentage\",\n                    \"negotiable\": false,\n                    \"step\": 1,\n                    \"baseline\": 100\n                }],\n        \"002\": [{\n                    \"name\": \"payment_date\",\n                    \"min\": 1,\n                    \"max\": 100,\n                    \"weight\": 1,\n                    \"unit\": \"day\",\n                    \"negotiable\": true,\n                    \"step\": 1,\n                    \"baseline\": 100 },\n                {\n                    \"name\": \"discount\",\n                    \"min\": 1,\n                    \"max\": 100,\n                    \"weight\": 1,\n                    \"unit\": \"percentage\",\n                    \"negotiable\": false,\n                    \"step\": 1,\n                    \"baseline\": 100\n                }]\n    },\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.5,\n            0.2\n        ],\n        \"counter_offers\": 2,\n        \"negotiation_round\": 1,\n        \"business_type\": \"collector\",\n        \"evaluation_method\": \"ultility_method\"\n    },\n    \"customer_basket_offer\": {\n        \"001\": { \"discount\": 2, \"payment_date\": 7 },\n        \"002\": { \"discount\": 2, \"payment_date\": 7 }  \n    },\n    \"customer_basket_negotiable\": {\n        \"001\": { \"discount\": true, \"payment_date\": true },\n        \"002\": { \"discount\": true, \"payment_date\": true } },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"123456\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/20/2020-06:53:14\"\n    },\n    \"negotiation_trace\": [],\n    \"last_counter_offer\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{negotiation_host_name}}/basket_evaluation",
+					"host": [
+						"{{negotiation_host_name}}"
+					],
+					"path": [
+						"basket_evaluation"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "parametric evaluation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{negotiation_host_name}}/parametric_evaluation",
+							"host": [
+								"{{negotiation_host_name}}"
+							],
+							"path": [
+								"parametric_evaluation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 02:30:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"action\": \"negotiate\",\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3\n        ],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"customer_offer_utility\": {\n        \"score\": 0,\n        \"evaluation\": \"negotiate\",\n        \"parametric_scores\": {\n            \"discount\": 0\n        },\n        \"is_violated\": false\n    },\n    \"counter_offer\": {\n        \"payment_date\": 7,\n        \"discount\": 5\n    },\n    \"counter_offer_utility\": {\n        \"score\": 0.75,\n        \"evaluation\": \"accept\",\n        \"parametric_scores\": {\n            \"discount\": 0.75\n        },\n        \"is_violated\": false\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "offer evaluation - single counter offer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 1,\n            \"max\": 100,\n            \"weight\": 1,\n            \"unit\": \"day\",\n            \"inverse\": false,\n            \"step\": 1,\n            \"baseline\": 100\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 1,\n            \"max\": 100,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": false,\n            \"step\": 1,\n            \"baseline\": 100\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.5,\n            0.2\n        ],\n        \"counter_offers\": 1,\n        \"negotiation_round\": 1,\n        \"business_type\": \"seller\",\n        \"evaluation_method\": \"ultility_method\"\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"123456\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/20/2020-06:53:14\"\n    },\n    \"negotiation_trace\": [],\n    \"last_counter_offer\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{negotiation_host_name}}/evaluation",
+					"host": [
+						"{{negotiation_host_name}}"
+					],
+					"path": [
+						"evaluation"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "parametric evaluation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{negotiation_host_name}}/parametric_evaluation",
+							"host": [
+								"{{negotiation_host_name}}"
+							],
+							"path": [
+								"parametric_evaluation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 02:30:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"action\": \"negotiate\",\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3\n        ],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"customer_offer_utility\": {\n        \"score\": 0,\n        \"evaluation\": \"negotiate\",\n        \"parametric_scores\": {\n            \"discount\": 0\n        },\n        \"is_violated\": false\n    },\n    \"counter_offer\": {\n        \"payment_date\": 7,\n        \"discount\": 5\n    },\n    \"counter_offer_utility\": {\n        \"score\": 0.75,\n        \"evaluation\": \"accept\",\n        \"parametric_scores\": {\n            \"discount\": 0.75\n        },\n        \"is_violated\": false\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "offer evaluation with negotiable",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 1,\n            \"max\": 100,\n            \"weight\": 1,\n            \"unit\": \"day\",\n            \"negotiable\": true,\n            \"step\": 1,\n            \"baseline\": 100\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 1,\n            \"max\": 100,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"negotiable\": true,\n            \"step\": 1,\n            \"baseline\": 100\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.5,\n            0.2\n        ],\n        \"counter_offers\": 2,\n        \"negotiation_round\": 1,\n        \"business_type\": \"epd\",\n        \"evaluation_method\": \"ultility_method\"\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"customer_negotiable\": {\n        \"discount\": true,\n        \"payment_date\": true\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"123456\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/20/2020-06:53:14\"\n    },\n    \"negotiation_trace\": [],\n    \"last_counter_offer\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{negotiation_host_name}}/evaluation",
+					"host": [
+						"{{negotiation_host_name}}"
+					],
+					"path": [
+						"evaluation"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "parametric evaluation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{negotiation_host_name}}/parametric_evaluation",
+							"host": [
+								"{{negotiation_host_name}}"
+							],
+							"path": [
+								"parametric_evaluation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 02:30:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"action\": \"negotiate\",\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3\n        ],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"customer_offer_utility\": {\n        \"score\": 0,\n        \"evaluation\": \"negotiate\",\n        \"parametric_scores\": {\n            \"discount\": 0\n        },\n        \"is_violated\": false\n    },\n    \"counter_offer\": {\n        \"payment_date\": 7,\n        \"discount\": 5\n    },\n    \"counter_offer_utility\": {\n        \"score\": 0.75,\n        \"evaluation\": \"accept\",\n        \"parametric_scores\": {\n            \"discount\": 0.75\n        },\n        \"is_violated\": false\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "offer evaluation - 2nd",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 2,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 1,\n            \"max\": 100,\n            \"weight\": 1,\n            \"unit\": \"day\",\n            \"inverse\": false,\n            \"step\": 1,\n            \"baseline\": 100\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 1,\n            \"max\": 100,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": false,\n            \"step\": 1,\n            \"baseline\": 100\n        }\n    ],\n    \"last_counter_offer_values\": [\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 100\n        },\n        {\n            \"parameter\": \"discount\",\n            \"value\": 21\n        }\n    ],\n    \"last_buyer_offer_values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 4,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.5,\n            0.2,\n            0.1,\n            0.1\n        ],\n        \"negotiation_round\": 2,\n        \"counter_offers\": 2,\n        \"business_type\": \"seller\",\n        \"evaluation_method\": \"ultility_method\"\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"123456\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/20/2020-06:53:14\"\n    },\n    \"negotiation_trace\": [\n        {\n            \"customer_offer\": {\n                \"discount\": 2,\n                \"payment_date\": 7\n            },\n            \"negotiation_result\": {\n                \"action\": \"negotiate\",\n                \"negotiation_evaluation_metric\": {\n                    \"max_concession_round\": 4,\n                    \"max_concession_score\": 0.2,\n                    \"min_accept_score\": 0.2,\n                    \"auto_accept_score\": 0.7,\n                    \"concession_pattern\": [\n                        0.5,\n                        0.2,\n                        0.1,\n                        0.1\n                    ],\n                    \"negotiation_round\": 1,\n                    \"evaluation_method\": \"utility\"\n                },\n                \"customer_offer\": {\n                    \"discount\": 2,\n                    \"payment_date\": 7\n                },\n                \"customer_offer_utility\": {\n                    \"score\": 0.04,\n                    \"evaluation\": \"negotiate\",\n                    \"parametric_scores\": {\n                        \"payment_date\": 0.06060606060606061,\n                        \"discount\": 0.010101010101010102\n                    },\n                    \"is_violated\": false\n                },\n                \"is_violated\": false,\n                \"counter_offer\": {\n                    \"payment_date\": 100,\n                    \"discount\": 21\n                },\n                \"counter_offer_utility\": {\n                    \"score\": 0.6,\n                    \"evaluation\": \"negotiate\",\n                    \"parametric_scores\": {\n                        \"payment_date\": 1,\n                        \"discount\": 0.20202020202020202\n                    },\n                    \"is_violated\": false\n                },\n                \"multi_counter_offer\": [\n                    {\n                        \"payment_date\": 100,\n                        \"discount\": 21\n                    },\n                    {\n                        \"payment_date\": 100,\n                        \"discount\": 20\n                    },\n                    {\n                        \"payment_date\": 99,\n                        \"discount\": 22\n                    },\n                    {\n                        \"payment_date\": 99,\n                        \"discount\": 21\n                    }\n                ],\n                \"multi_counter_offer_utility\": [\n                    {\n                        \"score\": 0.6,\n                        \"evaluation\": \"negotiate\",\n                        \"parametric_scores\": {\n                            \"payment_date\": 1,\n                            \"discount\": 0.20202020202020202\n                        },\n                        \"is_violated\": false\n                    },\n                    {\n                        \"score\": 0.6,\n                        \"evaluation\": \"negotiate\",\n                        \"parametric_scores\": {\n                            \"payment_date\": 1,\n                            \"discount\": 0.1919191919191919\n                        },\n                        \"is_violated\": false\n                    },\n                    {\n                        \"score\": 0.6,\n                        \"evaluation\": \"negotiate\",\n                        \"parametric_scores\": {\n                            \"payment_date\": 0.98989898989899,\n                            \"discount\": 0.21212121212121213\n                        },\n                        \"is_violated\": false\n                    },\n                    {\n                        \"score\": 0.6,\n                        \"evaluation\": \"negotiate\",\n                        \"parametric_scores\": {\n                            \"payment_date\": 0.98989898989899,\n                            \"discount\": 0.20202020202020202\n                        },\n                        \"is_violated\": false\n                    }\n                ]\n            }\n        }\n    ],\n    \"last_counter_offer\": {\n        \"payment_date\": 100,\n        \"discount\": 21\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{negotiation_host_name}}/evaluation",
+					"host": [
+						"{{negotiation_host_name}}"
+					],
+					"path": [
+						"evaluation"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "parametric evaluation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{negotiation_host_name}}/parametric_evaluation",
+							"host": [
+								"{{negotiation_host_name}}"
+							],
+							"path": [
+								"parametric_evaluation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 02:30:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"action\": \"negotiate\",\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3\n        ],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"customer_offer_utility\": {\n        \"score\": 0,\n        \"evaluation\": \"negotiate\",\n        \"parametric_scores\": {\n            \"discount\": 0\n        },\n        \"is_violated\": false\n    },\n    \"counter_offer\": {\n        \"payment_date\": 7,\n        \"discount\": 5\n    },\n    \"counter_offer_utility\": {\n        \"score\": 0.75,\n        \"evaluation\": \"accept\",\n        \"parametric_scores\": {\n            \"discount\": 0.75\n        },\n        \"is_violated\": false\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "parametric evaluation - 2nd",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 2,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 2\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": {\n    \t\"payment_date\": 7,\n    \t\"discount\": 2\n    },\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": {\n    \t\"payment_date\": 7,\n    \t\"discount\": 6\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{negotiation_host_name}}/parametric_evaluation",
+					"host": [
+						"{{negotiation_host_name}}"
+					],
+					"path": [
+						"parametric_evaluation"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "parametric evaluation - 2nd",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 2,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 2\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": {\n    \t\"payment_date\": 7,\n    \t\"discount\": 2\n    },\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": {\n    \t\"payment_date\": 7,\n    \t\"discount\": 6\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{negotiation_host_name}}/parametric_evaluation",
+							"host": [
+								"{{negotiation_host_name}}"
+							],
+							"path": [
+								"parametric_evaluation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 02:30:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"action\": \"reject\",\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3\n        ],\n        \"negotiation_round\": 2\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"customer_offer_utility\": {\n        \"score\": 0,\n        \"evaluation\": \"reject\",\n        \"parametric_scores\": {\n            \"discount\": 0\n        },\n        \"is_violated\": false\n    },\n    \"counter_offer\": {\n        \"payment_date\": 7,\n        \"discount\": 6\n    },\n    \"counter_offer_utility\": {\n        \"score\": 1,\n        \"evaluation\": \"accept\",\n        \"parametric_scores\": {\n            \"discount\": 1\n        },\n        \"is_violated\": false\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "offer evaluation Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{negotiation_host_name}}/evaluation",
+					"host": [
+						"{{negotiation_host_name}}"
+					],
+					"path": [
+						"evaluation"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "parametric evaluation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"values\": [\n        {\n            \"parameter\": \"discount\",\n            \"value\": 2\n        },\n        {\n            \"parameter\": \"payment_date\",\n            \"value\": 7\n        }\n    ],\n    \"nego_round\": 1,\n    \"parameters\": [\n        {\n            \"name\": \"payment_date\",\n            \"min\": 7,\n            \"max\": 7,\n            \"weight\": 0,\n            \"unit\": \"day\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 7\n        },\n        {\n            \"name\": \"discount\",\n            \"min\": 2,\n            \"max\": 6,\n            \"weight\": 1,\n            \"unit\": \"percentage\",\n            \"inverse\": true,\n            \"step\": 1,\n            \"baseline\": 6\n        }\n    ],\n    \"last_counter_offer_values\": [],\n    \"last_buyer_offer_values\": [],\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [0.2, 0.3],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"last_customer_offer\": null,\n    \"session\": {\n        \"agent_seal_deal\": \"negotiate\",\n        \"brand_id\": \"test_brand_01\",\n        \"customer_email\": \"test@test.com\",\n        \"customer_name\": \"test\",\n        \"customer_role\": \"buyer\",\n        \"organisation_id\": \"epd-demo\",\n        \"product_id\": \"None\",\n        \"seal_deal\": \"negotiate\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/18/2020-08:41:56\"\n    },\n    \"last_counter_offer\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{negotiation_host_name}}/parametric_evaluation",
+							"host": [
+								"{{negotiation_host_name}}"
+							],
+							"path": [
+								"parametric_evaluation"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 02:30:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"action\": \"negotiate\",\n    \"negotiation_evaluation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [\n            0.2,\n            0.3\n        ],\n        \"negotiation_round\": 1\n    },\n    \"customer_offer\": {\n        \"discount\": 2,\n        \"payment_date\": 7\n    },\n    \"customer_offer_utility\": {\n        \"score\": 0,\n        \"evaluation\": \"negotiate\",\n        \"parametric_scores\": {\n            \"discount\": 0\n        },\n        \"is_violated\": false\n    },\n    \"counter_offer\": {\n        \"payment_date\": 7,\n        \"discount\": 5\n    },\n    \"counter_offer_utility\": {\n        \"score\": 0.75,\n        \"evaluation\": \"accept\",\n        \"parametric_scores\": {\n            \"discount\": 0.75\n        },\n        \"is_violated\": false\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "59c1cc14-20b8-49aa-84aa-cf1f9db39869",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ef94b97f-99fd-46ea-8049-cf0c273eef22",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status test\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

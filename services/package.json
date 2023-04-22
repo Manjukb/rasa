@@ -1,0 +1,12 @@
+{
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "packages/*"
+        ]
+    },
+    "dependencies": {
+        "@socket.io/redis-adapter": "^7.1.0",
+        "redis": "^4.0.4"
+    }
+}

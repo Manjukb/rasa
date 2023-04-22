@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: authv2-service
+spec:
+  selector:
+    app: authv2-app
+  ports:
+    - protocol: TCP
+      port: 4202
+      targetPort: 4202

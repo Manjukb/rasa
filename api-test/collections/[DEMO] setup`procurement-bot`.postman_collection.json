@@ -1,0 +1,1895 @@
+{
+	"info": {
+		"_postman_id": "53d0b3d1-1800-4f8e-842e-7e9574578444",
+		"name": "[DEMO] setup`procurement-bot`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "fetch procument domain sheet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/domains/fetch_sheet?organisation_id=procurement",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"domains",
+						"fetch_sheet"
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "procurement"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch message template sheet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/message_templates/fetch_sheet?organisation_id=procurement",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"message_templates",
+						"fetch_sheet"
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "procurement"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add `procurement` domain",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"procurement\",\n    \"bot_domain\": {\n        \"intents\": [\n            {\n                \"questions\": [\n                    \"What are your operating hours?\\n\",\n                    \"\\nFrom what time to what time are you open?\\n\",\n                    \"\\nWhen do you open and close?\\n\",\n                    \"\\nAre you open on Sundays?\\n\",\n                    \"\\nDo you operate on public holidays?\\n\",\n                    \"\\nDo you work on weekends?\"\n                ],\n                \"answers\": [\n                    \"[1] Our operating hours are: \\nMonday - Friday : 9am - 5pm\\nSaturday : 9am - 12pm\\nWe are closed on Sundays and Public Holidays\\n\",\n                    \"\\n[2] Our operating hours are:\\nMonday - Friday : 9am - 5pm\\nSaturday : 9am - 12pm\\nWe are closed on Sundays and Public Holidays\"\n                ],\n                \"intent_name\": \"Opening_Hours\",\n                \"description\": \"Question on opening/ operating hours\"\n            },\n            {\n                \"questions\": [\n                    \"When will my order be delivered?\\n\",\n                    \"\\nHow long does it take for the order to be delivered?\\n\",\n                    \"\\nCan I choose delivery timings for my order?\\n\",\n                    \"\\nWhat is your delivery schedule?\"\n                ],\n                \"answers\": [\n                    \"[1] Delivery time is usually between 9am - 5pm on working days. On Saturdays delivery timings are 9am - 2pm. There are no deliveries on Sundays and Public Holidays.\"\n                ],\n                \"intent_name\": \"Delivery_Timing\",\n                \"description\": \"Question on delivery timings\"\n            },\n            {\n                \"questions\": [\n                    \"What quality standards do you follow?\\n\",\n                    \"\\nWhat are the checks on the quality standards?                    \"\n                ],\n                \"answers\": [\n                    \"[1] The sellers on the platform have to verified suppliers and need to abide by FDA norms on quality control.\"\n                ],\n                \"intent_name\": \"Product_Quality\",\n                \"description\": \"Question on Product quality\"\n            },\n            {\n                \"questions\": [\n                    \"How do I cancel an order before it is shipped?\\n\",\n                    \"\\nHow do I add items to an order that has been placed?\"\n                ],\n                \"answers\": [\n                    \"[1] There is an order cancellation option which is active till the order is shipped. Before shipping, products maybe added or removed from the cart, though this may delay the shipping as per the requirements.\"\n                ],\n                \"intent_name\": \"Cart_Changes\",\n                \"description\": \"Question on cart changes\"\n            },\n            {\n                \"questions\": [\n                    \"When will I recieve my refund for cancelled order?\\n\",\n                    \"\\nWhat is the refund policy?\\n\",\n                    \"\\nWhat part of shipping charges will be refunded?\"\n                ],\n                \"answers\": [\n                    \"[1] The refund for cancelled order is processed when the product has reached back to the supplier. After processing it takes 2-5 working days to reflect the money in the bank. The shipping charges are non refundable.\"\n                ],\n                \"intent_name\": \"Refund\",\n                \"description\": \"Question on refunds\"\n            },\n            {\n                \"questions\": [\n                    \"Are there any priority or fast delivery options?\\n\",\n                    \"\\nHow long does it take for delivery in case I opt for priority delievry?\\n\",\n                    \"\\nWhat are the extra charges for priority delivery options?\"\n                ],\n                \"answers\": [\n                    \"[1] There are priority delivery options available with some suppliers in Singapore. The priority delievry costs S$10 eextra and can be delivered within 12 hours of placing the order.\"\n                ],\n                \"intent_name\": \"Priotiry_Delivery\",\n                \"description\": \"Question on priority delivery\"\n            },\n            {\n                \"questions\": [\n                    \"Can I reject the delivery for dissatisfaction?\\n\",\n                    \"\\nWhat is the maximum time after delivery when rejections will be accepted?\\n\",\n                    \"\\nCan I reject and not pay for products in case of COD?\\n\",\n                    \"\\nCan I reject some items from the order if they are unsatisfactory?\"\n                ],\n                \"answers\": [\n                    \"[1] Products that are rejected should be informed to the supplier within 2 hours of receiving the delivery. Post that no rejections will be accepted. On rejection, the supplier will be notified to verify the reasoning and the product reversal and refund will be processed accordingly.\"\n                ],\n                \"intent_name\": \"Rejection\",\n                \"description\": \"Question on rejection post delivery\"\n            },\n            {\n                \"questions\": [\n                    \"What is the credit period allowed by supliers?\\n\",\n                    \"\\nAre there any discounts on upfront cash payment?\\n\",\n                    \"\\nDoes cash on delivery have any extra discounts?\"\n                ],\n                \"answers\": [\n                    \"[1] Credit and early payment discount is allowed as per the discretion of the supplier.\"\n                ],\n                \"intent_name\": \"Payment_Terms\",\n                \"description\": \"Question on Payment Terms\"\n            },\n            {\n                \"questions\": [\n                    \"Are there any financing options to pay the supplier?\"\n                ],\n                \"answers\": [\n                    \"[1] Currently we do not have any financing options. Please check back later for update on this. Thanks :)\"\n                ],\n                \"intent_name\": \"Financing_Options\",\n                \"description\": \"Question on financing options\"\n            },\n            {\n                \"questions\": [\n                    \"Can I cancel some items from the order? \\n\",\n                    \" \\nCan I change my basket?\\n\",\n                    \"\\nWhat if I need to change some items in my order?\"\n                ],\n                \"answers\": [\n                    \"[1] The basket can be modified before the order is shipped, post shipping if any modifications are required then the product might be returned/ replaced basis the order terms and conditions.\"\n                ],\n                \"intent_name\": \"Basket_Modifications\",\n                \"description\": \"Question on basket modifications\"\n            },\n            {\n                \"questions\": [\n                    \"What are the shipping charges?\\n\",\n                    \"\\nWhat are shipping charges for cross-border shipping?\\n\",\n                    \"\\nIs there any criteria for free shipping?\"\n                ],\n                \"answers\": [\n                    \"[1] Shipping charges are based on supplier and buyer location. The shipping charges vary from order to order and can be checked while placing the order.\"\n                ],\n                \"intent_name\": \"Shipping_Charges\",\n                \"description\": \"Question on Shipping charges\"\n            },\n            {\n                \"questions\": [\n                    \"How can I provide special delivery instructions?\"\n                ],\n                \"answers\": [\n                    \"[1] Incase of special delivery instructions, the buyer may write it in a note on theplatform. The instructions will be passed on to the supplier.\"\n                ],\n                \"intent_name\": \"Special_Instructions\",\n                \"description\": \"Question on Special Instructions\"\n            },\n            {\n                \"questions\": [\n                    \"Can I have additional information about Dijon Mustard?\\n\",\n                    \"\\nWhat is the nutritional content of Dijon Mustard?\\n\",\n                    \"\\nWhat are the ingredients of Dijon Mustard?\"\n                ],\n                \"answers\": [\n                    \"https://drive.google.com/file/d/1LkWM4sBCC1kN7spzbRm910qDvKjKZnKc/view?usp=sharing\"\n                ],\n                \"intent_name\": \"Mustard_Information\",\n                \"description\": \"Question on information about Mustard\"\n            }\n        ]\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/domains/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"domains",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get api key `procurement`",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/users/apikey",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"users",
+						"apikey"
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": []
+		},
+		{
+			"name": "add `procument` message_template",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"procurement\",\n    \"bot_template\": {\n        \"templates\": [\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"negotiate\",\n                    \"negotiation_round\": 1,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"I am afraid your offer is still on the lower side. Let me improve my counter-proposal. <br>\\n**{product_name}**\\n\",\n                    \"\\nWe seem to be closing in on a deal. How about this? <br>\\n**{product_name}**\\n\",\n                    \"\\nWe are keen to make this deal happen. How about this offer? <br>\\n**{product_name}**\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's round one offer is not above auto acceptance utility. BOT will make a counter offer, concession strategy for round one is applicable. The buyer will have following options after after this round - Accept, Make Offer, Exit Negotiation.\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"accept\",\n                    \"negotiation_round\": 1,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Thanks for your offer! We will collate all our supplier offers and come back to you with our response soon....<br>\\n**{product_name}** <br> \"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's offer in round 1 is above the auto acceptance. The BOT accepts the buyer offer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"reject\",\n                    \"negotiation_round\": 1,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Thanks for your offer! We will collate all our supplier offers and come back to you with our response soon....<br>\\n**{product_name}** <br> \"\n                ],\n                \"action\": \"None\",\n                \"description\": \"BOT makes the final offer. Buyer has following options after this round - Accept, Exit Negotiation\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"negotiate\",\n                    \"negotiation_round\": 2,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"I am afraid your offer is still on the lower side. Let me improve my offer.\\n\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's counter offer in round 2 is not above auto acceptance utility. BOT will make a counter offer, concession strategy for round two is applicable. The buyer will have following options after after this round - Accept Offer, Make Offer, Exit Negotiation.\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"accept\",\n                    \"negotiation_round\": 2,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Thanks a lot! We have a deal....Please confirm the offer for:<br>\\n **Product: {product_name}** <br> \\n{customer_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's round 2 offer is above the auto acceptance. The BOT accepts the buyer offer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"reject\",\n                    \"negotiation_round\": 2,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Sorry, this is our final offer:<br>\\n**Product: {product_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"BOT makes the final offer. Buyer has following options after this round - Accept Offer, Exit Negotiation\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"negotiate\",\n                    \"negotiation_round\": 3,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"We are close to striking a deal. How about this? \\n\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's offer in round 3 is not above auto acceptance utility. BOT will make a counter offer, concession strategy for round three is applicable. The buyer will have following options after after this round - Accept Offer, Make offer, Exit Negotiation.\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"accept\",\n                    \"negotiation_round\": 3,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Thanks a lot! We have a deal....Please confirm the offer for:<br>\\n **Product: {product_name}** <br> \\n{customer_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer's round three offer is above the auto acceptance. The BOT accepts the buyer offer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"reject\",\n                    \"negotiation_round\": 3,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Sorry, this is our final offer:<br>\\n**Product: {product_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"BOT makes the final offer. Buyer has following options after this round - Accept Offer, Exit Negotiation\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"negotiate\",\n                    \"negotiation_round\": 4,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"I really hope we can agree on this. Here's my final offer:\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"Buyer's final offer is not above auto-accpetance utility. BOT makes the FINAL OFFER as per the concession startegy for round four. Buyer will have following options after this round - Accept Offer, Exit Negotiation \"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"accept\",\n                    \"negotiation_round\": 4,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Finally have a deal! Hope we can shake hands on this offer for:<br>\\n **Product: {product_name}** <br> \\n{customer_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"The buyer round four offer is in above the auto acceptance. The BOT accepts the buyer offer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"reject\",\n                    \"negotiation_round\": 4,\n                    \"template_name\": \"bot_suggestion\"\n                },\n                \"answers\": [\n                    \"Sorry, this is our final offer:<br>\\n**Product: {product_name}** <br> \\n{bot_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"BOT makes the final offer. Buyer has following options - Accept , Reject\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_product_id\"\n                },\n                \"answers\": [\n                    \"disable message.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"When supplier clicks on link inviting a bid, this is the opening message bot presents on the platform\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_make_offer\"\n                },\n                \"answers\": [\n                    \"Hi {customer_name}. Thanks for your interest in providing us a quote for {product_name}. Our proposed offer is:\\n{bot_offer_message}\\nPlease let us know if this works for you, or if you would like to make a counter-offer? Thanks!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"When supplier quotes in the first round but it is below acceptance threshold. Bot will make a counter-offer in Round 1\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_input_offer\"\n                },\n                \"answers\": [\n                    \"Offer {product_name}:\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when buyer hit the accept nego buttons while the bot dont accept the buyer' offer \\nbut propose the counter offer, the counter offer is set to be accept by buyer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_input_negotiable\"\n                },\n                \"answers\": [\n                    \"Which parameter is negotiable:\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_seal_deal\"\n                },\n                \"answers\": [\n                    \"Please confirm your offer.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when buyer hit the accept nego buttons while the bot dont accept the buyer' offer \\nbut propose the counter offer, the counter offer is set to be accept by buyer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_faq_feedback\"\n                },\n                \"answers\": [\n                    \"Was this answer useful?\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when buyer hit the accept nego buttons while the bot dont accept the buyer' offer \\nbut propose the counter offer, the counter offer is set to be accept by buyer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_unclear_faq_feedback\"\n                },\n                \"answers\": [\n                    \"I am sorry I could not understand your question. Could you help me improve by providing me the correct question label? Thanks!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when buyer hit the reject nego button while the bot don't accept the buyer' offer\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_unknown_feedback\"\n                },\n                \"answers\": [\n                    \"I am sorry. I didn't quite catch that. Please continue with your negotiation.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when user hit the nego buttons, \\nthe corresponding product name of that button \\nwill be set to this slot automatically \\nand remain unchange\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_response_correct_feedback\"\n                },\n                \"answers\": [\n                    \"That's great! Glad it was helpful....please continue with your negotiation. \"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when user login, the provided email will be set \\nto this slot automatically and remain unchange\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_response_intent_name_feedback\"\n                },\n                \"answers\": [\n                    \"Thanks a lot! Your feedback will help me get better. Much appreciated!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"when start the nego form, \\nthe prefill customer_email slot will be checked\\nto validate of customer_email with authorization service, \\nif sucess validated, the customer_name value will return \\nand set the slot and remain unchange \"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_response_not_correct_feedback\"\n                },\n                \"answers\": [\n                    \"I am sorry I couldn't be of help. I will alert my supervisor to help you. In the meantime, I'll return you to our earlier negotiation.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_response_continue_nego\"\n                },\n                \"answers\": [\n                    \"Let me return you to our earlier negotiation, thanks!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"provided by popup model\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_confirm_seal_deal_with_bot_offer\"\n                },\n                \"answers\": [\n                    \"Thank you {customer_name} Confirming that the offer for {product_name} is: <br>\\n{bot_offer_message} \\nI will alert my supervisor to come back to you at the soonest.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"provided by popup model\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_confirm_seal_deal_with_customer_offer\"\n                },\n                \"answers\": [\n                    \"Thank you {customer_name} Confirming that the offer for {product_name} is: <br>\\n{bot_offer_message} \\nI will alert my supervisor to come back to you at the soonest.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"provided by nego service\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_confirm_no_seal_deal\"\n                },\n                \"answers\": [\n                    \"Sorry we couldn’t arrive at a deal today {customer_name} :cry: <br>\\nHope to be of help in the future.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"provided by nego service\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_product_id\"\n                },\n                \"answers\": [\n                    \"Could you please provide me the name of the product?\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_wait_for_agent_to_review_deal\"\n                },\n                \"answers\": [\n                    \"Please wait for my supervisor to review and confirm the deal.\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_ask_confirm_agent_fix_offer\"\n                },\n                \"answers\": [\n                    \"Thank you. This is our final offer for {product_name}: <br>\\n {agent_offer_message}\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_confirm_agent_accept_deal\"\n                },\n                \"answers\": [\n                    \"Hi, I have accepted the deal. Thanks for your business... Have a good day! :smiley:\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"bot_confirm_agent_reject_deal\"\n                },\n                \"answers\": [\n                    \"Hi, I am afraid we cannot accept this deal. :cry: <br>\\nHope to do business with you in future. \"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            },\n            {\n                \"condition\": {\n                    \"negotiation_action\": \"all\",\n                    \"negotiation_round\": 0,\n                    \"template_name\": \"agent_release_session\"\n                },\n                \"answers\": [\n                    \"Hi, I will let my sales assistant {bot_name} continue this conversation with you. Thanks!\"\n                ],\n                \"action\": \"None\",\n                \"description\": \"\"\n            }\n        ],\n        \"offer_template_view\": \"\",\n        \"parameter_view\": {\n            \"price\": \"Price\",\n            \"quantity\": \"Quantity\",\n            \"monthly_quantity\": \"Monthly quantity\",\n            \"credit_terms\": \"Credit Terms\",\n            \"delivery_charges\": \"Delivery Charges\",\n            \"payment_date\": \"Payment days\",\n            \"discount\": \"Discount\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/message_templates/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"message_templates",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update `procurement` organisation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"procurement\",\n    \"organisation_info\": {\n        \"name\": \"procurement\",\n        \"type\": \"buyer\",\n        \"service_id\": \"ISca4c35562f4b4e75a512a8b1891743d7\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/organisations/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"organisations",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrieve token with custom service id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"identity\": \"monitor@negobot.co\",\n    \"apiKey\": \"uuxaxhsfrpncsmehbxqr\"\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{auth_host_name}}/token",
+					"host": [
+						"{{auth_host_name}}"
+					],
+					"path": [
+						"token"
+					]
+				},
+				"description": "request channel"
+			},
+			"response": [
+				{
+					"name": "retrieve token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"identity\": \"mean@negobo.co\",\n    \"apiKey\": \"{{api_key}}\"\n}"
+						},
+						"url": {
+							"raw": "{{auth_host_name}}/token",
+							"host": [
+								"{{auth_host_name}}"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Mar 2020 10:38:01 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzNlZDhmMjM5YjVmMWY3MmZkNTExNmYyNWVlOTllZDhmLTE1ODUyMTkwODEiLCJncmFudHMiOnsiY2hhdCI6eyJzZXJ2aWNlX3NpZCI6IklTYjE1YjA5N2FhMDA3NDI4YjhlZTBhMGIwZjAwOThhNWYifSwiYm90Ijp7ImNoYW5uZWwiOiJlcGQtZGVtby1tZWFuQG5lZ29iby5jbyIsIm9yZ2FuaXNhdGlvbl9pZCI6ImVwZC1kZW1vIn0sImlkZW50aXR5IjoiZXBkLWRlbW8tbWVhbkBuZWdvYm8uY28ifSwiaXNzIjoiU0szZWQ4ZjIzOWI1ZjFmNzJmZDUxMTZmMjVlZTk5ZWQ4ZiIsImV4cCI6MTU4NTIyMjY4MSwibmJmIjoxNTg1MjE5MDgxLCJzdWIiOiJBQzRmZGQ5ZTg2YzEyNzI5NDg4Njg3ZmJkMjY1M2QxNTE0In0.AlojQAYHd-DO_rMImrPnx4MJN3GlX5EZKJOREf8_qXk\",\n    \"channel_id\": \"CHa8f29b3c345c44e0a2e38a3c8c7eb628\",\n    \"service_id\": \"ISb15b097aa007428b8ee0a0b0f0098a5f\",\n    \"bot_id\": \"bot-epd-demo\",\n    \"admin_id\": \"admin-epd-demo\",\n    \"sender_id\": \"epd-demo-mean@negobo.co\"\n}"
+				}
+			]
+		},
+		{
+			"name": "update `negotiation evaluation metric`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"procurement\",\n    \"negotiation_metric\": {\n        \"max_concession_round\": 2,\n        \"max_concession_score\": 0.2,\n        \"min_accept_score\": 0.2,\n        \"auto_accept_score\": 0.7,\n        \"concession_pattern\": [ 0.2, 0.3],\n        \"negotiation_round\": 0,\n        \"counter_offers\": 1,\n        \"evaluation_method\": \"ultility_method\",\n        \"business_type\": \"collector\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/negotiation_metrics/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"negotiation_metrics",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547613,\n        \"updated_date\": 1585547613\n    }\n}"
+				},
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547535,\n        \"updated_date\": 1585547535\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update parameter `PO14000003` with step offer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organisation_id\": \"procurement\",\n\t\"product_id\": \"PO14000003\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 2.1,\n                    \"max\": 4.2,\n                    \"weight\": 0.6,\n                    \"unit\": \"SGD\",\n                    \"negotiable\": true,\n                    \"step_offer\": true,\n                    \"step\": 0.1,\n                    \"baseline\": 4.2\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 40.0,\n                    \"max\": 100.0,\n                    \"weight\": 0.1,\n                    \"unit\": \"KG\",\n                    \"negotiable\": true,\n                    \"step_offer\": true,\n                    \"step\": 10.0,\n                    \"baseline\": 100.0\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 80.0,\n                    \"max\": 200.0,\n                    \"weight\": 0.3,\n                    \"unit\": \"KG\",\n                    \"negotiable\": true,\n                    \"step_offer\": true,\n                    \"step\": 10.0,\n                    \"baseline\": 200.0\n                }\n            ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/parameters/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"parameters",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547535,\n        \"updated_date\": 1585547535\n    }\n}"
+				},
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547613,\n        \"updated_date\": 1585547613\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "create `procurement` api key",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organisation_id\": \"procurement\",\n\t\"user_id\": \"user2@procurement.co\",\n\t\"authority\": \"org_user\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/users/apikey",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"users",
+						"apikey"
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": []
+		},
+		{
+			"name": "get parameter `PO14000003`",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"PO14000003\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 2.1,\n                    \"max\": 4.2,\n                    \"weight\": 0.6,\n                    \"unit\": \"SGD\",\n                    \"inverse\": false,\n                    \"step_offer\": true,\n                    \"step\": 0.1,\n                    \"baseline\": 4.2\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 40.0,\n                    \"max\": 100.0,\n                    \"weight\": 0.1,\n                    \"unit\": \"KG\",\n                    \"inverse\": false,\n                    \"step\": 10.0,\n                    \"baseline\": 100.0\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 80.0,\n                    \"max\": 200.0,\n                    \"weight\": 0.3,\n                    \"unit\": \"KG\",\n                    \"inverse\": false,\n                    \"step\": 10.0,\n                    \"baseline\": 200.0\n                }\n            ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/parameters/?organisation_id=angliss&product_id=PO14000003",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"parameters",
+						""
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "angliss"
+						},
+						{
+							"key": "product_id",
+							"value": "PO14000003"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547613,\n        \"updated_date\": 1585547613\n    }\n}"
+				},
+				{
+					"name": "create `test-parameter`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"angliss\",\n\t\"product_id\": \"test-parameter\",\n\t\"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9,\n                    \"max\": 19,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5.0,\n                    \"max\": 20.0,\n                    \"baseline\": 10.0,\n                    \"weight\": 0.1,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40.0,\n                    \"max\": 80.0,\n                    \"baseline\": 80.0,\n                    \"weight\": 0.3,\n                    \"step\": 5.0,\n                    \"unit\": \"PKT\"\n                }\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"angliss\",\n        \"product_id\": \"test-parameter\",\n        \"parameter\": [\n            {\n                \"name\": \"price\",\n                \"min\": 9,\n                \"max\": 19,\n                \"weight\": 0.6,\n                \"unit\": \"SGD\",\n                \"inverse\": false,\n                \"step\": 0.5,\n                \"baseline\": 16.2\n            },\n            {\n                \"name\": \"quantity\",\n                \"min\": 5,\n                \"max\": 20,\n                \"weight\": 0.1,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 10\n            },\n            {\n                \"name\": \"monthly_quantity\",\n                \"min\": 40,\n                \"max\": 80,\n                \"weight\": 0.3,\n                \"unit\": \"PKT\",\n                \"inverse\": false,\n                \"step\": 5,\n                \"baseline\": 80\n            }\n        ],\n        \"created_date\": 1585547535,\n        \"updated_date\": 1585547535\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get product negotiation session",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e31221ef-5b87-419f-ac84-81042d12778d",
+						"exec": [
+							"options = {",
+							"      'method': 'GET',",
+							"      'url': pm.environment.get(\"data_host_name\")+'/epd_negotiation_sessions/schema',",
+							"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"epd_demo_admin_jwt\")}",
+							"};",
+							"pm.sendRequest(options, function (err, res) {",
+							"    pm.environment.set('epd_negotiation_sessions_schema', res.json().item)",
+							"});    "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "85ac5008-2b59-4dfd-ada1-36aba32f4ec6",
+						"exec": [
+							"var Ajv = require('ajv'),",
+							"    ajv = new Ajv({logger: console}),",
+							"    schema = pm.environment.get('epd_negotiation_sessions_schema');",
+							"",
+							"pm.test(\"schema check\", function () {",
+							"    items = pm.response.json().items;",
+							"    items.map(item=> {",
+							"        data = item.negotiation_session;",
+							"        pm.expect(ajv.validate(schema, data)).to.be.true;",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/product_negotiation_sessions/?organisation_id=procurement&sort_by=updated_date&order=desc&page_index=1&page_size=10",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"product_negotiation_sessions",
+						""
+					],
+					"query": [
+						{
+							"key": "customer_email",
+							"value": "test@test.com",
+							"disabled": true
+						},
+						{
+							"key": "organisation_id",
+							"value": "procurement"
+						},
+						{
+							"key": "product_id",
+							"value": "product_",
+							"disabled": true
+						},
+						{
+							"key": "sort_by",
+							"value": "updated_date"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						},
+						{
+							"key": "page_index",
+							"value": "1"
+						},
+						{
+							"key": "page_size",
+							"value": "10"
+						},
+						{
+							"key": "session_status",
+							"value": "[\"customer_negotiate\", \"agent_fix_offer\"]",
+							"disabled": true
+						}
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "set product negotiation agent offer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"procurement\",\n    \"product_id\": \"DR10005030\",\n    \"customer_email\": \"huynh@negobot.co\",\n    \"session_id\": \"procurement-huynh@negobot.co-DR10005030-06032020100951\",\n    \"session_status\": \"fix_offer\",\n    \"offer\": {\"price\": 1, \"quantity\": 7, \"monthly_quantity\": 60}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/product_negotiation_sessions/agent_seal_session",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"product_negotiation_sessions",
+						"agent_seal_session"
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "bulk upload to `procurement`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/huynhnguyen/github/rasa-poc/services/data/sample-angliss-parameters.csv"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/parameters/upload?organisation_id=procurement",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"parameters",
+						"upload"
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "procurement"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "bulk upload to `test-org`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/huynhnguyen/github/rasa-poc/services/data/sample-angliss-parameters.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{data_host_name}}/parameters/upload?organisation_id=test-org",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"parameters",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "organisation_id",
+									"value": "test-org"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "5012"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"product_id\": \"BH10001003\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 16.2,\n                    \"max\": 16.2,\n                    \"baseline\": 16.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5,\n                    \"max\": 20,\n                    \"baseline\": 10,\n                    \"weight\": 0.1,\n                    \"step\": 5,\n                    \"unit\": \"PKT\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40,\n                    \"max\": 80,\n                    \"baseline\": 80,\n                    \"weight\": 0.3,\n                    \"step\": 5,\n                    \"unit\": \"PKT\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"BH11001100\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 136.2,\n                    \"max\": 136.2,\n                    \"baseline\": 136.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5,\n                    \"max\": 20,\n                    \"baseline\": 20,\n                    \"weight\": 0.1,\n                    \"step\": 0.5,\n                    \"unit\": \"KG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40,\n                    \"max\": 80,\n                    \"baseline\": 80,\n                    \"weight\": 0.3,\n                    \"step\": 0.5,\n                    \"unit\": \"KG\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"BV10003898\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 42,\n                    \"max\": 42,\n                    \"baseline\": 42,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5,\n                    \"max\": 20,\n                    \"baseline\": 20,\n                    \"weight\": 0.1,\n                    \"step\": 0.5,\n                    \"unit\": \"KG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40,\n                    \"max\": 80,\n                    \"baseline\": 80,\n                    \"weight\": 0.3,\n                    \"step\": 0.5,\n                    \"unit\": \"KG\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"BV10003891\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 38,\n                    \"max\": 38,\n                    \"baseline\": 38,\n                    \"weight\": 0.6,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5,\n                    \"max\": 20,\n                    \"baseline\": 20,\n                    \"weight\": 0.1,\n                    \"step\": 0.5,\n                    \"unit\": \"KG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40,\n                    \"max\": 80,\n                    \"baseline\": 80,\n                    \"weight\": 0.3,\n                    \"step\": 0.5,\n                    \"unit\": \"KG\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"BV10003881\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 46,\n                    \"max\": 46,\n                    \"baseline\": 46,\n                    \"weight\": 0.5,\n                    \"step\": 0.5,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 5,\n                    \"max\": 20,\n                    \"baseline\": 20,\n                    \"weight\": 0.1,\n                    \"step\": 0.5,\n                    \"unit\": \"KG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 40,\n                    \"max\": 80,\n                    \"baseline\": 80,\n                    \"weight\": 0.3,\n                    \"step\": 0.5,\n                    \"unit\": \"KG\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"BH10000202\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 10.93,\n                    \"max\": 11.5,\n                    \"baseline\": 11.5,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 10,\n                    \"max\": 50,\n                    \"baseline\": 50,\n                    \"weight\": 0.1,\n                    \"step\": 5,\n                    \"unit\": \"KG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 30,\n                    \"max\": 150,\n                    \"baseline\": 150,\n                    \"weight\": 0.3,\n                    \"step\": 5,\n                    \"unit\": \"KG\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"BH10000206\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 9.5,\n                    \"max\": 10,\n                    \"baseline\": 10,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 10,\n                    \"max\": 50,\n                    \"baseline\": 50,\n                    \"weight\": 0.1,\n                    \"step\": 10,\n                    \"unit\": \"KG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 30,\n                    \"max\": 150,\n                    \"baseline\": 150,\n                    \"weight\": 0.3,\n                    \"step\": 10,\n                    \"unit\": \"KG\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"DY10000121\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 7.51,\n                    \"max\": 7.9,\n                    \"baseline\": 7.9,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 12,\n                    \"max\": 48,\n                    \"baseline\": 48,\n                    \"weight\": 0.1,\n                    \"step\": 12,\n                    \"unit\": \"KG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 48,\n                    \"max\": 192,\n                    \"baseline\": 192,\n                    \"weight\": 0.3,\n                    \"step\": 12,\n                    \"unit\": \"KG\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"DY10000042\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 3.14,\n                    \"max\": 3.3,\n                    \"baseline\": 3.3,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 12,\n                    \"max\": 48,\n                    \"baseline\": 48,\n                    \"weight\": 0.1,\n                    \"step\": 12,\n                    \"unit\": \"PCS\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 48,\n                    \"max\": 192,\n                    \"baseline\": 192,\n                    \"weight\": 0.3,\n                    \"step\": 12,\n                    \"unit\": \"PCS\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"LM55000120\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 21.85,\n                    \"max\": 23,\n                    \"baseline\": 23,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 10,\n                    \"max\": 50,\n                    \"baseline\": 50,\n                    \"weight\": 0.1,\n                    \"step\": 5,\n                    \"unit\": \"BAG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 20,\n                    \"max\": 100,\n                    \"baseline\": 100,\n                    \"weight\": 0.3,\n                    \"step\": 5,\n                    \"unit\": \"BAG\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"BT08000151\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 5.77,\n                    \"max\": 6.2,\n                    \"baseline\": 6.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 40,\n                    \"max\": 100,\n                    \"baseline\": 100,\n                    \"weight\": 0.1,\n                    \"step\": 10,\n                    \"unit\": \"KG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 160,\n                    \"max\": 400,\n                    \"baseline\": 400,\n                    \"weight\": 0.3,\n                    \"step\": 10,\n                    \"unit\": \"KG\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"DR10005030\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 61.38,\n                    \"max\": 66,\n                    \"baseline\": 66,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 2,\n                    \"max\": 10,\n                    \"baseline\": 10,\n                    \"weight\": 0.1,\n                    \"step\": 1,\n                    \"unit\": \"CTN\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 6,\n                    \"max\": 30,\n                    \"baseline\": 30,\n                    \"weight\": 0.3,\n                    \"step\": 1,\n                    \"unit\": \"CTN\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"DR10005060\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 49.76,\n                    \"max\": 53.5,\n                    \"baseline\": 53.5,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 2,\n                    \"max\": 10,\n                    \"baseline\": 10,\n                    \"weight\": 0.1,\n                    \"step\": 1,\n                    \"unit\": \"CTN\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 6,\n                    \"max\": 30,\n                    \"baseline\": 30,\n                    \"weight\": 0.3,\n                    \"step\": 1,\n                    \"unit\": \"CTN\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"PO10000204\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 3.35,\n                    \"max\": 3.6,\n                    \"baseline\": 3.6,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 40,\n                    \"max\": 100,\n                    \"baseline\": 100,\n                    \"weight\": 0.1,\n                    \"step\": 10,\n                    \"unit\": \"KG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 80,\n                    \"max\": 200,\n                    \"baseline\": 200,\n                    \"weight\": 0.3,\n                    \"step\": 10,\n                    \"unit\": \"KG\"\n                }\n            ]\n        },\n        {\n            \"product_id\": \"PO14000003\",\n            \"parameter\": [\n                {\n                    \"name\": \"price\",\n                    \"min\": 3.91,\n                    \"max\": 4.2,\n                    \"baseline\": 4.2,\n                    \"weight\": 0.6,\n                    \"step\": 0.1,\n                    \"unit\": \"SGD\"\n                },\n                {\n                    \"name\": \"quantity\",\n                    \"min\": 40,\n                    \"max\": 100,\n                    \"baseline\": 100,\n                    \"weight\": 0.1,\n                    \"step\": 10,\n                    \"unit\": \"KG\"\n                },\n                {\n                    \"name\": \"monthly_quantity\",\n                    \"min\": 80,\n                    \"max\": 200,\n                    \"baseline\": 200,\n                    \"weight\": 0.3,\n                    \"step\": 10,\n                    \"unit\": \"KG\"\n                }\n            ]\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get open product negotiation session",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8140c666-1249-4e61-9dd4-33f9b2498136",
+						"exec": [
+							"options = {",
+							"      'method': 'GET',",
+							"      'url': pm.environment.get(\"data_host_name\")+'/product_negotiation_sessions/schema',",
+							"      'header': {'Authorization': 'Bearer '+pm.environment.get(\"super_admin_jwt\")}",
+							"};",
+							"pm.sendRequest(options, function (err, res) {",
+							"    pm.environment.set('product_nego_session_schema', res.json().item)",
+							"});    "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8ce43434-41ad-4bd3-8286-aa3df01f7fc9",
+						"exec": [
+							"var Ajv = require('ajv'),",
+							"    ajv = new Ajv({logger: console}),",
+							"    schema = pm.environment.get('product_nego_session_schema');",
+							"",
+							"pm.test(\"schema check\", function () {",
+							"    items = pm.response.json().items;",
+							"    items.map(item=> {",
+							"        data = item.parameter;",
+							"        pm.expect(ajv.validate(schema, data)).to.be.true;",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{angliss_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{data_host_name}}/product_negotiation_sessions/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"product_negotiation_sessions",
+						""
+					]
+				},
+				"description": "add user on behave of admin"
+			},
+			"response": [
+				{
+					"name": "get user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{data_host_name}}/users/",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1002"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"items\": [\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@angliss.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin@epd-demo.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"huynh@gmail.com\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-negobot\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"test@test-negobot.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"test-org\",\n            \"authority\": \"super_admin\",\n            \"user_id\": \"admin@test-org.co\",\n            \"user_info\": {}\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_admin\",\n            \"user_id\": \"admin-5@angliss.co\",\n            \"user_info\": {\n                \"name\": \"demo org admin\"\n            }\n        },\n        {\n            \"organisation_id\": \"angliss\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"org-user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"demo org user\"\n            }\n        },\n        {\n            \"organisation_id\": \"epd-demo\",\n            \"authority\": \"org_user\",\n            \"user_id\": \"user@test-org.co\",\n            \"user_info\": {\n                \"name\": \"update user\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "clean all product session `angliss`",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organisation_id\": \"angliss\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{actions_host_name}}/clean_all_product_sessions",
+					"host": [
+						"{{actions_host_name}}"
+					],
+					"path": [
+						"clean_all_product_sessions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "clean all EPD session of `test_brand_01`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"epd-demo\",\n\t\"brand_id\": \"test_brand_01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{actions_host_name}}/clean_all_epd_session",
+							"host": [
+								"{{actions_host_name}}"
+							],
+							"path": [
+								"clean_all_epd_session"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:28:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"brand_id\": \"test_brand_01\",\n        \"created_date\": \"Mon, 30 Mar 2020 04:28:10 GMT\",\n        \"customer_email\": \"test@test.com\",\n        \"negotiation_session\": {\n            \"discount\": [\n                {\n                    \"baseline\": 6,\n                    \"counter_offer\": 5,\n                    \"counter_offer_score\": 0.75,\n                    \"customer_offer\": 1,\n                    \"customer_offer_score\": 0,\n                    \"inverse\": true,\n                    \"max\": 6,\n                    \"min\": 2,\n                    \"name\": \"discount\",\n                    \"step\": 1,\n                    \"unit\": \"percentage\",\n                    \"weight\": 1\n                },\n                {\n                    \"baseline\": 6,\n                    \"counter_offer\": 5,\n                    \"counter_offer_score\": 0.75,\n                    \"customer_offer\": 1,\n                    \"customer_offer_score\": 0,\n                    \"inverse\": true,\n                    \"max\": 6,\n                    \"min\": 2,\n                    \"name\": \"discount\",\n                    \"step\": 1,\n                    \"unit\": \"percentage\",\n                    \"weight\": 1\n                }\n            ],\n            \"negotiation_evaluation_metric\": {\n                \"auto_accept_score\": 0.7,\n                \"concession_pattern\": [\n                    0.2,\n                    0.3,\n                    0.4,\n                    0.9\n                ],\n                \"max_concession_round\": 4,\n                \"max_concession_score\": 0.2,\n                \"min_accept_score\": 0.2\n            },\n            \"negotiation_parameter\": [\n                {\n                    \"baseline\": 7,\n                    \"inverse\": true,\n                    \"max\": 7,\n                    \"min\": 7,\n                    \"name\": \"payment_date\",\n                    \"step\": 1,\n                    \"unit\": \"day\",\n                    \"weight\": 0\n                },\n                {\n                    \"baseline\": 6,\n                    \"inverse\": true,\n                    \"max\": 6,\n                    \"min\": 2,\n                    \"name\": \"discount\",\n                    \"step\": 1,\n                    \"unit\": \"percentage\",\n                    \"weight\": 1\n                }\n            ],\n            \"overall\": [\n                {\n                    \"customer_offer\": {\n                        \"discount\": 1,\n                        \"payment_date\": 7\n                    },\n                    \"negotiation_result\": {\n                        \"action\": \"negotiate\",\n                        \"counter_offer\": {\n                            \"discount\": 5,\n                            \"payment_date\": 7\n                        },\n                        \"counter_offer_utility\": {\n                            \"evaluation\": \"accept\",\n                            \"is_violated\": false,\n                            \"parametric_scores\": {\n                                \"discount\": 0.75\n                            },\n                            \"score\": 0.75\n                        },\n                        \"customer_offer\": {\n                            \"discount\": 1,\n                            \"payment_date\": 7\n                        },\n                        \"customer_offer_utility\": {\n                            \"evaluation\": \"negotiate\",\n                            \"is_violated\": true,\n                            \"parametric_scores\": {\n                                \"discount\": 0\n                            },\n                            \"score\": 0\n                        },\n                        \"is_violated\": true,\n                        \"negotiation_evaluation_metric\": {\n                            \"auto_accept_score\": 0.7,\n                            \"concession_pattern\": [\n                                0.2,\n                                0.3,\n                                0.4,\n                                0.9\n                            ],\n                            \"max_concession_round\": 4,\n                            \"max_concession_score\": 0.2,\n                            \"min_accept_score\": 0.2,\n                            \"negotiation_round\": 1\n                        }\n                    }\n                },\n                {\n                    \"customer_offer\": {\n                        \"discount\": 1,\n                        \"payment_date\": 7\n                    },\n                    \"negotiation_result\": {\n                        \"action\": \"negotiate\",\n                        \"counter_offer\": {\n                            \"discount\": 5,\n                            \"payment_date\": 7\n                        },\n                        \"counter_offer_utility\": {\n                            \"evaluation\": \"accept\",\n                            \"is_violated\": false,\n                            \"parametric_scores\": {\n                                \"discount\": 0.75\n                            },\n                            \"score\": 0.75\n                        },\n                        \"customer_offer\": {\n                            \"discount\": 1,\n                            \"payment_date\": 7\n                        },\n                        \"customer_offer_utility\": {\n                            \"evaluation\": \"negotiate\",\n                            \"is_violated\": true,\n                            \"parametric_scores\": {\n                                \"discount\": 0\n                            },\n                            \"score\": 0\n                        },\n                        \"is_violated\": true,\n                        \"negotiation_evaluation_metric\": {\n                            \"auto_accept_score\": 0.7,\n                            \"concession_pattern\": [\n                                0.2,\n                                0.3,\n                                0.4,\n                                0.9\n                            ],\n                            \"max_concession_round\": 4,\n                            \"max_concession_score\": 0.2,\n                            \"min_accept_score\": 0.2,\n                            \"negotiation_round\": 2\n                        }\n                    }\n                }\n            ],\n            \"payment_date\": [\n                {\n                    \"baseline\": 7,\n                    \"counter_offer\": 7,\n                    \"counter_offer_score\": 0,\n                    \"customer_offer\": 7,\n                    \"customer_offer_score\": 0,\n                    \"inverse\": true,\n                    \"max\": 7,\n                    \"min\": 7,\n                    \"name\": \"payment_date\",\n                    \"step\": 1,\n                    \"unit\": \"day\",\n                    \"weight\": 0\n                },\n                {\n                    \"baseline\": 7,\n                    \"counter_offer\": 7,\n                    \"counter_offer_score\": 0,\n                    \"customer_offer\": 7,\n                    \"customer_offer_score\": 0,\n                    \"inverse\": true,\n                    \"max\": 7,\n                    \"min\": 7,\n                    \"name\": \"payment_date\",\n                    \"step\": 1,\n                    \"unit\": \"day\",\n                    \"weight\": 0\n                }\n            ],\n            \"session\": {\n                \"agent_seal_deal\": \"negotiate\",\n                \"brand_id\": \"test_brand_01\",\n                \"customer_email\": \"test@test.com\",\n                \"customer_name\": \"test\",\n                \"customer_role\": \"buyer\",\n                \"organisation_id\": \"epd-demo\",\n                \"product_id\": \"None\",\n                \"seal_deal\": \"negotiate\",\n                \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/19/2020-04:33:01\"\n            },\n            \"session_status\": \"customer_negotiate\"\n        },\n        \"organisation_id\": \"epd-demo\",\n        \"session_id\": \"epd-demo-test@test.com-test_brand_01-03/19/2020-04:33:01\",\n        \"session_status\": \"customer_negotiate\",\n        \"updated_date\": \"Mon, 30 Mar 2020 04:28:20 GMT\"\n    }\n]"
+				},
+				{
+					"name": "clean all EPD session of `test_brand_01`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"epd-demo\",\n\t\"brand_id\": \"test_brand_01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{actions_host_name}}/clean_all_epd_session",
+							"host": [
+								"{{actions_host_name}}"
+							],
+							"path": [
+								"clean_all_epd_session"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:28:49 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "[]"
+				},
+				{
+					"name": "clean all EPD session of `test_brand_01`",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"organisation_id\": \"epd-demo\",\n\t\"brand_id\": \"test_brand_01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{actions_host_name}}/clean_all_epd_session",
+							"host": [
+								"{{actions_host_name}}"
+							],
+							"path": [
+								"clean_all_epd_session"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Mar 2020 04:28:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "[]"
+				}
+			]
+		},
+		{
+			"name": "add user `admin@procurement.co` as org admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"procurement\",\n    \"authority\": \"org_admin\",\n    \"user_id\": \"admin@procurement.co\",\n    \"user_info\": {\n        \"first_name\": \"admin procurement\",\n        \"description\": \"this is default admin procurement\",\n        \"password\": \"123456\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/users/create",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"users",
+						"create"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "add user `admin@test-org.co` as org admin",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"organisation_id\": \"test-org\",\n    \"authority\": \"org_admin\",\n    \"user_id\": \"admin@test-org.co\",\n    \"user_info\": {\n        \"first_name\": 111,\n        \"description\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{data_host_name}}/users/create",
+							"host": [
+								"{{data_host_name}}"
+							],
+							"path": [
+								"users",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "211"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"item\": {\n        \"organisation_id\": \"test-org\",\n        \"authority\": \"org_admin\",\n        \"user_id\": \"admin@test-org.co\",\n        \"user_info\": {\n            \"first_name\": 111,\n            \"description\": 1\n        },\n        \"created_date\": 1585546237,\n        \"updated_date\": 1585546237\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "add `procurement` organisation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"procurement\",\n    \"organisation_info\": {\n        \"name\": \"procurement demo\",\n        \"type\": \"buyer\",\n        \"service_id\": \"ISca4c35562f4b4e75a512a8b1891743d7\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/organisations/",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"organisations",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get `procurement` suppliers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{data_host_name}}/procurements/suppliers?organisation_id=procurement",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"procurements",
+						"suppliers"
+					],
+					"query": [
+						{
+							"key": "organisation_id",
+							"value": "procurement"
+						},
+						{
+							"key": "product_id",
+							"value": "cccc",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send email to suppliers in `procurement`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organisation_id\": \"procurement\",\n    \"product_id\": \"PO14000003\",\n    \"agent_info\": {\n      \"agent_name\": \"Negobot procurement team\",  \n      \"agent_email\": \"demo@procurement.co\" \n    },\n    \"email_template\": {\"content\":\"Dear Supplier,\\nThank you for your ongoing business with us. We are looking to renegotiate our contract for {product_name}.\\n{product_info}\\n{agent_offer_message}.\\nPlease click on the link below to give us an indicative offer.\\n{chat_url}\\n.\\nThanks and best regards,\\n{agent_name}\", \"title\": \"hi\"},\n    \"chat_url\": \"https://dev.landing.procurement.negobot.co/\",\n    \"suppliers\": [\n        {\n            \"supplier_id\": \"huynh-01\",\n            \"supplier_name\": \"Acorn Distribution Pte Ltd\",\n            \"supplier_email\": \"huynh@negobot.co\",\n            \"purchase_info\": {}\n        },\n        {\n            \"supplier_id\": \"ani-02\",\n            \"supplier_name\": \"Coca-cola Singapore Beverages Pte Ltd\",\n            \"supplier_email\": \"man@negobot.co\",\n            \"purchase_info\": {\n                \"purchase_value\": 3491.96000027061\n            }\n        },\n        {\n            \"supplier_id\": \"ani-01\",\n            \"supplier_name\": \"Singapore Fine Foods Store\",\n            \"supplier_email\": \"aniruddha@negobot.co\",\n            \"purchase_info\": {},\n            \"email_status\": \"new\",\n            \"negotiation_status\": \"new\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{data_host_name}}/procurements/send_email_requests",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"procurements",
+						"send_email_requests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "email template `procurement`",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{super_admin_jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{data_host_name}}/procurements/email_template",
+					"host": [
+						"{{data_host_name}}"
+					],
+					"path": [
+						"procurements",
+						"email_template"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
